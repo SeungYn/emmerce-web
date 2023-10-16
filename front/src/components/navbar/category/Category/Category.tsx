@@ -37,7 +37,7 @@ export default function Category() {
     <section className='relative' ref={categoryRef}>
       <div className='flex justify-between  px-1 border-b border-gray-300 py-2'>
         <div className='flex justify-between w-full px-2 font-bold text-sm max-w-screen-xl mx-auto'>
-          <div className='flex py-2'>
+          <div className='flex py-2 shrink-0'>
             <div
               className='flex items-center border-r border-gray-200 pr-6'
               role='button'
