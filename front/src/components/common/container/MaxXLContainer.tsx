@@ -9,6 +9,8 @@ export default function MaxXLContainer({
   className,
 }: PropsWithChildren<Props>) {
   return (
-    <div className={`max-w-screen-xl mx-auto ${className}`}>{children}</div>
+    <div className={`max-w-screen-xl w-[1280px] mx-auto ${className}`}>
+      {children}
+    </div>
   );
 }

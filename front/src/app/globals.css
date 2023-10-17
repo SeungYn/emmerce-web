@@ -9,7 +9,6 @@
 html,
 body {
   max-width: 100vw;
-  height: 100vh;
 }
 
 input {
@@ -17,7 +16,6 @@ input {
 }
 
 html {
-  height: 100%;
   font-size: 62.5%;
 
   @media screen and (min-width: 400px) {
