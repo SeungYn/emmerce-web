@@ -2,8 +2,8 @@ import Image from 'next/image';
 
 export default function BrandIconList() {
   return (
-    <section className='max-w-screen-xl mx-auto mt-6'>
-      <ul className='w-full flex justify-between'>
+    <section className='max-w-screen-xl w-[1280px] mx-auto mt-6'>
+      <ul className='w-full flex justify-between flex-shrink-0'>
         <li className='flex flex-col items-center justify-center'>
           <Image
             src='/assets/brand-icon/kidikidi-icon.jpeg'
