@@ -1,5 +1,7 @@
 import Image from 'next/image';
 
+type Props = {};
+
 export default function MiniItem() {
   return (
     <div className='flex gap-2 shrink-0 mxh'>
@@ -17,7 +19,7 @@ export default function MiniItem() {
 
       <div className='flex flex-col justify-center'>
         <h4 className='text-sm font-bold'>브랜드명</h4>
-        <p className='text-xs text-gray-500 break-all'>
+        <p className='text-xs text-gray-500 break-all line-clamp-3'>
           설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명설명
         </p>
         <span className='line-through text-gray-300 text-xs'>
