@@ -1,3 +1,12 @@
+import MaxXLContainer from '@/components/common/container/MaxXLContainer';
+import Location from '@/components/common/location/Location';
+
 export default function page() {
-  return <div>상세페이지</div>;
+  return (
+    <>
+      <MaxXLContainer className='mt-4'>
+        <Location />
+      </MaxXLContainer>
+    </>
+  );
 }
