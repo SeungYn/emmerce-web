@@ -23,7 +23,7 @@ export default function ProductDetailMain() {
             />
           </div>
 
-          <div className='flex items-center text-lg gap-2 pt-4'>
+          <div className='flex items-center text-lg gap-2 pt-4 border-t border-gray-300 mt-4'>
             <p className=' font-semibold'>고객리뷰</p>
 
             <div
