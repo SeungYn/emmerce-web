@@ -2,7 +2,11 @@ import Image from 'next/image';
 import Category from '../category/Category/Category';
 import NavbarForm from '../NavbarForm/NavbarForm';
 
-export default function Navbar() {
+type Props = {
+  isLogo: boolean;
+};
+
+export default function Navbar({ isLogo = true }: Props) {
   return (
     <nav className='w-full'>
       {/* top section */}
@@ -19,15 +23,17 @@ export default function Navbar() {
       </section>
 
       {/* middle section */}
-      <section className='w-full border-b border-gray-300 py-2'>
-        <Image
-          className='mx-auto'
-          src='/assets/eland-logo.png'
-          width={200}
-          height={100}
-          alt='이머스 로고'
-        />
-      </section>
+      {isLogo && (
+        <section className='w-full border-b border-gray-300 py-2'>
+          <Image
+            className='mx-auto'
+            src='/assets/eland-logo.png'
+            width={200}
+            height={100}
+            alt='이머스 로고'
+          />
+        </section>
+      )}
 
       {/* bottom section */}
       <Category />
