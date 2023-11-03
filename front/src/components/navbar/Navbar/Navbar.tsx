@@ -1,12 +1,17 @@
+'use client';
+
 import Image from 'next/image';
 import Category from '../category/Category/Category';
 import NavbarForm from '../NavbarForm/NavbarForm';
+import { useAuthFormContext } from '@/context/auth/AuthFormContext';
 
 type Props = {
   isLogo: boolean;
 };
 
 export default function Navbar({ isLogo = true }: Props) {
+  const { isOpen, handleOpen } = useAuthFormContext();
+
   return (
     <nav className='w-full'>
       {/* top section */}
@@ -17,7 +22,16 @@ export default function Navbar({ isLogo = true }: Props) {
             <li className='border-gray-200 px-4'>NOTICE</li>
             <li className='border-gray-200 px-4'>MY</li>
             <li className='border-gray-200 px-4'>CART</li>
-            <li className='border-gray-200 px-4'>LOGOUT</li>
+            {isOpen ? (
+              <li className='border-gray-200 px-4'>LOGOUT</li>
+            ) : (
+              <li
+                className='border-gray-200 px-4 cursor-pointer'
+                onClick={handleOpen}
+              >
+                LOGIN
+              </li>
+            )}
           </ul>
         </div>
       </section>

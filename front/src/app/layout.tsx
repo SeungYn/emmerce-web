@@ -1,6 +1,10 @@
+import AuthBackground from '@/components/auth/AuthBackground';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import AuthContextProvider from '@/context/auth/AuthFormContext';
+import AuthFormContextProvider from '@/context/auth/AuthFormContext';
+import ReactQueryContext from '@/context/common/ReactQueryContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,7 +20,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ReactQueryContext>
+          <AuthFormContextProvider>
+            {children}
+            <AuthBackground />
+          </AuthFormContextProvider>
+        </ReactQueryContext>
+      </body>
     </html>
   );
 }
