@@ -7,6 +7,8 @@ import Navbar from '@/components/navbar/Navbar/Navbar';
 import SliderBannerContainer from '@/container/home/banner/SliderBannerContainer';
 
 export default function Home() {
+  const a = 13;
+
   return (
     <>
       <Navbar isLogo />

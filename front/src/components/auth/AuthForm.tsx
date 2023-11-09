@@ -1,9 +1,10 @@
 'use client';
 import { AuthFormContextType } from '@/context/auth/AuthFormContext';
+import useAuth from '@/hooks/api/auth/useAuth';
 import useInput from '@/hooks/auth/useInput';
 import service from '@/service/client';
 import { motion } from 'framer-motion';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 
 type Props = {} & AuthFormContextType;
@@ -17,24 +18,21 @@ export default function AuthForm({ isOpen, handleClose, handleOpen }: Props) {
     useInput(/''/);
   const [tell, setTell, isTellValidate] = useInput(/''/);
   const [birth, setBirth, isBirthValidate] = useInput(/''/);
+  const { loginMutate, registerMutate } = useAuth();
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (formState === FormState.login) {
-      service.auth
-        .login({ name, password }) //
-        .then((res) => console.log(res));
+      loginMutate({ name, password });
     } else {
-      service.auth
-        .register({
-          name,
-          password,
-          passwordConfirm: passwordCheck,
-          email,
-          tel: tell,
-          birth,
-        })
-        .then((res) => console.log(res));
+      registerMutate({
+        name,
+        password,
+        passwordConfirm: passwordCheck,
+        email,
+        tel: tell,
+        birth,
+      });
     }
   };
 

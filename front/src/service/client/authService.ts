@@ -12,28 +12,24 @@ export default class AuthService {
     tel,
     birth,
   }: RegisterReq) {
-    const option: AxiosRequestConfig = {
-      data: {
-        name,
-        email,
-        password,
-        passwordConfirm,
-        tel,
-        birth,
-      },
+    const data = {
+      name,
+      email,
+      password,
+      passwordConfirm,
+      tel,
+      birth,
     };
 
-    return await this.axios.post('/auth/register', option);
+    return await this.axios.post('/auth/register', data);
   }
 
   async login({ name, password }: LoginReq) {
-    const option: AxiosRequestConfig = {
-      data: {
-        name,
-        password,
-      },
+    const data = {
+      name,
+      password,
     };
 
-    return await this.axios.post('/auth/login', option);
+    return await this.axios.post('/auth/login', data);
   }
 }
