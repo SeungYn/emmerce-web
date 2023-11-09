@@ -4,16 +4,20 @@ import Image from 'next/image';
 import Category from '../category/Category/Category';
 import NavbarForm from '../NavbarForm/NavbarForm';
 import { useAuthFormContext } from '@/context/auth/AuthFormContext';
+import { useUserContext } from '@/context/auth/UserContext';
+import useAuth from '@/hooks/api/auth/useAuth';
 
 type Props = {
   isLogo: boolean;
 };
 
 export default function Navbar({ isLogo = true }: Props) {
-  const { isOpen, handleOpen } = useAuthFormContext();
+  const { handleOpen } = useAuthFormContext();
+  const { userInfo } = useUserContext();
+  const { logoutMutate } = useAuth();
 
   return (
-    <nav className='w-full'>
+    <nav className='w-full' suppressHydrationWarning>
       {/* top section */}
       <section className='border-b border-gray-300 py-2 '>
         <div className='flex justify-between max-w-screen-xl mx-auto px-1'>
@@ -22,8 +26,16 @@ export default function Navbar({ isLogo = true }: Props) {
             <li className='border-gray-200 px-4'>NOTICE</li>
             <li className='border-gray-200 px-4'>MY</li>
             <li className='border-gray-200 px-4'>CART</li>
-            {isOpen ? (
-              <li className='border-gray-200 px-4'>LOGOUT</li>
+            {userInfo?.token ? (
+              <li
+                className='border-gray-200 px-4'
+                onClick={() => {
+                  logoutMutate();
+                  console.log(123123);
+                }}
+              >
+                LOGOUT
+              </li>
             ) : (
               <li
                 className='border-gray-200 px-4 cursor-pointer'

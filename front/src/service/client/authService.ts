@@ -32,4 +32,11 @@ export default class AuthService {
 
     return await this.axios.post('/auth/login', data);
   }
+
+  async logout() {
+    console.log('logout');
+    const dd = await this.axios.post('/auth/logout');
+    console.log(dd);
+    return dd;
+  }
 }
