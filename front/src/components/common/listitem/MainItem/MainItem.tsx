@@ -2,12 +2,13 @@
 
 import Image from 'next/image';
 import HeartIcon from '../../icons/HeartIcon';
+import { Product } from '@/service/types/product';
 
 type Props = {
-  item: TemporaryItemType;
+  item: Product;
   rank?: number;
 };
-
+// 이미지 처리 해야됨
 export default function MainItem({ item, rank }: Props) {
   const {
     productId,
