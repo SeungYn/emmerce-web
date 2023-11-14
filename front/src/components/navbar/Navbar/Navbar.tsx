@@ -6,12 +6,15 @@ import NavbarForm from '../NavbarForm/NavbarForm';
 import { useAuthFormContext } from '@/context/auth/AuthFormContext';
 import { useUserContext } from '@/context/auth/UserContext';
 import useAuth from '@/hooks/api/auth/useAuth';
+import CategoryContainer from '@/container/common/category/CategoryContainer';
+import { CategoryList } from '@/service/types/category';
 
 type Props = {
   isLogo: boolean;
+  categoryList: CategoryList;
 };
 
-export default function Navbar({ isLogo = true }: Props) {
+export default function Navbar({ isLogo = true, categoryList }: Props) {
   const { handleOpen } = useAuthFormContext();
   const { userInfo } = useUserContext();
   const { logoutMutate } = useAuth();
@@ -62,7 +65,8 @@ export default function Navbar({ isLogo = true }: Props) {
       )}
 
       {/* bottom section */}
-      <Category />
+      {/* <CategoryContainer /> */}
+      <Category categoryList={categoryList} />
     </nav>
   );
 }

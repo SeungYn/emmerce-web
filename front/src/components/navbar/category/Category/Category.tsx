@@ -4,12 +4,18 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { MdKeyboardArrowRight, MdOutlineKeyboardArrowUp } from 'react-icons/md';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import styles from './Category.module.css';
+import { Category, CategoryList } from '@/service/types/category';
+import Link from 'next/link';
 
-export default function Category() {
+type Props = {
+  categoryList: CategoryList;
+};
+
+export default function Category({ categoryList }: Props) {
   const categoryRef = useRef<HTMLSelectElement>(null);
   const [isOpenCategory, setIsOpenCategory] = useState(false);
-  const [currentCategory, setCurrentCategory] = useState<MainCategories>(
-    categories[0].mainCategory
+  const [currentCategory, setCurrentCategory] = useState<Category>(
+    categoryList[0].mainCategory
   );
 
   const toggleCategory = useCallback(() => {
@@ -74,43 +80,49 @@ export default function Category() {
         <nav className='relative mx-auto max-w-screen-xl px-2'>
           {/* 이랜드 기준 기본 height 458px 내용이 넘치면 528px */}
           <ul className='[&>*]:leading-7 border-r border-gray-200 pr-10 w-44 h-[458px]'>
-            {categories.map((cate) => {
+            {categoryList.map((cate) => {
               return (
-                <li key={cate.mainCategory}>
-                  <a
-                    href='#'
+                <li key={cate.mainCategory.code}>
+                  <Link
+                    href={`/category/${cate.mainCategory.categoryId}`}
                     onMouseEnter={() => setCurrentCategory(cate.mainCategory)}
                     className='relative w-full inline-block'
                   >
-                    {cate.mainCategory}
-                    {currentCategory === cate.mainCategory ? (
+                    {cate.mainCategory.name}
+                    {currentCategory.code === cate.mainCategory.code ? (
                       <MdKeyboardArrowRight className='absolute top-[50%] -translate-y-1/2 right-0 text-xl text-red-600' />
                     ) : (
                       ''
                     )}
-                  </a>
+                  </Link>
 
                   {/* 현재 카테고리이면 block 아니면 hidden */}
                   <div
                     className={`absolute left-44 top-0 right-0  flex flex-col pl-10 text-xs ${
-                      currentCategory === cate.mainCategory ? 'block' : 'hidden'
+                      currentCategory.code === cate.mainCategory.code
+                        ? 'block'
+                        : 'hidden'
                     }`}
                   >
-                    {cate.subCategories.map((list) => (
+                    {cate.subCategories.map((subCate) => (
                       <div
-                        key={list.subCategory + cate.mainCategory}
+                        key={subCate.subCategory.code + cate.mainCategory.code}
                         className='flex py-2 border-b border-gray-200'
                       >
-                        <a href='#' className='font-bold w-32 text-black'>
-                          {list.subCategory}
-                        </a>
+                        <Link
+                          href={`/category/${subCate.subCategory.categoryId}`}
+                          className='font-bold w-32 text-black'
+                        >
+                          {subCate.subCategory.name}
+                        </Link>
                         <ul className='flex [&>*]:mr-6'>
-                          {list.kinds.map((kind) => (
-                            <a
-                              key={kind + list.subCategory + cate.mainCategory}
+                          {subCate.kinds.map((kind) => (
+                            <Link
+                              key={kind.code}
+                              href={`/category/${kind.categoryId}`}
                             >
-                              <li>{kind}</li>
-                            </a>
+                              <li>{kind.name}</li>
+                            </Link>
                           ))}
                         </ul>
                       </div>
