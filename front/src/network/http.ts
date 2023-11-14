@@ -10,3 +10,31 @@ axiosInstance.interceptors.request.use((req) => {
   req.headers.Authorization = `Baerer ${token}`;
   return req;
 });
+
+export class HttpServer {
+  constructor(private baseUrl: string) {}
+
+  async fetch<R>(url: string, option: RequestInit) {
+    const res = await fetch(`${this.baseUrl}${url}`, {
+      ...option,
+      headers: {
+        ...option.headers,
+      },
+    });
+
+    let data;
+    try {
+      data = (await res.json()) as R;
+    } catch (err) {
+      console.log('json error', err);
+    }
+    if (res.status > 299 || res.status < 200) {
+      if (res.status === 401) {
+        console.log('401 error');
+        return;
+      }
+    }
+
+    return data;
+  }
+}
