@@ -84,8 +84,11 @@ export default function Category({ categoryList }: Props) {
               return (
                 <li key={cate.mainCategory.code}>
                   <Link
-                    href={`/category/${cate.mainCategory.categoryId}`}
-                    onMouseEnter={() => setCurrentCategory(cate.mainCategory)}
+                    href={`/category/${cate.mainCategory.categoryId}?mainCate=${cate.mainCategory.name}${cate.mainCategory.categoryId}`}
+                    onMouseEnter={() => {
+                      setCurrentCategory(cate.mainCategory);
+                    }}
+                    onClick={() => setIsOpenCategory(false)}
                     className='relative w-full inline-block'
                   >
                     {cate.mainCategory.name}
@@ -110,8 +113,9 @@ export default function Category({ categoryList }: Props) {
                         className='flex py-2 border-b border-gray-200'
                       >
                         <Link
-                          href={`/category/${subCate.subCategory.categoryId}`}
+                          href={`/category/${subCate.subCategory.categoryId}?mainCate=${cate.mainCategory.name}${cate.mainCategory.categoryId}&subCate=${subCate.subCategory.name}${subCate.subCategory.categoryId}`}
                           className='font-bold w-32 text-black'
+                          onClick={() => setIsOpenCategory(false)}
                         >
                           {subCate.subCategory.name}
                         </Link>
@@ -119,7 +123,8 @@ export default function Category({ categoryList }: Props) {
                           {subCate.kinds.map((kind) => (
                             <Link
                               key={kind.code}
-                              href={`/category/${kind.categoryId}`}
+                              href={`/category/${kind.categoryId}?mainCate=${cate.mainCategory.name}${cate.mainCategory.categoryId}&subCate=${subCate.subCategory.name}${subCate.subCategory.categoryId}&kind=${kind.name}${kind.categoryId}`}
+                              onClick={() => setIsOpenCategory(false)}
                             >
                               <li>{kind.name}</li>
                             </Link>

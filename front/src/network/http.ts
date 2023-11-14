@@ -11,7 +11,7 @@ axiosInstance.interceptors.request.use((req) => {
   return req;
 });
 
-export class HttpServer {
+class HttpServer {
   constructor(private baseUrl: string) {}
 
   async fetch<R>(url: string, option: RequestInit) {
@@ -24,7 +24,7 @@ export class HttpServer {
 
     let data;
     try {
-      data = (await res.json()) as R;
+      data = (await res.json()) as NonNullable<R>;
     } catch (err) {
       console.log('json error', err);
     }
@@ -35,6 +35,8 @@ export class HttpServer {
       }
     }
 
-    return data;
+    return data!;
   }
 }
+
+export const fetchInstance = new HttpServer('http://localhost:8088');
