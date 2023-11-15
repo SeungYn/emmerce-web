@@ -1,0 +1,7 @@
+.categoryOpen {
+  transform: rotate(180deg);
+}
+
+.categoryOff {
+  transform: rotate(0deg);
+}
