@@ -10,6 +10,22 @@ export type Product = {
   likeCount: number;
 };
 
+export type ProductDetail = {
+  productId: number;
+  name: string;
+  detail: string;
+  originalPrice: number;
+  discountPrice: number;
+  discountRate: number;
+  stockQuantity: number;
+  starScore: number;
+  titleImg: string;
+  detailImgList: string[];
+  brand: string;
+  enrollTime: string;
+  likeCount: number;
+};
+
 export type Paging = {
   pageNumber: number;
   totalPages: number;

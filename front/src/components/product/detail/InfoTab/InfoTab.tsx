@@ -14,9 +14,10 @@ export default function InfoTab() {
           )}`}
         >
           <Link
-            href='#'
+            href='#p-info'
             className='inline-block py-4 w-full'
             onClick={() => setCurrentTab(0)}
+            id='p-info'
           >
             상품 상세정보
           </Link>
@@ -28,7 +29,7 @@ export default function InfoTab() {
           )}`}
         >
           <Link
-            href='#'
+            href='#p-review'
             className='inline-block py-4 w-full'
             onClick={() => setCurrentTab(1)}
           >

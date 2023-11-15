@@ -1,4 +1,5 @@
-import { ProductList } from '../types/product';
+import { HttpServer } from '@/network/http';
+import { ProductDetail, ProductList } from '../types/product';
 
 export async function getProductListByCategory({
   categoryId,
@@ -20,7 +21,7 @@ export async function getProductListByCategory({
   }${limit ? `limit=${limit}?` : ''}${maxPrice ? `maxPrice=${maxPrice}?` : ''}${
     minPrice ? `minPrice=${minPrice}?` : ''
   }`;
-  console.log(query);
+
   const res = await fetch(
     `http://localhost:8088/category/${categoryId}/product/list${query}`,
     {
@@ -32,4 +33,19 @@ export async function getProductListByCategory({
   );
 
   return res.json();
+}
+
+export class ProductServerService {
+  constructor(private http: HttpServer) {}
+
+  async getProductDetail(productId: number | string) {
+    const data = await this.http.fetch<ProductDetail>(`/product/${productId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    return data;
+  }
 }

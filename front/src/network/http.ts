@@ -11,7 +11,7 @@ axiosInstance.interceptors.request.use((req) => {
   return req;
 });
 
-class HttpServer {
+export class HttpServer {
   constructor(private baseUrl: string) {}
 
   async fetch<R>(url: string, option: RequestInit) {
@@ -31,8 +31,8 @@ class HttpServer {
     if (res.status > 299 || res.status < 200) {
       if (res.status === 401) {
         console.log('401 error');
-        return;
       }
+      throw new Error('에러에러');
     }
 
     return data!;

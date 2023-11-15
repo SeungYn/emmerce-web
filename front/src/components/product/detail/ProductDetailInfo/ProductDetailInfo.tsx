@@ -1,8 +1,13 @@
+import { ProductDetail } from '@/service/types/product';
 import InfoImgContents from '../InfoImgContents/InfoImgContents';
 import InfoTab from '../InfoTab/InfoTab';
 import InfoReview from '../review/InfoReview/InfoReview';
 
-export default function ProductDetailInfo() {
+type Props = {
+  productDetail: ProductDetail;
+};
+
+export default function ProductDetailInfo({ productDetail }: Props) {
   return (
     <div>
       <InfoTab />

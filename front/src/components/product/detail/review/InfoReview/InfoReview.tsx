@@ -1,6 +1,6 @@
 export default function InfoReview() {
   return (
-    <div>
+    <div id='p-review'>
       <h3 className='text-lg font-normal border-b border-black py-6'>
         리뷰(갯수)
       </h3>
