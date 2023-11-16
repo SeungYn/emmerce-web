@@ -4,8 +4,6 @@ import { GetReviewsRes } from '../types/review';
 export default class ReviewService {
   constructor(private axios: AxiosInstance) {}
 
-  async getReviews(productId: number | string): Promise<GetReviewsRes>;
-
   async getReviews(productId: number | string, page?: number, size?: number) {
     let query = `/product/${productId}/reviews`;
     if (page && size) query += `?page=${page}&size=${size}`;

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import TopBottomPaddingBox from '../../common/TopBottomPaddingBox/TopBottomPaddingBox';
 import { ProductDetail } from '@/service/types/product';
 import Link from 'next/link';
-import { translateStarScoreToPㄷrcent } from '@/util/lib/util';
+import { translateStarScoreToPercent } from '@/util/lib/util';
 
 type Props = {
   productDetail: ProductDetail;
@@ -56,7 +56,7 @@ export default function ProductDetailMain({ productDetail }: Props) {
                 className={`bg-no-repeat h-[24px] block bg-icons absolute t-0 l-0`}
                 style={{
                   backgroundPosition: '-174px -146px',
-                  width: `${translateStarScoreToPㄷrcent(starScore)}%`,
+                  width: `${translateStarScoreToPercent(starScore)}%`,
                 }}
               ></span>
             </div>
