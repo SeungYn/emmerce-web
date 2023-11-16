@@ -1,5 +1,5 @@
 import { HttpServer } from '@/network/http';
-import { ProductDetail, ProductList } from '../types/product';
+import { Product, ProductDetail, ProductList } from '../types/product';
 
 export async function getProductListByCategory({
   categoryId,
@@ -40,6 +40,39 @@ export class ProductServerService {
 
   async getProductDetail(productId: number | string) {
     const data = await this.http.fetch<ProductDetail>(`/product/${productId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    return data;
+  }
+
+  async getLatestProducts() {
+    const data = await this.http.fetch<Product[]>(`/product/latest`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    return data;
+  }
+
+  async getHotdealProducts() {
+    const data = await this.http.fetch<Product[]>(`/product/hot-deal`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    return data;
+  }
+
+  async getRankingProducts() {
+    const data = await this.http.fetch<Product[]>(`/product/ranking`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
