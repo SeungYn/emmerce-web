@@ -13,3 +13,9 @@ export type CategoryList = {
     kinds: Category[];
   }[];
 }[];
+
+export type ProductCategoryInfo = {
+  categoryId: number;
+  tier: number;
+  name: string;
+};
