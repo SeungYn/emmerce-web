@@ -8,7 +8,7 @@ export default function useReviewList(
   size: number = 5
 ) {
   const res = useSuspenseQuery({
-    queryKey: ['reviews', productId],
+    queryKey: ['reviews', productId, page],
     queryFn: () => service.review.getReviews(productId, page, size),
   });
 

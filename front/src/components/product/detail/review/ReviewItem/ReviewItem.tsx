@@ -40,7 +40,9 @@ export default function ReviewItem({ review }: Props) {
 
         <p className='text-gray-400 pt-4'>{title}</p>
         <p className='whitespace-pre-line pt-4'>{description}</p>
-        {reviewImgList && <img src={reviewImgList[0]} alt={'상품이미지'} />}
+        {reviewImgList && (
+          <img src={'/assets/slide/1.png'} alt={'상품이미지'} />
+        )}
       </div>
       <div className='basis-[20%] p-6'>
         <p>

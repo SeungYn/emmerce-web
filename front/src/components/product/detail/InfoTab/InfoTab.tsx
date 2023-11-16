@@ -33,7 +33,7 @@ export default function InfoTab() {
             className='inline-block py-4 w-full'
             onClick={() => setCurrentTab(1)}
           >
-            고객리뷰(265)
+            고객리뷰
           </Link>
         </li>
 
