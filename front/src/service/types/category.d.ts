@@ -19,3 +19,5 @@ export type ProductCategoryInfo = {
   tier: number;
   name: string;
 };
+
+export type RecommendCategory = { categoryId: number; name: string };
