@@ -1,6 +1,7 @@
 import MaxXLContainer from '@/components/common/container/MaxXLContainer';
 import BrandIconList from '@/components/home/BrandIconList/BrandIconList';
 import CustomItems from '@/components/home/content/CustomItems/CustomItems';
+import HotDeal from '@/components/home/content/HotDeal/HotDeal';
 import RankingItems from '@/components/home/content/RankingItems/RankingItems';
 import ShowcaseItems from '@/components/home/content/ShowcaseItems/ShowcaseItems';
 import SliderBannerContainer from '@/container/home/banner/SliderBannerContainer';
@@ -33,9 +34,9 @@ export default async function Home() {
       <MaxXLContainer className='mt-10'>
         <RankingItems productList={rankingProductList} />
       </MaxXLContainer>
-      {/* <MaxXLContainer className='mt-10'>
-        <RankingItems />
-      </MaxXLContainer> */}
+      <MaxXLContainer className='mt-10'>
+        <HotDeal productList={hotdealProductList} />
+      </MaxXLContainer>
     </>
   );
 }
