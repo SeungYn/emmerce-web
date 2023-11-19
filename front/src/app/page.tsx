@@ -31,11 +31,11 @@ export default async function Home() {
         <RecommendProductsContainer />
       </MaxXLContainer>
       <MaxXLContainer className='mt-10'>
-        <RankingItems />
+        <RankingItems productList={rankingProductList} />
       </MaxXLContainer>
-      <MaxXLContainer className='mt-10'>
+      {/* <MaxXLContainer className='mt-10'>
         <RankingItems />
-      </MaxXLContainer>
+      </MaxXLContainer> */}
     </>
   );
 }
