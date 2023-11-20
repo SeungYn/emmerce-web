@@ -4,8 +4,6 @@ import SSRSuspense from '@/components/common/\butil/SSRSuspense';
 import ShowcaseItems from '@/components/home/content/ShowcaseItems/ShowcaseItems';
 import useRecommendProducts from '@/hooks/api/product/useRecommendProducts';
 import useRecommendProductsPrefetch from '@/hooks/api/product/useRecommendProductsPrefetch';
-import service from '@/service/client';
-import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { ComponentProps, useCallback, useState } from 'react';
 
