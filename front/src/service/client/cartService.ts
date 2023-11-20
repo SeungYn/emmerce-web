@@ -1,9 +1,10 @@
 import { AxiosInstance } from 'axios';
+import { CartAddReq } from '../types/cart';
 
 export default class CartService {
   constructor(private axios: AxiosInstance) {}
 
-  async add({ productId, quantity }: { productId: number; quantity: number }) {
+  async add({ productId, quantity }: CartAddReq) {
     const query = `/cart/product`;
     const { data } = await this.axios.post(query, {
       productId,
