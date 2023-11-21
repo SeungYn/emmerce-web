@@ -1,6 +1,6 @@
 'use client';
 
-import SSRSuspense from '@/components/common/\butil/SSRSuspense';
+import SSRSuspense from '@/components/common/util/SSRSuspense';
 import ShowcaseItems from '@/components/home/content/ShowcaseItems/ShowcaseItems';
 import useRecommendProducts from '@/hooks/api/product/useRecommendProducts';
 import useRecommendProductsPrefetch from '@/hooks/api/product/useRecommendProductsPrefetch';

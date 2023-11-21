@@ -1,6 +1,6 @@
 'use client';
 
-import SSRSuspense from '@/components/common/\butil/SSRSuspense';
+import SSRSuspense from '@/components/common/util/SSRSuspense';
 import InfoReview from '@/components/product/detail/review/InfoReview/InfoReview';
 import useReviewList from '@/hooks/api/review/useReviewList';
 import { useCallback, useState } from 'react';

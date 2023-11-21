@@ -1,5 +1,6 @@
 import MaxXLContainer from '@/components/common/container/MaxXLContainer';
 import MainItem from '@/components/common/listitem/MainItem/MainItem';
+import MainItemLink from '@/components/common/listitem/MainItemLink/MainItemLink';
 import Location from '@/components/common/location/Location';
 import FilterForm from '@/components/product/filter/FilterForm/FilterForm';
 import { getProductListByCategory } from '@/service/server/product';
@@ -50,7 +51,10 @@ export default async function page({ params: { id } }: Props) {
               <ul className='w-full flex flex-shrink-0 flex-wrap mt-4 gap-4 '>
                 {data.content.map((item, i) => (
                   <li key={item.productId}>
-                    <MainItem item={item} />
+                    <MainItemLink
+                      item={item}
+                      targetLink={`/detail/${item.productId}`}
+                    />
                   </li>
                 ))}
               </ul>
