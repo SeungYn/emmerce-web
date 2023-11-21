@@ -1,3 +1,5 @@
+import CartHeader from '@/components/cart/common/CartHeader/CartHeader';
+import MaxXLContainer from '@/components/common/container/MaxXLContainer';
 import { getCategoryList } from '@/service/server/category';
 import dynamic from 'next/dynamic';
 
@@ -15,7 +17,9 @@ export default async function layout({
   return (
     <>
       <Navbar isLogo={false} categoryList={categoryList} />
-      {children}
+      <section>
+        <MaxXLContainer>{children}</MaxXLContainer>
+      </section>
     </>
   );
 }
