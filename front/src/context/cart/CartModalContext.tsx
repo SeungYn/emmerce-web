@@ -1,6 +1,12 @@
 'use client';
 
-import { PropsWithChildren, createContext, useCallback, useState } from 'react';
+import {
+  PropsWithChildren,
+  createContext,
+  useCallback,
+  useContext,
+  useState,
+} from 'react';
 
 const CartModalContext = createContext({
   isOpen: false,
@@ -12,7 +18,9 @@ export default function CartMoalContextProvider({
   children,
 }: PropsWithChildren) {
   const [isOpen, setIsOpen] = useState(false);
-  const handleCloseModal = useCallback(() => setIsOpen(false), []);
+  const handleCloseModal = useCallback(() => {
+    setIsOpen(false);
+  }, []);
   const handleOpenModal = useCallback(() => setIsOpen(true), []);
 
   return (
@@ -22,4 +30,8 @@ export default function CartMoalContextProvider({
       {children}
     </CartModalContext.Provider>
   );
+}
+
+export function useCartModalContext() {
+  return useContext(CartModalContext);
 }

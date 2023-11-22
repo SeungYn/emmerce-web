@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en'>
+    <html lang='kr'>
       <body className={inter.className}>
         <ReactQueryContext>
           <UserContextProvider>
@@ -30,6 +30,7 @@ export default function RootLayout({
             </AuthFormContextProvider>
           </UserContextProvider>
         </ReactQueryContext>
+        <div id='portal'></div>
       </body>
     </html>
   );

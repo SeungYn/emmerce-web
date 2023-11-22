@@ -3,6 +3,8 @@ import TopBottomPaddingBox from '../../common/TopBottomPaddingBox/TopBottomPaddi
 import { ProductDetail } from '@/service/types/product';
 import Link from 'next/link';
 import { translateStarScoreToPercent } from '@/util/lib/util';
+import CartBtnAndModal from '@/components/cart/CartBtnAndModal/CartBtnAndModal';
+import CartMoalContextProvider from '@/context/cart/CartModalContext';
 
 type Props = {
   productDetail: ProductDetail;
@@ -143,9 +145,9 @@ export default function ProductDetailMain({ productDetail }: Props) {
             </div>
           </TopBottomPaddingBox>
           <div className='flex pt-5'>
-            <button className='basis-[50%] h-[53px] border border-black font-medium text-xl'>
-              장바구니
-            </button>
+            <CartMoalContextProvider>
+              <CartBtnAndModal />
+            </CartMoalContextProvider>
             <button className='basis-[50%]  h-[53px] border border-black font-medium text-xl text-white bg-black'>
               바로구매
             </button>

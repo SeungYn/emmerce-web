@@ -1,18 +1,20 @@
-'use client';
-
+import { PropsWithChildren } from 'react';
 import { motion } from 'framer-motion';
-import AuthForm from './AuthForm';
-import { useAuthFormContext } from '@/context/auth/AuthFormContext';
 
-export default function AuthBackground() {
-  const context = useAuthFormContext();
+type Props = {
+  isOpen: boolean;
+};
 
+export default function MotionBG({
+  isOpen,
+  children,
+}: PropsWithChildren<Props>) {
   return (
     <motion.section
       style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
       className='top-0 z-50 fixed w-full h-[100vh] text-white flex justify-center items-center'
       initial={false}
-      animate={context.isOpen ? 'visible' : 'hidden'}
+      animate={isOpen ? 'visible' : 'hidden'}
       variants={{
         hidden: { opacity: 0, display: 'none' },
         visible: {
@@ -20,9 +22,9 @@ export default function AuthBackground() {
           display: 'flex',
         },
       }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.3 }}
     >
-      <AuthForm {...context} />
+      {children}
     </motion.section>
   );
 }
