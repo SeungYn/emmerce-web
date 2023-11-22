@@ -7,27 +7,41 @@ import dynamic from 'next/dynamic';
 import CartModal from '../CartModal/CartModal';
 import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
+import { useCartAdd } from '@/hooks/api/cart/useCart';
+import { useUserContext } from '@/context/auth/UserContext';
+import { useAuthFormContext } from '@/context/auth/AuthFormContext';
 
 const ModalPortal = dynamic(
   () => import('@/components/common/modal/ModalPortal'),
   { ssr: false }
 );
 
-export default function CartBtnAndModal() {
-  const router = useRouter();
+type Props = {
+  productId: number;
+};
 
+export default function CartBtnAndModal({ productId }: Props) {
+  const router = useRouter();
+  const { userInfo } = useUserContext();
+  const { handleOpen: handleOpenAuthForm } = useAuthFormContext();
   const { isOpen, handleCloseModal, handleOpenModal } = useCartModalContext();
+  const { mutate } = useCartAdd(handleOpenModal);
 
   const handleMoveCartPage = useCallback(
     () => router.push('/o/cart'),
     [router]
   );
 
+  const onAddCartItem = () => {
+    if (!userInfo?.token) handleOpenAuthForm();
+    else mutate({ productId, quantity: 1 });
+  };
+
   return (
     <>
       <button
         className='basis-[50%] h-[53px] border border-black font-medium text-xl'
-        onClick={handleOpenModal}
+        onClick={onAddCartItem}
       >
         장바구니
       </button>

@@ -18,6 +18,7 @@ export default function ProductDetailMain({ productDetail }: Props) {
     originalPrice,
     discountPrice,
     discountRate,
+    productId,
     titleImg,
     stockQuantity,
     detail,
@@ -146,7 +147,7 @@ export default function ProductDetailMain({ productDetail }: Props) {
           </TopBottomPaddingBox>
           <div className='flex pt-5'>
             <CartMoalContextProvider>
-              <CartBtnAndModal />
+              <CartBtnAndModal productId={productId} />
             </CartMoalContextProvider>
             <button className='basis-[50%]  h-[53px] border border-black font-medium text-xl text-white bg-black'>
               바로구매

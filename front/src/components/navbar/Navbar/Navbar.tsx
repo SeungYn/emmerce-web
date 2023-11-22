@@ -34,7 +34,6 @@ export default function Navbar({ isLogo = true, categoryList }: Props) {
                 className='border-gray-200 px-4'
                 onClick={() => {
                   logoutMutate();
-                  console.log(123123);
                 }}
               >
                 LOGOUT

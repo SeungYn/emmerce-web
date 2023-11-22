@@ -34,3 +34,14 @@ export function useCartMutations() {
 
   return { addMutate, deleteMutate, clearMutate };
 }
+
+// 장바구니 아이템 추가
+export function useCartAdd(cb: () => void) {
+  const addMutate = useMutation({
+    mutationFn: (req: CartAddReq) => service.cart.add(req),
+    onSuccess: () => {
+      cb();
+    },
+  });
+  return addMutate;
+}

@@ -34,9 +34,9 @@ export default class AuthService {
   }
 
   async logout() {
-    console.log('logout');
+    console.log('logout!!!');
     const dd = await this.axios.post('/auth/logout');
-    console.log(dd);
+    console.log(dd, 'logout');
     return dd;
   }
 }

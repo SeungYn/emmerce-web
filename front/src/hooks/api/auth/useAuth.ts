@@ -32,8 +32,8 @@ export default function useAuth() {
   });
 
   const { mutate: logoutMutate } = useMutation({
-    mutationFn: service.auth.logout,
-    onSuccess: resetUserInfo,
+    mutationFn: () => service.auth.logout(),
+    onSuccess: () => resetUserInfo(),
   });
 
   return { loginMutate, registerMutate, logoutMutate };
