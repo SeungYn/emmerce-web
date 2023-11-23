@@ -32,7 +32,10 @@ export default function UserContextProvider({ children }: PropsWithChildren) {
     return null;
   });
 
-  const resetUserInfo = useCallback(() => setUserInfo(null), []);
+  const resetUserInfo = useCallback(() => {
+    localStorage.removeItem('access-token');
+    setUserInfo(null);
+  }, []);
 
   return (
     <UserContext.Provider
