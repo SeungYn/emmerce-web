@@ -1,6 +1,6 @@
 export default function DeliveryForm() {
   return (
-    <>
+    <div className='my-8'>
       <h3 className='text-xl font-bold mb-4'>배송정보</h3>
 
       <table className='w-full'>
@@ -90,6 +90,6 @@ export default function DeliveryForm() {
           </tr>
         </tbody>
       </table>
-    </>
+    </div>
   );
 }
