@@ -24,22 +24,6 @@ export function useCartItemListSuspense() {
   return res;
 }
 
-export function useCartMutations() {
-  const addMutate = useMutation({
-    mutationFn: (req: CartAddReq) => service.cart.add(req),
-  });
-
-  const deleteMutate = useMutation({
-    onMutate: () => {},
-  });
-
-  const clearMutate = useMutation({
-    mutationFn: () => service.cart.clear(),
-  });
-
-  return { addMutate, deleteMutate, clearMutate };
-}
-
 // 장바구니 아이템 추가
 export function useCartAdd(cb: () => void) {
   const addMutate = useMutation({
@@ -72,11 +56,14 @@ export function useCartDeleteItem() {
     onError: (err, checkCartItem, context) => {
       queryClient.setQueryData(['cart'], context?.previousList);
     },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['cart'] });
+    },
   });
   return deleteMutate;
 }
 
-export function useCheckAllCartItems() {
+export function useCartCheckAllItems() {
   const queryClient = useQueryClient();
   const mutate = useMutation({
     onMutate: () => {
@@ -96,7 +83,7 @@ export function useCheckAllCartItems() {
   return mutate;
 }
 
-export function useUnCheckAllCartItems() {
+export function useCartUnCheckAllItems() {
   const queryClient = useQueryClient();
   const mutate = useMutation({
     onMutate: () => {
@@ -116,7 +103,7 @@ export function useUnCheckAllCartItems() {
   return mutate;
 }
 
-export function useToggleCheckCartItem() {
+export function useCartToggleCheckItem() {
   const queryClient = useQueryClient();
   const mutate = useMutation({
     onMutate: (checkCartItem: CheckCartItem) => {
@@ -138,7 +125,7 @@ export function useToggleCheckCartItem() {
   return mutate;
 }
 
-export function useUpCountCartItem() {
+export function useCartUpCountItem() {
   const queryClient = useQueryClient();
   const mutate = useMutation({
     onMutate: (checkCartItem: CheckCartItem) => {
@@ -147,7 +134,7 @@ export function useUpCountCartItem() {
       queryClient.setQueryData(['cart'], () => {
         const result = previousList.map((item) => {
           if (item.cartProductId === checkCartItem.cartProductId) {
-            return { ...item, totalCount: checkCartItem.totalCount + 1 };
+            return { ...item, quantity: checkCartItem.quantity + 1 };
           }
           return { ...item };
         });
@@ -161,7 +148,7 @@ export function useUpCountCartItem() {
   return mutate;
 }
 
-export function useDownCountCartItem() {
+export function useCartDownCountItem() {
   const queryClient = useQueryClient();
   const mutate = useMutation({
     onMutate: (checkCartItem: CheckCartItem) => {
@@ -170,9 +157,9 @@ export function useDownCountCartItem() {
       queryClient.setQueryData(['cart'], () => {
         const result = previousList.map((item) => {
           if (item.cartProductId === checkCartItem.cartProductId) {
-            const countResult = checkCartItem.totalCount - 1;
+            const countResult = checkCartItem.quantity - 1;
 
-            return { ...item, totalCount: countResult < 1 ? 1 : countResult };
+            return { ...item, quantity: countResult < 1 ? 1 : countResult };
           }
           return { ...item };
         });
@@ -186,7 +173,7 @@ export function useDownCountCartItem() {
   return mutate;
 }
 
-export function useClearCart() {
+export function useCartClear() {
   const queryClient = useQueryClient();
   const mutate = useMutation({
     mutationFn: () => service.cart.clear(),

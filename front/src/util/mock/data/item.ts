@@ -113,19 +113,25 @@ export const items = [
 
 export const cartItems = [
   {
-    productId: 1,
-    name: '무난무난 검정 슬랙스',
-    titleImg: 'title-img',
-    discountPrice: 20000,
-    totalCount: 3,
-    totalPrice: 60000,
-  },
-  {
+    cartProductId: 1,
     productId: 2,
     name: '무난무난 검정 반팔티',
     titleImg: 'title-img',
+    originalPrice: 40000,
     discountPrice: 25000,
     totalCount: 5,
     totalPrice: 125000,
+    brand: '무신사',
+  },
+  {
+    cartProductId: 2,
+    productId: 1,
+    name: '무난무난 검정 슬랙스',
+    titleImg: 'title-img',
+    originalPrice: 40000,
+    discountPrice: 20000,
+    totalCount: 3,
+    totalPrice: 60000,
+    brand: '무신사',
   },
 ];

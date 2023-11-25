@@ -1,12 +1,33 @@
-import { CartItem } from '@/service/types/cart';
+'use client';
+import { CheckCartItem } from '@/service/types/cart';
 
 type Props = {
-  item: CartItem;
+  item: CheckCartItem;
+  handleToggleCartItem: (cartItem: CheckCartItem) => void;
+  handleDeleteCartItem: (checkCartItem: CheckCartItem) => void;
+  handleUpCountCartItem: (checkCartItem: CheckCartItem) => void;
+  handleDownCountCartItem: (checkCartItem: CheckCartItem) => void;
 };
 
-export default function CartTableItem({ item }: Props) {
-  const { productId, name, titleImg, discountPrice, totalCount, totalPrice } =
-    item;
+export default function CartTableItem({
+  item,
+  handleToggleCartItem,
+  handleDeleteCartItem,
+  handleUpCountCartItem,
+  handleDownCountCartItem,
+}: Props) {
+  const {
+    productId,
+    cartProductId,
+    name,
+    titleImg,
+    discountPrice,
+    brand,
+    totalCount,
+    originalPrice,
+    quantity,
+    isCheck,
+  } = item;
 
   return (
     <tr
@@ -19,7 +40,14 @@ export default function CartTableItem({ item }: Props) {
       }}
     >
       <td>
-        <input type='checkbox' name='all_cart_item' id='' />
+        <input
+          type='checkbox'
+          name='all_cart_item'
+          checked={isCheck}
+          onChange={() => {
+            handleToggleCartItem(item);
+          }}
+        />
       </td>
       <td className='flex shrink-0 justify-self-start gap-4'>
         <img
@@ -28,26 +56,26 @@ export default function CartTableItem({ item }: Props) {
           className='w-[85px] aspect-square'
         />
         <div className=''>
-          <p>브랜드</p>
+          <p>{brand}</p>
           <p>{name}</p>
           <p>옵션</p>
         </div>
       </td>
 
-      <td>100000000원</td>
-      <td className='flex '>
-        <input type='text' name='' id='' className='w-full border' />
+      <td>{(originalPrice * quantity).toLocaleString()}</td>
+      <td className='flex items-center gap-2'>
+        <div>{quantity}</div>
         <div className='flex flex-col'>
-          <button>🔼</button>
-          <button>🔽</button>
+          <button onClick={() => handleUpCountCartItem(item)}>🔼</button>
+          <button onClick={() => handleDownCountCartItem(item)}>🔽</button>
         </div>
       </td>
-      <td>{discountPrice.toLocaleString()}원</td>
-      <td>{totalPrice.toLocaleString()}원</td>
+      <td>{((originalPrice - discountPrice) * quantity).toLocaleString()}원</td>
+      <td>{(discountPrice * quantity).toLocaleString()}원</td>
       <td>무료배송</td>
       <td className='flex flex-col'>
         <button>바로구매</button>
-        <button>삭제</button>
+        <button onClick={() => handleDeleteCartItem(item)}>삭제</button>
       </td>
     </tr>
   );

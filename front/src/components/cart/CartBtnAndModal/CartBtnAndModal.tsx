@@ -6,8 +6,8 @@ import { useCartModalContext } from '@/context/cart/CartModalContext';
 import dynamic from 'next/dynamic';
 import CartModal from '../CartModal/CartModal';
 import { useRouter } from 'next/navigation';
-import { useCallback, useState } from 'react';
-import { useCartAdd } from '@/hooks/api/cart/useCart';
+import { useCallback, useEffect, useState } from 'react';
+import { useCartAdd, useCartItemList } from '@/hooks/api/cart/useCart';
 import { useUserContext } from '@/context/auth/UserContext';
 import { useAuthFormContext } from '@/context/auth/AuthFormContext';
 

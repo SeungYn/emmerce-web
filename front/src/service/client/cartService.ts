@@ -1,11 +1,12 @@
 import { AxiosInstance } from 'axios';
-import { CartAddReq } from '../types/cart';
+import { CartAddReq, CartItem, CheckCartItem } from '../types/cart';
 
 export default class CartService {
   constructor(private axios: AxiosInstance) {}
 
   async add({ productId, quantity }: CartAddReq) {
     const query = `/cart/product`;
+    console.log('add cart item');
     const { data } = await this.axios.post(query, {
       productId,
       quantity,
@@ -14,7 +15,7 @@ export default class CartService {
     return data;
   }
 
-  async deleteByProductId(productId: number) {
+  async deleteByProductId({ productId }: CheckCartItem) {
     const query = `/cart/product/${productId}`;
     const { data } = await this.axios.delete(query);
     return data;
@@ -22,8 +23,16 @@ export default class CartService {
 
   async getCartItemList() {
     const query = `/cart/product`;
-    const { data } = await this.axios.get(query);
-    return data;
+    const { data } = await this.axios.get<CartItem[]>(query);
+
+    function addCheckAttribute(list: CartItem[]): CheckCartItem[] {
+      return list.map((item) => ({
+        ...item,
+        isCheck: true,
+      }));
+    }
+
+    return addCheckAttribute(data);
   }
 
   async clear() {

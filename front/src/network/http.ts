@@ -7,7 +7,7 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use((req) => {
   const token = localStorage.getItem('access-token');
-  req.headers.Authorization = `Baerer ${token}`;
+  req.headers.Authorization = `Bearer ${token}`;
   return req;
 });
 
