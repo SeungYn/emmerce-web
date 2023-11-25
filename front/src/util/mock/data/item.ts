@@ -122,6 +122,8 @@ export const cartItems = [
     totalCount: 5,
     totalPrice: 125000,
     brand: '무신사',
+    isCheck: true,
+    quantity: 10,
   },
   {
     cartProductId: 2,
@@ -133,5 +135,7 @@ export const cartItems = [
     totalCount: 3,
     totalPrice: 60000,
     brand: '무신사',
+    isCheck: true,
+    quantity: 10,
   },
 ];
