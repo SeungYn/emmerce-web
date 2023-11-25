@@ -3,7 +3,7 @@ export default function DeliveryForm() {
     <>
       <h3 className='text-xl font-bold mb-4'>배송정보</h3>
 
-      <table>
+      <table className='w-full'>
         <tbody className='border-t border-b border-gray-400'>
           {/* 행 */}
           <tr className='flex border-t border-b border-gray-400 border-collapse'>
