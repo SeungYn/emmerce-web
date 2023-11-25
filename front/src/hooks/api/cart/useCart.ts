@@ -11,6 +11,7 @@ export function useCartItemList() {
   const res = useQuery({
     queryKey: ['cart'],
     queryFn: () => service.cart.getCartItemList(),
+    staleTime: Infinity,
   });
   return res;
 }
@@ -20,6 +21,7 @@ export function useCartItemListSuspense() {
     queryKey: ['cart'],
     queryFn: () => service.cart.getCartItemList(),
     refetchOnMount: true,
+    staleTime: Infinity,
   });
   return res;
 }
