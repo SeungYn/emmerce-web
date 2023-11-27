@@ -27,10 +27,12 @@ export default function DeliveryForm() {
     new window.daum.Postcode({
       oncomplete: (data: DaumPostRes) => {
         const { roadAddress, zonecode } = data;
-        console.log(roadAddress, zonecode);
+        dispatch({ type: 'city', payload: roadAddress });
+        dispatch({ type: 'zipcode', payload: zonecode });
       },
     }).open();
   };
+
   return (
     <div className='my-8'>
       <h3 className='text-xl font-bold mb-4'>배송정보</h3>
