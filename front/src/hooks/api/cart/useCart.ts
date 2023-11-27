@@ -12,6 +12,8 @@ export function useCartItemList() {
     queryKey: ['cart'],
     queryFn: () => service.cart.getCartItemList(),
     staleTime: Infinity,
+    refetchOnMount: false,
+    initialData: [],
   });
   return res;
 }

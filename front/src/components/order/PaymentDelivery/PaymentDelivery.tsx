@@ -1,5 +1,7 @@
+'use client';
+
+import FinalPaymentInfoContainer from '@/container/order/FinalPaymentInfoContainer';
 import DeliveryForm from '../DeliveryForm/DeliveryForm';
-import FinalPaymentInfo from '../FinalPaymentInfo/FinalPaymentInfo';
 import PaymentForm from '../Payment/PaymentForm';
 
 export default function PaymentDelivery() {
@@ -9,7 +11,7 @@ export default function PaymentDelivery() {
         <DeliveryForm />
         <PaymentForm />
       </div>
-      <FinalPaymentInfo />
+      <FinalPaymentInfoContainer />
     </div>
   );
 }

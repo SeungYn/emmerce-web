@@ -1,4 +1,20 @@
-export default function FinalPaymentInfo() {
+'use client';
+
+type Props = {
+  originPrice: number;
+  discountPrice: number;
+  discoutedPrice: number;
+  deliverPrice: number;
+  handlePostOrder: () => void;
+};
+
+export default function FinalPaymentInfo({
+  originPrice,
+  deliverPrice,
+  discountPrice,
+  discoutedPrice,
+  handlePostOrder,
+}: Props) {
   return (
     <div className='flex-grow'>
       <div className=' border-[3px] border-zinc-600'>
@@ -8,19 +24,21 @@ export default function FinalPaymentInfo() {
           </h3>
           <div className='flex-grow flex justify-between border-b border-gray-200 py-2'>
             <span>상품금액</span>
-            <span>100000원</span>
+            <span>{originPrice.toLocaleString()}원</span>
           </div>
           <div className='flex-grow flex justify-between border-b border-gray-200 py-2'>
             <span>쿠폰/할인금액</span>
-            <span>100000원</span>
+            <span>{discountPrice.toLocaleString()}원</span>
           </div>
           <div className='flex-grow flex justify-between border-b border-gray-200 py-2'>
             <span>배송비</span>
-            <span>100000원</span>
+            <span>{deliverPrice.toLocaleString()}원</span>
           </div>
           <div className='flex flex-col py-2 text-red-600 '>
             <span className=''>총 결제금액</span>
-            <span className='self-end '>100000원</span>
+            <span className='self-end '>
+              {discoutedPrice.toLocaleString()}원
+            </span>
           </div>
         </div>
         <p className='text-center border-t border-gray-400 bg-gray-200 py-2'>
@@ -33,6 +51,7 @@ export default function FinalPaymentInfo() {
           background:
             'linear-gradient(90deg, rgba(255,85,9,1) 0%, rgba(255,0,0,1) 49%, rgba(255,0,247,1) 100%)',
         }}
+        onClick={handlePostOrder}
       >
         구매하기
       </button>
