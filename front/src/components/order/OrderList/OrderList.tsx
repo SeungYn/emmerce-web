@@ -11,7 +11,7 @@ export default function OrderList() {
   return (
     <section>
       <div className='flex justify-between'>
-        <h3>주문하실 상품</h3>
+        <h3 className='text-xl font-bold mb-4 '>주문하실 상품</h3>
         <Link href='#'>장바구니가기</Link>
       </div>
       <div className='text-lg p-2 bg-zinc-600 text-white'>

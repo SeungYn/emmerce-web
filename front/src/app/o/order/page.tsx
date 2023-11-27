@@ -8,7 +8,10 @@ export default function page() {
   return (
     <>
       {/* 다음 주소 api */}
-      <Script src='https://developers.kakao.com/sdk/js/kakao.js' async />
+      <Script
+        src='//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js'
+        async
+      />
 
       <CartHeader currentPage='order' />
       <OrderList />

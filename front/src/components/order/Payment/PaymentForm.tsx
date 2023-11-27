@@ -1,4 +1,8 @@
+'use client';
+import { useState } from 'react';
+
 export default function PaymentForm() {
+  const [currentPayment, setCurrnetPayment] = useState('kakao');
   return (
     <div className='my-8'>
       <div className='border-b border-black'>
@@ -6,7 +10,12 @@ export default function PaymentForm() {
       </div>
 
       <div className='py-4'>
-        <button className='w-[20%] p-4 flex justify-center border border-black bg-yellow-300'>
+        <button
+          className={`w-[20%] p-4 flex justify-center border border-zinc-500 ${
+            currentPayment === 'kakao' ? 'bg-yellow-300' : 'bg-white'
+          } `}
+          onClick={() => setCurrnetPayment('kakao')}
+        >
           <div
             className='bg-paymentIcons w-[108px] h-[28px] '
             style={{
