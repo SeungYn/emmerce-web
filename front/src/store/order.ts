@@ -1,22 +1,19 @@
+import { Delivery } from '@/service/types/order';
 import { create } from 'zustand';
 
-export interface DeliveryForm {
-  name: string;
-  tel: string;
+export interface DeliveryForm extends Delivery {
   telFirst: string;
   telSecond: string;
   telThird: string;
-  email: string;
-  city: string;
-  street: string;
-  zipcode: string;
 }
 
 interface DeliveryState extends DeliveryForm {
   dispatch: (action: DeliveryStateActionType) => void;
 }
 
-type DeliveryStateActionType = { type: keyof DeliveryForm; payload: string };
+type DeliveryStateType = keyof DeliveryForm | 'reset';
+
+type DeliveryStateActionType = { type: DeliveryStateType; payload: string };
 
 const initialDeliveryState = {
   name: '',
@@ -67,8 +64,11 @@ function deliverStateReduceer(
       return { ...state, street: payload };
     case 'zipcode':
       return { ...state, zipcode: payload };
+    case 'reset':
+      return { ...initialDeliveryState };
   }
 }
+
 export const useDeliveryFormFluxStore = create<DeliveryState>()((set) => ({
   ...initialDeliveryState,
   dispatch: (action: DeliveryStateActionType) =>
