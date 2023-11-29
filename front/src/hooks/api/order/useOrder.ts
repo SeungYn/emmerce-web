@@ -10,7 +10,10 @@ export function usePostOrder() {
   const postOrderMutate = useMutation({
     mutationFn: () =>
       service.order.postOrder({
-        orderProductList: cartList,
+        orderProductList: cartList.map((item) => ({
+          productId: item.productId,
+          totalCount: item.quantity,
+        })),
         deliveryReq: deliveryForm,
       }),
   });

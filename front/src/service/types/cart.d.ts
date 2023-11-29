@@ -9,7 +9,7 @@ export type CartItem = {
   name: string;
   titleImg: string;
   discountPrice: number;
-  totalCount: number;
+  totalCount: number; // 현재 안 씀
   quantity: number;
   originalPrice: number;
   brand: string;

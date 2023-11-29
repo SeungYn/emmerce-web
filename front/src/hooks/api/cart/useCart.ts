@@ -12,6 +12,7 @@ export function useCartItemList() {
     queryKey: ['cart'],
     queryFn: () => service.cart.getCartItemList(),
     staleTime: Infinity,
+    gcTime: Infinity,
     refetchOnMount: false,
     initialData: [],
   });
@@ -24,6 +25,7 @@ export function useCartItemListSuspense() {
     queryFn: () => service.cart.getCartItemList(),
     refetchOnMount: true,
     staleTime: Infinity,
+    gcTime: Infinity,
   });
   return res;
 }
