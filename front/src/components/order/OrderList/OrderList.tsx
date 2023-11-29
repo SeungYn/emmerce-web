@@ -1,13 +1,14 @@
 'use client';
 
-import CartTableItem from '@/components/cart/item/CartTableItem/CartTableItem';
-import { cartItems } from '@/util/mock/data/item';
 import Link from 'next/link';
 import OrderListItem from '../OrderListItem/OrderListItem';
-
-const cartItemList = cartItems;
+import { useCartItemList } from '@/hooks/api/cart/useCart';
+import { useEffect } from 'react';
+import useInvalidCart from '@/hooks/cart/useInvalidCart';
 
 export default function OrderList() {
+  const { data: cartItemList } = useCartItemList();
+  useInvalidCart();
   return (
     <section>
       <div className='flex justify-between'>
