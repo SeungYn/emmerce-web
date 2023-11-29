@@ -1,7 +1,9 @@
+import CookiStorage from './cookieStorage';
 import LocalStorage from './localstorage';
 
-const storage = {
+const browserStorage = {
   local: new LocalStorage(),
+  cookie: new CookiStorage(),
 };
 
-export default storage;
+export default browserStorage;
