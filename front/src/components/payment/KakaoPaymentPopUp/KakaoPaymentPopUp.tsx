@@ -12,9 +12,9 @@ export default function KakaoPaymentPopUp() {
   const { redirect_pc_url, reset } = useKakaoPayStore();
   const cartClearMutate = useCartClear();
 
-  const approveSuccessCallback = () => {
+  const approveSuccessCallback = (orderId: number | string) => {
     reset();
-    router.push('/o/complate?orderId=3');
+    router.push(`/o/complate?orderId=${orderId}`);
   };
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function KakaoPaymentPopUp() {
       console.log(e);
       if (e.origin === 'http://localhost:3000') {
         if (e.data.approveResult === 'SUCCESS') {
-          approveSuccessCallback();
+          approveSuccessCallback(e.data.orderId);
           cartClearMutate.mutate();
         }
         if (e.data.approveResult === 'FAIL') {

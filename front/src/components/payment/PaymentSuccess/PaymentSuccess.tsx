@@ -42,7 +42,7 @@ export default function PaymentSuccess({ orderId, pg_token }: Props) {
       </div>
       <button
         onClick={() => {
-          onSendParentWindowMsg({ approveResult: 'SUCCESS' });
+          onSendParentWindowMsg({ approveResult: 'SUCCESS', orderId });
         }}
         className='border border-black px-2 rounded text-xl font-bold'
       >
