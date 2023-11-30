@@ -25,6 +25,9 @@ export default function KakaoPaymentPopUp() {
           approveSuccessCallback();
           cartClearMutate.mutate();
         }
+        if (e.data.approveResult === 'FAIL') {
+          reset();
+        }
       }
     };
 
