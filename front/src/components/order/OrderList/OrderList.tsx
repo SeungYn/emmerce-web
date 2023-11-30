@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import OrderListItem from '../OrderListItem/OrderListItem';
 import { useCartItemList } from '@/hooks/api/cart/useCart';
-import { useEffect } from 'react';
 import useInvalidCart from '@/hooks/cart/useInvalidCart';
 
 export default function OrderList() {
@@ -21,7 +20,7 @@ export default function OrderList() {
       <table>
         <thead>
           <tr
-            className='grid bg-gray-200 py-3'
+            className='grid bg-gray-200 py-3  [&>*]:text-center'
             style={{
               gridTemplateColumns: '492px 168px 114px 168px 168px 168px ',
             }}
