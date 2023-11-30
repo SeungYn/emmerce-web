@@ -7,7 +7,7 @@ import useInvalidCart from '@/hooks/cart/useInvalidCart';
 
 export default function OrderList() {
   const { data: cartItemList } = useCartItemList();
-  useInvalidCart();
+  //useInvalidCart();
   return (
     <section>
       <div className='flex justify-between'>
