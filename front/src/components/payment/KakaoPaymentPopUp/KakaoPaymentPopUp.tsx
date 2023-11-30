@@ -1,20 +1,53 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import PaymentModalBackground from '../common/PaymentModalBackground/PaymentModalBackground';
+import { useKakaoPayStore } from '@/store/payment/kakaoPayStore';
+import { useRouter } from 'next/navigation';
+import { useCartClear } from '@/hooks/api/cart/useCart';
 
 export default function KakaoPaymentPopUp() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const router = useRouter();
+  const { redirect_pc_url, reset } = useKakaoPayStore();
+  const cartClearMutate = useCartClear();
+
+  const approveSuccessCallback = () => {
+    reset();
+    router.push('/o/complate?orderId=3');
+  };
+
+  useEffect(() => {
+    const receiveCallback = (e: MessageEvent<any>) => {
+      console.log(e);
+      if (e.origin === 'http://localhost:3000') {
+        if (e.data.approveResult === 'SUCCESS') {
+          approveSuccessCallback();
+          cartClearMutate.mutate();
+        }
+      }
+    };
+
+    window.addEventListener('message', receiveCallback);
+
+    return () => {
+      window.removeEventListener('message', receiveCallback);
+    };
+  }, []);
+
+  if (!redirect_pc_url) return <></>;
 
   return (
-    <PaymentModalBackground>
-      <div className='w-[600px] h-[600px] bg-white'>
+    <PaymentModalBackground
+      className={`${redirect_pc_url ? 'block' : 'hidden'}`}
+    >
+      <div className='w-[500px] h-[600px] bg-white '>
         <iframe
+          ref={iframeRef}
           width={'100%'}
           height={'100%'}
-          ref={iframeRef}
           id='kakao-iframe'
-          src='https://online-pay.kakao.com/mockup/v1/d23c2b55a2644a1b5bac960942ef71a50a029f0a9bbd153917925f71a0b01a4e/info'
+          src={redirect_pc_url}
         ></iframe>
       </div>
     </PaymentModalBackground>
