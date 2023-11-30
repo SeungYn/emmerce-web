@@ -4,6 +4,7 @@ import CartService from './cartService';
 import ProductService from './productService';
 import ReviewService from './reviewService';
 import OrderService from './orderService';
+import PaymentService from './paymentService';
 
 const service = {
   auth: new AuthService(axiosInstance),
@@ -11,6 +12,7 @@ const service = {
   product: new ProductService(axiosInstance),
   cart: new CartService(axiosInstance),
   order: new OrderService(axiosInstance),
+  payment: new PaymentService(axiosInstance),
 };
 
 export default service;

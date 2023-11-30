@@ -2,9 +2,11 @@ import service from '@/service/client';
 import { useMutation } from '@tanstack/react-query';
 import { useCartItemList } from '../cart/useCart';
 import { useDeliveryFormFluxStore } from '@/store/order';
+import usePaymentMutation from '../payment/usePaymentMutation';
 
 export function usePostOrder() {
   const { data: cartList } = useCartItemList();
+  const { readyMutate } = usePaymentMutation();
   const deliveryForm = useDeliveryFormFluxStore();
 
   const postOrderMutate = useMutation({
@@ -16,6 +18,9 @@ export function usePostOrder() {
         })),
         deliveryReq: deliveryForm,
       }),
+    onSuccess: ({ orderId }) => {
+      readyMutate.mutate(orderId);
+    },
   });
 
   return { postOrderMutate };

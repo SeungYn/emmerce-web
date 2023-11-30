@@ -183,6 +183,9 @@ export function useCartClear() {
   const queryClient = useQueryClient();
   const mutate = useMutation({
     mutationFn: () => service.cart.clear(),
+    onSuccess: () => {
+      queryClient.removeQueries({ queryKey: ['cart'] });
+    },
   });
 
   return mutate;

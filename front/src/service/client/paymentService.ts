@@ -8,7 +8,7 @@ import {
 export default class PaymentService {
   constructor(private axios: AxiosInstance) {}
 
-  async ready(orderId: number) {
+  async ready(orderId: number | string) {
     const { data } = await this.axios.post<PaymentReadyRes>('/payment/ready', {
       orderId,
     });
@@ -17,13 +17,13 @@ export default class PaymentService {
   }
 
   async approve({ orderId, pg_token }: PaymentApproveReq) {
-    const url = `/payment/success?orderId=${orderId}}&pg_token=${pg_token}`;
-    const { data } = await this.axios.post<PaymentApproveRes>(url);
+    const url = `/payment/success?orderId=${orderId}&pg_token=${pg_token}`;
+    const { data } = await this.axios.get<PaymentApproveRes>(url);
 
     return data;
   }
 
-  async cancel(orderId: number) {
+  async cancel(orderId: number | string) {
     const url = '/payment/refund';
     const { data } = await this.axios.post(url, { orderId });
   }
@@ -31,5 +31,7 @@ export default class PaymentService {
   async getPaymentInfoByOrderId(orderId: number) {
     const url = '/payment/order';
     const { data } = await this.axios.post(url, { orderId });
+
+    return data;
   }
 }
