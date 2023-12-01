@@ -1,6 +1,6 @@
 'use client';
 import { AuthFormContextType } from '@/context/auth/AuthFormContext';
-import useAuth from '@/hooks/api/auth/useAuth';
+import useAuth, { useAuthRegister } from '@/hooks/api/auth/useAuth';
 import useInput from '@/hooks/auth/useInput';
 import service from '@/service/client';
 import { motion } from 'framer-motion';
@@ -18,14 +18,15 @@ export default function AuthForm({ isOpen, handleClose, handleOpen }: Props) {
     useInput(/''/);
   const [tell, setTell, isTellValidate] = useInput(/''/);
   const [birth, setBirth, isBirthValidate] = useInput(/''/);
-  const { loginMutate, registerMutate } = useAuth();
+  const { loginMutate } = useAuth();
+  const registerMutate = useAuthRegister(setFormState);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (formState === FormState.login) {
       loginMutate({ name, password });
     } else {
-      registerMutate({
+      registerMutate.mutate({
         name,
         password,
         passwordConfirm: passwordCheck,
@@ -34,6 +35,11 @@ export default function AuthForm({ isOpen, handleClose, handleOpen }: Props) {
         birth,
       });
     }
+    setName('');
+    setPassword('');
+    setEmail('');
+    setTell('');
+    setBirth('');
   };
 
   return (
@@ -61,12 +67,21 @@ export default function AuthForm({ isOpen, handleClose, handleOpen }: Props) {
           <AiOutlineClose />
         </button>
       </header>
-      <section className='p-8 '>
-        <p className='text-2xl'>
-          상황에 맞는
-          <br />
-          텍스트를 넣기
-        </p>
+      <section className='p-8  '>
+        {formState === FormState.login ? (
+          <p className='text-3xl px-10'>
+            이랜드보다
+            <br />
+            편리하게
+          </p>
+        ) : (
+          <p className='text-3xl px-10'>
+            환영합니다.
+            <br />
+            이랜드보단 이머스로
+          </p>
+        )}
+
         <nav className='text-lg text-gray-600 flex border-b border-gray-300'>
           <button
             className={`basis-[50%] flex-shrink-0 py-4 border-b-2 ${
@@ -87,6 +102,7 @@ export default function AuthForm({ isOpen, handleClose, handleOpen }: Props) {
         </nav>
         {formState === FormState.login ? (
           <form
+            key={FormState.login}
             className='flex flex-col text-base text-gray-500 px-4'
             onSubmit={onSubmit}
           >
@@ -121,6 +137,7 @@ export default function AuthForm({ isOpen, handleClose, handleOpen }: Props) {
           </form>
         ) : (
           <form
+            key={FormState.register}
             className='flex flex-col text-base text-gray-500 px-4'
             onSubmit={onSubmit}
           >
@@ -183,7 +200,7 @@ export default function AuthForm({ isOpen, handleClose, handleOpen }: Props) {
   );
 }
 
-enum FormState {
+export enum FormState {
   login,
   register,
 }

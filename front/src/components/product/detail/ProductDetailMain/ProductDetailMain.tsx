@@ -1,19 +1,42 @@
 import Image from 'next/image';
 import TopBottomPaddingBox from '../../common/TopBottomPaddingBox/TopBottomPaddingBox';
+import { ProductDetail } from '@/service/types/product';
+import Link from 'next/link';
+import { translateStarScoreToPercent } from '@/util/lib/util';
+import CartBtnAndModal from '@/components/cart/CartBtnAndModal/CartBtnAndModal';
+import CartMoalContextProvider from '@/context/cart/CartModalContext';
 
-export default function ProductDetailMain() {
+type Props = {
+  productDetail: ProductDetail;
+};
+
+export default function ProductDetailMain({ productDetail }: Props) {
+  const {
+    brand,
+    starScore,
+    name,
+    originalPrice,
+    discountPrice,
+    discountRate,
+    productId,
+    titleImg,
+    stockQuantity,
+    detail,
+  } = productDetail;
+
   return (
     <section>
       <div>
-        <a href='' className='text-2xl font-bold'>
-          브랜드명
-        </a>
+        <Link href='' className='text-2xl font-bold'>
+          {brand}
+        </Link>
       </div>
       {/* 메인 */}
       <div className='flex shrink-0 gap-6'>
         {/* left */}
         <div className='relative basis-[640px] '>
           <div>
+            {/* 이미지 서버 생기면 이미지 연동 */}
             <Image
               src='/assets/slide/1.png'
               width={640}
@@ -33,13 +56,14 @@ export default function ProductDetailMain() {
               }}
             >
               <span
-                className='w-[80%] bg-no-repeat h-[24px] block bg-icons absolute t-0 l-0'
+                className={`bg-no-repeat h-[24px] block bg-icons absolute t-0 l-0`}
                 style={{
                   backgroundPosition: '-174px -146px',
+                  width: `${translateStarScoreToPercent(starScore)}%`,
                 }}
               ></span>
             </div>
-            <p className='pr-2 mr-2 border-r border-gray-300'>4.9점</p>
+            <p className='pr-2 mr-2 border-r border-gray-300'>{starScore}점</p>
             <a
               href='#'
               className='border-b border-gray-300 text-gray-300 leading-5'
@@ -50,18 +74,18 @@ export default function ProductDetailMain() {
         </div>
         {/* right */}
         <div className='basis-[640px] text-base'>
-          <h2 className='font-semibold text-2xl'>
-            [남녀공용] (우디) 그래픽 스웨트 셔츠_SPMWC12C3
-          </h2>
+          <h2 className='font-semibold text-2xl'>{name}</h2>
           <TopBottomPaddingBox className='border-b border-gray-300'>
             <div className='flex shrink-0 items-center '>
               <span className='basis-[140px]'>판매가</span>
               <div className='flex items-end gap-4'>
-                <h3 className='text-3xl font-semibold'>16,130원</h3>
+                <h3 className='text-3xl font-semibold'>{discountPrice}원</h3>
                 <span className='text-lg text-gray-400 line-through'>
-                  35444원
+                  {originalPrice}원
                 </span>
-                <h3 className='text-3xl text-red-500 font-semibold'>55%</h3>
+                <h3 className='text-3xl text-red-500 font-semibold'>
+                  {discountRate}%
+                </h3>
               </div>
             </div>
           </TopBottomPaddingBox>
@@ -122,9 +146,9 @@ export default function ProductDetailMain() {
             </div>
           </TopBottomPaddingBox>
           <div className='flex pt-5'>
-            <button className='basis-[50%] h-[53px] border border-black font-medium text-xl'>
-              장바구니
-            </button>
+            <CartMoalContextProvider>
+              <CartBtnAndModal productId={productId} />
+            </CartMoalContextProvider>
             <button className='basis-[50%]  h-[53px] border border-black font-medium text-xl text-white bg-black'>
               바로구매
             </button>

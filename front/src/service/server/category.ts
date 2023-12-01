@@ -1,4 +1,5 @@
-import { Category } from '../types/category';
+import { HttpServer } from '@/network/http';
+import { Category, ProductCategoryInfo } from '../types/category';
 
 export async function getCategoryList() {
   const res = await fetch('http://localhost:8088/category/list', {
@@ -40,4 +41,24 @@ export async function getCategoryList() {
   );
 
   return categories;
+}
+
+export class CategoryServerService {
+  constructor(private http: HttpServer) {}
+
+  async getProductCategoryInfo(productId: number | string) {
+    const data = await this.http.fetch<ProductCategoryInfo[]>(
+      `/product/${productId}/categories`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    data.sort((a, b) => a.tier - b.tier);
+
+    return data;
+  }
 }

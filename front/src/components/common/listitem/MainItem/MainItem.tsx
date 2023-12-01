@@ -6,10 +6,17 @@ import { Product } from '@/service/types/product';
 
 type Props = {
   item: Product;
+  handleMovePage: (productId: number) => void;
+  handleLike?: (productId: number) => void;
   rank?: number;
 };
 // 이미지 처리 해야됨
-export default function MainItem({ item, rank }: Props) {
+export default function MainItem({
+  item,
+  rank,
+  handleMovePage,
+  handleLike,
+}: Props) {
   const {
     productId,
     name,
@@ -25,7 +32,10 @@ export default function MainItem({ item, rank }: Props) {
   const isDiscount = discountRate > 0;
 
   return (
-    <div className='relative'>
+    <div
+      className='relative cursor-pointer'
+      onClick={() => handleMovePage(productId)}
+    >
       <div onClick={() => console.log('div')}>
         <div className='relative shrink-0 rounded-xl w-[240px] overflow-hidden after:content-[""] after:absolute after:inset-0 after:border after:border-gray-400 after:rounded-xl after:z-10'>
           {rank && (
@@ -67,12 +77,14 @@ export default function MainItem({ item, rank }: Props) {
         </div>
       </div>
       {/* 유저 정보로 좋아요 여부 필요 */}
-      <button
-        className='absolute right-2 top-2 z-10'
-        onClick={() => console.log('button')}
-      >
-        <HeartIcon className='w-6 h-6' />
-      </button>
+      {handleLike && (
+        <button
+          className='absolute right-2 top-2 z-10'
+          onClick={() => console.log('button')}
+        >
+          <HeartIcon className='w-6 h-6' />
+        </button>
+      )}
     </div>
   );
 }

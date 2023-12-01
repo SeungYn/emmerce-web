@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import AuthForm from './AuthForm';
 import { useAuthFormContext } from '@/context/auth/AuthFormContext';
-import { useEffect } from 'react';
 
 export default function AuthBackground() {
   const context = useAuthFormContext();

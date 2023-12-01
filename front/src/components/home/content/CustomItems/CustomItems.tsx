@@ -1,7 +1,12 @@
 import MiniItem from '@/components/common/listitem/MiniItem/MiniItem';
 import Header from '../Header/Header';
+import { Product } from '@/service/types/product';
 
-export default function CustomItems() {
+type Props = {
+  productList: Product[];
+};
+
+export default function CustomItems({ productList }: Props) {
   return (
     <div>
       <Header
@@ -11,7 +16,12 @@ export default function CustomItems() {
 
       <div className='overflow-auto mt-4'>
         <ul className='flex flex-wrap shrink-0 w-[1500px] gap-4'>
-          <li className='w-[340px]'>
+          {productList.map((item) => (
+            <li key={item.productId} className='w-[340px]'>
+              <MiniItem product={item} />
+            </li>
+          ))}
+          {/* <li className='w-[340px]'>
             <MiniItem />
           </li>
           <li className='w-[340px]'>
@@ -31,7 +41,7 @@ export default function CustomItems() {
           </li>
           <li className='w-[340px]'>
             <MiniItem />
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>
