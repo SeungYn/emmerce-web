@@ -1,0 +1,28 @@
+'use client';
+
+import { useAuthFormContext } from '@/context/auth/AuthFormContext';
+import { useUserContext } from '@/context/auth/UserContext';
+import useAuth from '@/hooks/api/auth/useAuth';
+
+export default function GNBLogin() {
+  const { handleOpen } = useAuthFormContext();
+  const { userInfo } = useUserContext();
+  const { logoutMutate } = useAuth();
+
+  if (userInfo?.token)
+    return (
+      <button
+        className='text-sm text-zinc-500 self-end'
+        onClick={() => {
+          logoutMutate();
+        }}
+      >
+        로그아웃
+      </button>
+    );
+  return (
+    <button className='text-sm text-zinc-500 self-end' onClick={handleOpen}>
+      로그인
+    </button>
+  );
+}
