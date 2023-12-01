@@ -11,6 +11,7 @@ const config: Config = {
     extend: {
       backgroundImage: {
         icons: "url('/assets/icons/eland-icons.png')",
+        paymentIcons: "url('/assets/icons/payment-icons.png')",
       },
     },
   },

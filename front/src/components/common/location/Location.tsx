@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
 // 나중에 location 받아오면 HOME를 제외한 아이템 이전에 화살표 넣어주는 로직 필요
-const categoryRex = /(\D+)(\d+)/;
+export const categoryRex = /(\D+)(\d+)/;
 
 type CateReg = [string, string, string, RegExpMatchArray];
 

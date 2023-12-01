@@ -7,11 +7,11 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use((req) => {
   const token = localStorage.getItem('access-token');
-  req.headers.Authorization = `Baerer ${token}`;
+  req.headers.Authorization = `Bearer ${token}`;
   return req;
 });
 
-class HttpServer {
+export class HttpServer {
   constructor(private baseUrl: string) {}
 
   async fetch<R>(url: string, option: RequestInit) {
@@ -22,7 +22,7 @@ class HttpServer {
       },
     });
 
-    let data;
+    let data: R;
     try {
       data = (await res.json()) as NonNullable<R>;
     } catch (err) {
@@ -31,8 +31,10 @@ class HttpServer {
     if (res.status > 299 || res.status < 200) {
       if (res.status === 401) {
         console.log('401 error');
-        return;
+        throw new Error('인증 에러');
       }
+      console.log(res);
+      throw new Error('에러에러');
     }
 
     return data!;
