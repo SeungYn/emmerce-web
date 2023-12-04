@@ -6,7 +6,7 @@ export default class NextURLSearchParams {
     this.urlSearchParams = new URLSearchParams(useSearchParams);
   }
 
-  addQueryString(key: string, value: string) {
+  setQueryString(key: string, value: string) {
     this.urlSearchParams.set(key, value);
     return this.urlSearchParams.toString();
   }
@@ -18,5 +18,9 @@ export default class NextURLSearchParams {
 
   getQueryString(key: string) {
     return this.urlSearchParams.get(key);
+  }
+
+  toString() {
+    return this.urlSearchParams.toString();
   }
 }
