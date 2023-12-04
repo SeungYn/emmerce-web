@@ -17,11 +17,12 @@ type Props = {
     limit: string;
     minPrice: string;
     maxPrice: string;
+    page: string;
   };
 };
 
 export default async function page({
-  searchParams: { keyword, brand, limit, minPrice, maxPrice },
+  searchParams: { keyword, brand, limit, minPrice, maxPrice, page },
 }: Props) {
   const data = await serverService.product.getProductListByKeyword({
     keyword,
@@ -29,6 +30,7 @@ export default async function page({
     limit,
     minPrice,
     maxPrice,
+    page,
   });
   const categoryList = await getCategoryList();
 
