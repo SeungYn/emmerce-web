@@ -15,7 +15,7 @@ export default function GNB({ categoryList }: Props) {
     <nav className='w-full pt-2' suppressHydrationWarning>
       <div className='border-b border-zinc-200 py-3'>
         <MaxXLContainer>
-          <div className='flex justify-between items-center  relative'>
+          <div className='flex flex-grow justify-between items-center  relative'>
             <GNBLogo />
             <GNBNavbarForm />
             <GNBMenu />
