@@ -1,3 +1,4 @@
+import GNB from '@/components/navbar/gnb/GNB/GNB';
 import { getCategoryList } from '@/service/server/category';
 import dynamic from 'next/dynamic';
 
@@ -14,7 +15,7 @@ export default async function layout({
 
   return (
     <>
-      <Navbar isLogo={false} categoryList={categoryList} />
+      <GNB categoryList={categoryList} />
       {children}
     </>
   );
