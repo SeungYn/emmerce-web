@@ -1,22 +1,27 @@
 'use client';
 import { SlMagnifier } from 'react-icons/sl';
-import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import FIlterFormAccordion from '@/components/common/accordion/FIlterFormAccordion';
 import { categoryRex } from '@/components/common/location/Location';
+import NextURLSearchParams from '@/util/lib/urlSearchParams';
+import { Product } from '@/service/types/product';
+import { filterBrandList } from '@/util/lib/util';
 
 type Props = {
   keyword?: string;
+  productList: Product[];
 };
 
-export default function FilterForm({ keyword }: Props) {
-  const searchParmas = useSearchParams();
+export default function FilterForm({ keyword, productList }: Props) {
+  const router = useRouter();
+  const searchParams = new NextURLSearchParams(useSearchParams());
   const pathname = usePathname();
-  const mainCateStr = searchParmas.get('mainCate')?.match(categoryRex);
-  const subCateStr = searchParmas.get('subCate')?.match(categoryRex);
-  const kindStr = searchParmas.get('kind')?.match(categoryRex);
-  const keywordParam = searchParmas.get('keyword');
-  console.log(pathname, searchParmas.toString(), searchParmas.getAll);
+  const mainCateStr = searchParams
+    .getQueryString('mainCate')
+    ?.match(categoryRex);
+  const subCateStr = searchParams.getQueryString('subCate')?.match(categoryRex);
+  const kindStr = searchParams.getQueryString('kind')?.match(categoryRex);
+
   let title = kindStr
     ? kindStr[1]
     : subCateStr
@@ -24,64 +29,63 @@ export default function FilterForm({ keyword }: Props) {
     : mainCateStr
     ? mainCateStr[1]
     : '';
-  if (keywordParam) title = keywordParam;
+
+  const pushRoute = (pathname: string, query: string) => {
+    router.push(pathname + '?' + query);
+  };
 
   return (
-    <div className='basis-[20%]'>
-      <form>
-        <h2 className='text-2xl font-bold border-b border-black py-4'>
-          {title}
-        </h2>
-
-        {/* <ul>
-          <li className='border-b border-gray-300 py-4'>
-            <p className='font-semibold flex justify-between items-center '>
-              브랜드 <AiOutlinePlus className='text-xl' />
-            </p>
-
-            <div className='flex border-b border-black'>
-              <input type='text' className='w-full' />
-              <SlMagnifier
-                className='text-2xl '
-                style={{ stroke: 'black', strokeWidth: '10' }}
-              />
-            </div>
-          </li>
-        </ul> */}
-        <FIlterFormAccordion>
-          <FIlterFormAccordion.Item title='브랜드'>
-            <div className='flex border-b border-black'>
-              <input type='text' className='w-full' />
-              <SlMagnifier
-                className='text-2xl '
-                style={{ stroke: 'black', strokeWidth: '10' }}
-              />
-            </div>
-            <ul>
-              <li>
-                <label className='pl-2 text-sm text-gray-600'>
-                  <input type='checkbox' name='' id='' /> 프로젝트엠
+    <form>
+      <div className='border-b border-black py-4'>
+        {keyword ? (
+          <h2 className=' '>
+            {' '}
+            <span className='text-red-500 font-medium'>
+              {productList.length}
+            </span>
+            개의 상품
+          </h2>
+        ) : (
+          <h2 className='text-2xl font-bold border-b border-black py-4'>
+            {title}
+          </h2>
+        )}
+      </div>
+      <FIlterFormAccordion>
+        <FIlterFormAccordion.Item title='브랜드'>
+          <div className='flex border-b border-black mt-4'>
+            <input
+              type='text'
+              className='w-full text-sm py-2 '
+              placeholder='브랜드를 검색하세요'
+            />
+            <SlMagnifier
+              className='text-2xl '
+              style={{ stroke: 'black', strokeWidth: '5' }}
+            />
+          </div>
+          <ul className='mt-4'>
+            {Array.from(filterBrandList(productList)).map((v) => (
+              <li key={v as string} className='flex gap-2 items-center'>
+                <label className='flex gap-2 items-center pl-2 text-sm text-gray-600 cursor-pointer'>
+                  <input
+                    type='radio'
+                    name='brand'
+                    onChange={(e) => {
+                      console.log(e);
+                      pushRoute(
+                        pathname,
+                        searchParams.setQueryString('brand', '무신사')
+                      );
+                    }}
+                  />{' '}
+                  {v as string}
                 </label>
               </li>
-              <li>
-                <label className='pl-2 text-sm text-gray-600'>
-                  <input type='checkbox' name='' id='' /> 프로젝트엠
-                </label>
-              </li>
-              <li>
-                <label className='pl-2 text-sm text-gray-600'>
-                  <input type='checkbox' name='' id='' /> 프로젝트엠
-                </label>
-              </li>
-              <li>
-                <label className='pl-2 text-sm text-gray-600'>
-                  <input type='checkbox' name='' id='' /> 프로젝트엠
-                </label>
-              </li>
-            </ul>
-          </FIlterFormAccordion.Item>
-        </FIlterFormAccordion>
-      </form>
-    </div>
+            ))}
+          </ul>
+        </FIlterFormAccordion.Item>
+      </FIlterFormAccordion>
+    </form>
   );
 }
