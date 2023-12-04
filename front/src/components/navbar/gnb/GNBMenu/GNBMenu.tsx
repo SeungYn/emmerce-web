@@ -3,10 +3,12 @@ import { FaRegHeart } from 'react-icons/fa';
 import { IoPersonOutline } from 'react-icons/io5';
 import { BsCart } from 'react-icons/bs';
 import { CiDeliveryTruck } from 'react-icons/ci';
-import GNBLogin from '../GNBLogin/GNBLogin';
 import { useUserContext } from '@/context/auth/UserContext';
 import { useRouter } from 'next/navigation';
 import { useAuthFormContext } from '@/context/auth/AuthFormContext';
+import dynamic from 'next/dynamic';
+
+const GNBLogin = dynamic(() => import('../GNBLogin/GNBLogin'), { ssr: false });
 
 export default function GNBMenu() {
   const { userInfo } = useUserContext();
