@@ -8,7 +8,7 @@ export interface Delivery {
 }
 
 export interface OrderItem {
-  productId: number;
+  productId: number | string;
   totalCount: number;
 }
 
@@ -26,6 +26,9 @@ export interface OrderHistoryItem {
   name: string;
   titleImg: string;
   brand: string;
+  originalPrice: number;
+  discountPrice: number;
+  quantity: number;
 }
 
 export interface OrderHistory {
