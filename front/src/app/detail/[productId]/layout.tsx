@@ -1,9 +1,5 @@
+import GNB from '@/components/navbar/gnb/GNB/GNB';
 import { getCategoryList } from '@/service/server/category';
-import dynamic from 'next/dynamic';
-
-const Navbar = dynamic(() => import('@/components/navbar/Navbar/Navbar'), {
-  ssr: false,
-});
 
 export default async function RootLayout({
   children,
@@ -13,7 +9,7 @@ export default async function RootLayout({
   const categoryList = await getCategoryList();
   return (
     <>
-      <Navbar isLogo={false} categoryList={categoryList} />
+      <GNB categoryList={categoryList} />
       {children}
     </>
   );

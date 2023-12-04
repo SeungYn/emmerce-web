@@ -3,16 +3,11 @@ import BrandIconList from '@/components/home/BrandIconList/BrandIconList';
 import CustomItems from '@/components/home/content/CustomItems/CustomItems';
 import HotDeal from '@/components/home/content/HotDeal/HotDeal';
 import RankingItems from '@/components/home/content/RankingItems/RankingItems';
-import ShowcaseItems from '@/components/home/content/ShowcaseItems/ShowcaseItems';
+import GNB from '@/components/navbar/gnb/GNB/GNB';
 import SliderBannerContainer from '@/container/home/banner/SliderBannerContainer';
 import RecommendProductsContainer from '@/container/product/RecommendProductsContainer';
 import { serverService } from '@/service/server';
 import { getCategoryList } from '@/service/server/category';
-import dynamic from 'next/dynamic';
-
-const Navbar = dynamic(() => import('@/components/navbar/Navbar/Navbar'), {
-  ssr: false,
-});
 
 export default async function Home() {
   const categoryList = await getCategoryList();
@@ -22,7 +17,7 @@ export default async function Home() {
 
   return (
     <>
-      <Navbar isLogo categoryList={categoryList} />
+      <GNB categoryList={categoryList} />
       <SliderBannerContainer />
       <BrandIconList />
       <MaxXLContainer className='mt-10'>
