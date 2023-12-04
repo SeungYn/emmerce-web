@@ -81,4 +81,33 @@ export class ProductServerService {
 
     return data;
   }
+
+  async getProductListByKeyword({
+    keyword,
+    brand,
+    limit,
+    maxPrice,
+    minPrice,
+  }: {
+    keyword?: string;
+    brand?: string;
+    limit?: number;
+    minPrice?: number;
+    maxPrice?: number;
+  }) {
+    const query = `?${keyword ? `keyword=${keyword}?` : ''}${
+      brand ? `brand=${brand}?` : ''
+    }${limit ? `limit=${limit}?` : ''}${
+      maxPrice ? `maxPrice=${maxPrice}?` : ''
+    }${minPrice ? `minPrice=${minPrice}?` : ''}`;
+
+    const data = await this.http.fetch<ProductList>(`/product/search${query}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    return data;
+  }
 }
