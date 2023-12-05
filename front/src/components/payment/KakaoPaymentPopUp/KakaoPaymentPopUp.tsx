@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import PaymentModalBackground from '../common/PaymentModalBackground/PaymentModalBackground';
 import { useKakaoPayStore } from '@/store/payment/kakaoPayStore';
 import { useRouter } from 'next/navigation';
@@ -12,10 +12,13 @@ export default function KakaoPaymentPopUp() {
   const { redirect_pc_url, reset } = useKakaoPayStore();
   const cartClearMutate = useCartClear();
 
-  const approveSuccessCallback = (orderId: number | string) => {
-    reset();
-    router.push(`/o/complate?orderId=${orderId}`);
-  };
+  const approveSuccessCallback = useCallback(
+    (orderId: number | string) => {
+      reset();
+      router.push(`/o/complate?orderId=${orderId}`);
+    },
+    [reset, router]
+  );
 
   useEffect(() => {
     const receiveCallback = (e: MessageEvent<any>) => {
@@ -36,7 +39,7 @@ export default function KakaoPaymentPopUp() {
     return () => {
       window.removeEventListener('message', receiveCallback);
     };
-  }, []);
+  }, [approveSuccessCallback, cartClearMutate, reset]);
 
   if (!redirect_pc_url) return <></>;
 

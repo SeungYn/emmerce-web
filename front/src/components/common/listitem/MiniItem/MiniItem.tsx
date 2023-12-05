@@ -24,7 +24,7 @@ export default function MiniItem({ product }: Props) {
         <div className='relative shrink-0 rounded-xl w-[110px] overflow-hidden after:content-[""] after:absolute after:inset-0 after:border after:border-gray-400 after:rounded-xl'>
           {/* 이미지 태그가 */}
           <Image
-            src='/assets/slide/1.png'
+            src={titleImg}
             width={111}
             height={111}
             style={{ width: '111px', height: '111px' }}
@@ -46,6 +46,4 @@ export default function MiniItem({ product }: Props) {
       </div>
     </Link>
   );
-}
-{
 }

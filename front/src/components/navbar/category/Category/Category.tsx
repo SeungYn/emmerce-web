@@ -41,7 +41,7 @@ export default function Category({ categoryList }: Props) {
 
   return (
     <section className='relative' ref={categoryRef}>
-      <div className='flex justify-between  px-1 border-b border-gray-300 py-2'>
+      <div className='flex flex-grow justify-between  px-1 border-b border-gray-300 py-2'>
         <div className='flex justify-between w-full px-2 font-bold text-sm max-w-screen-xl mx-auto'>
           <div className='flex py-2 shrink-0'>
             <div

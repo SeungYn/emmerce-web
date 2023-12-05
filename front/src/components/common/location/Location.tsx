@@ -10,6 +10,7 @@ type CateReg = [string, string, string, RegExpMatchArray];
 
 export default function Location() {
   const searchParmas = useSearchParams();
+  const searchkeyword = searchParmas.get('keyword');
   const mainCateStr = searchParmas.get('mainCate')?.match(categoryRex);
   const subCateStr = searchParmas.get('subCate')?.match(categoryRex);
   const kindStr = searchParmas.get('kind')?.match(categoryRex);
@@ -19,6 +20,15 @@ export default function Location() {
       <a>
         <li>HOME</li>
       </a>
+
+      {searchkeyword && (
+        <>
+          <li className='px-4'>
+            <MdKeyboardArrowRight />
+          </li>
+          <li>통합검색</li>
+        </>
+      )}
       {mainCateStr && (
         <>
           <li className='px-4'>
