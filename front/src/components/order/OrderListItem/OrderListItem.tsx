@@ -1,5 +1,6 @@
 'use client';
 import { CheckCartItem } from '@/service/types/cart';
+import Image from 'next/image';
 
 type Props = {
   item: Pick<
@@ -36,9 +37,10 @@ export default function OrderListItem({ item }: Props) {
       }}
     >
       <td className='flex shrink-0 justify-self-start gap-4 p-2'>
-        <img
-          src='/assets/slide/1.png'
+        <Image
+          src={titleImg}
           alt='카트 상품 이미지'
+          width={85}
           className='w-[85px] aspect-square'
         />
         <div className='flex-grow'>

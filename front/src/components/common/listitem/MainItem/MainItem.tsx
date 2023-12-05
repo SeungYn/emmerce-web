@@ -44,7 +44,7 @@ export default function MainItem({
             </div>
           )}
           <Image
-            src='/assets/slide/1.png'
+            src={titleImg}
             width={240}
             height={240}
             style={{ width: '240px', height: '240px' }}

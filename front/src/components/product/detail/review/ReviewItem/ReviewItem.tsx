@@ -1,5 +1,6 @@
 import { Review } from '@/service/types/review';
 import { translateStarScoreToPercent } from '@/util/lib/util';
+import Image from 'next/image';
 
 type Props = {
   review: Review;
@@ -40,9 +41,16 @@ export default function ReviewItem({ review }: Props) {
 
         <p className='text-gray-400 pt-4'>{title}</p>
         <p className='whitespace-pre-line pt-4'>{description}</p>
-        {reviewImgList && (
-          <img src={'/assets/slide/1.png'} alt={'상품이미지'} />
-        )}
+        <ul>
+          {reviewImgList && (
+            <Image src={'/assets/slide/1.png'} alt={'상품이미지'} />
+          )}
+          {reviewImgList.map((img) => (
+            <li key={img}>
+              <Image src={img} width={100} height={100} alt={'상품이미지'} />
+            </li>
+          ))}
+        </ul>
       </div>
       <div className='basis-[20%] p-6'>
         <p>

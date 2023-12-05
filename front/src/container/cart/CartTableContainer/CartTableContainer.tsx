@@ -45,7 +45,9 @@ function CartTableSuspense() {
       handleUpCountCartItem={handleUpCountCartItem}
       handleDownCountCartItem={handleDownCountCartItem}
       handleClearCart={handleClearCart}
-      handleMoveOrderPage={() => router.push('/o/order')}
+      handleMoveOrderPage={() => {
+        router.push('/o/order');
+      }}
     />
   );
 }

@@ -46,9 +46,7 @@ export default function FilterForm({ keyword, productList }: Props) {
             개의 상품
           </h2>
         ) : (
-          <h2 className='text-2xl font-bold border-b border-black py-4'>
-            {title}
-          </h2>
+          <h2 className='text-2xl font-bold '>{title}</h2>
         )}
       </div>
       <FIlterFormAccordion>
@@ -72,7 +70,6 @@ export default function FilterForm({ keyword, productList }: Props) {
                     type='radio'
                     name='brand'
                     onChange={(e) => {
-                      console.log(e);
                       pushRoute(
                         pathname,
                         searchParams.setQueryString('brand', '무신사')
