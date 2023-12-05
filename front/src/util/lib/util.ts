@@ -20,3 +20,14 @@ export function filterBrandList(productList: Product[]) {
 
   return set.values();
 }
+
+// 오브젝트에서 원하는 키, 값만 뽑아내는 함수
+export function pick<T extends object, K extends keyof T>(
+  target: T,
+  keys: K[]
+) {
+  return keys.reduce((obj: Pick<T, K>, key: K) => {
+    obj[key] = target[key];
+    return obj;
+  }, {} as T);
+}

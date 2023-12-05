@@ -3,7 +3,7 @@
 type Props = {
   originPrice: number;
   discountPrice: number;
-  discoutedPrice: number;
+  discountedPrice: number;
   deliverPrice: number;
   handlePostOrder: () => void;
 };
@@ -12,7 +12,7 @@ export default function FinalPaymentInfo({
   originPrice,
   deliverPrice,
   discountPrice,
-  discoutedPrice,
+  discountedPrice,
   handlePostOrder,
 }: Props) {
   return (
@@ -37,7 +37,7 @@ export default function FinalPaymentInfo({
           <div className='flex flex-col py-2 text-red-600 '>
             <span className=''>총 결제금액</span>
             <span className='self-end '>
-              {discoutedPrice.toLocaleString()}원
+              {discountedPrice.toLocaleString()}원
             </span>
           </div>
         </div>
