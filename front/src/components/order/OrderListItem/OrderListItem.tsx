@@ -2,22 +2,29 @@
 import { CheckCartItem } from '@/service/types/cart';
 
 type Props = {
-  item: CheckCartItem;
+  item: Pick<
+    CheckCartItem,
+    | 'productId'
+    | 'name'
+    | 'discountPrice'
+    | 'originalPrice'
+    | 'quantity'
+    | 'titleImg'
+    | 'brand'
+  >;
 };
 
 export default function OrderListItem({ item }: Props) {
   const {
     productId,
-    cartProductId,
     name,
     titleImg,
     discountPrice,
     brand,
-    totalCount,
     originalPrice,
     quantity,
-    isCheck,
   } = item;
+
   return (
     <tr
       className='grid'
