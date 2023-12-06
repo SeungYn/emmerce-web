@@ -114,4 +114,40 @@ export class ProductServerService {
 
     return data;
   }
+
+  async getProductListByCategory({
+    categoryId,
+    keyword,
+    brand,
+    limit,
+    maxPrice,
+    minPrice,
+    page,
+  }: {
+    categoryId: number | string;
+    page?: string | number;
+    keyword?: string;
+    brand?: string;
+    limit?: number | string;
+    minPrice?: number | string;
+    maxPrice?: number | string;
+  }) {
+    const query = `?${keyword ? `keyword=${keyword}&` : ''}${
+      brand ? `brand=${brand}&` : ''
+    }${limit ? `limit=${limit}&` : ''}${
+      maxPrice ? `maxPrice=${maxPrice}&` : ''
+    }${minPrice ? `minPrice=${minPrice}&` : ''}${page ? `page=${page}&` : ''}`;
+
+    const data = await this.http.fetch<ProductList>(
+      `/category/${categoryId}/product/list${query}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    return data;
+  }
 }
