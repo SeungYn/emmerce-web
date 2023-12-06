@@ -6,7 +6,6 @@ import ProductListPagination from '@/components/product/common/ProductListPagina
 import FilterForm from '@/components/product/filter/FilterForm/FilterForm';
 import ListManipulation from '@/components/product/filter/ListManipulation/ListManipulation';
 import { serverService } from '@/service/server';
-import { getCategoryList } from '@/service/server/category';
 
 //export const dynamic = 'force-dynamic';
 
@@ -32,7 +31,7 @@ export default async function page({
     maxPrice,
     page,
   });
-  const categoryList = await getCategoryList();
+  const categoryList = await serverService.category.getCategoryList();
 
   return (
     <>

@@ -4,6 +4,7 @@ import Location from '@/components/common/location/Location';
 import ProductListPagination from '@/components/product/common/ProductListPagination/ProductListPagination';
 import FilterForm from '@/components/product/filter/FilterForm/FilterForm';
 import ListManipulation from '@/components/product/filter/ListManipulation/ListManipulation';
+import { serverService } from '@/service/server';
 import { getProductListByCategory } from '@/service/server/product';
 
 type Props = {
@@ -23,7 +24,7 @@ export default async function page({
   searchParams: { keyword, brand, limit, minPrice, maxPrice, page },
 }: Props) {
   console.log('paramsId', id);
-  const data = await getProductListByCategory({
+  const data = await serverService.product.getProductListByCategory({
     categoryId: id,
     keyword,
     brand,
@@ -32,7 +33,6 @@ export default async function page({
     maxPrice,
     page,
   });
-  console.log(data, 'data');
 
   return (
     <>
