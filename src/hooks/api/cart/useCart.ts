@@ -13,7 +13,7 @@ export function useCartItemList() {
     queryFn: () => service.cart.getCartItemList(),
     staleTime: Infinity,
     gcTime: Infinity,
-    refetchOnMount: false,
+    refetchOnMount: 'always',
     initialData: [],
   });
   return res;
@@ -23,7 +23,7 @@ export function useCartItemListSuspense() {
   const res = useSuspenseQuery({
     queryKey: ['cart'],
     queryFn: () => service.cart.getCartItemList(),
-    refetchOnMount: true,
+    refetchOnMount: 'always',
     staleTime: Infinity,
     gcTime: Infinity,
   });
