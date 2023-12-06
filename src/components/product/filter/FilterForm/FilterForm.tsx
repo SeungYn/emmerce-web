@@ -72,7 +72,7 @@ export default function FilterForm({ keyword, productList }: Props) {
                     onChange={(e) => {
                       pushRoute(
                         pathname,
-                        searchParams.setQueryString('brand', '무신사')
+                        searchParams.setQueryString('brand', v as string)
                       );
                     }}
                   />{' '}

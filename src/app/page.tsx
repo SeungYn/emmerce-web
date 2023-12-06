@@ -7,10 +7,9 @@ import GNB from '@/components/navbar/gnb/GNB/GNB';
 import SliderBannerContainer from '@/container/home/banner/SliderBannerContainer';
 import RecommendProductsContainer from '@/container/product/RecommendProductsContainer';
 import { serverService } from '@/service/server';
-import { getCategoryList } from '@/service/server/category';
 
 export default async function Home() {
-  const categoryList = await getCategoryList();
+  const categoryList = await serverService.category.getCategoryList();
   const hotdealProductList = await serverService.product.getHotdealProducts();
   const rankingProductList = await serverService.product.getRankingProducts();
   const latestProductList = await serverService.product.getLatestProducts();

@@ -1,6 +1,6 @@
 import MaxXLContainer from '@/components/common/container/MaxXLContainer';
 import GNB from '@/components/navbar/gnb/GNB/GNB';
-import { getCategoryList } from '@/service/server/category';
+import { serverService } from '@/service/server';
 import Script from 'next/script';
 
 export default async function layout({
@@ -8,7 +8,7 @@ export default async function layout({
 }: {
   children: React.ReactNode;
 }) {
-  const categoryList = await getCategoryList();
+  const categoryList = await serverService.category.getCategoryList();
 
   return (
     <>

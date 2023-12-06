@@ -28,6 +28,7 @@ export class HttpServer {
     } catch (err) {
       console.log('json error', err);
     }
+
     if (res.status > 299 || res.status < 200) {
       if (res.status === 401) {
         console.log('401 error');
