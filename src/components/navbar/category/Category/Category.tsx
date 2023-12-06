@@ -41,8 +41,8 @@ export default function Category({ categoryList }: Props) {
 
   return (
     <section className='relative' ref={categoryRef}>
-      <div className='flex flex-grow justify-between  px-1 border-b border-gray-300 py-2'>
-        <div className='flex justify-between w-full px-2 font-bold text-sm max-w-screen-xl mx-auto'>
+      <div className='flex flex-grow shrink-0 justify-between  px-1 border-b border-gray-300 py-2'>
+        <div className='flex shrink-0 justify-between w-full px-2 font-bold text-sm max-w-screen-xl mx-auto'>
           <div className='flex py-2 shrink-0'>
             <div
               className='flex items-center border-r border-gray-200 pr-6'
@@ -58,7 +58,7 @@ export default function Category({ categoryList }: Props) {
               />
             </div>
 
-            <ul className='flex [&>*]:px-5'>
+            <ul className='flex items-center shrink-0 [&>*]:px-5'>
               <li>베스트</li>
               <li>럭키딜</li>
               <li>스파오아울렛</li>

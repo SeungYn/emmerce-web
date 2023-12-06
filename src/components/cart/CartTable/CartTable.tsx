@@ -2,6 +2,7 @@
 
 import { CheckCartItem } from '@/service/types/cart';
 import CartTableItem from '../item/CartTableItem/CartTableItem';
+import Link from 'next/link';
 
 type Props = {
   cartItemList: CheckCartItem[];
@@ -46,13 +47,13 @@ export default function CartTable({
       <table>
         <thead>
           <tr
-            className='grid bg-gray-200 py-3'
+            className='grid bg-gray-200 py-3 '
             style={{
               gridTemplateColumns:
                 '79px 457px 133px 79px 133px 133px 133px 133px',
             }}
           >
-            <th>
+            <th className='text-center'>
               <input
                 type='checkbox'
                 name='all_cart_item'
@@ -64,13 +65,13 @@ export default function CartTable({
                 }}
               />
             </th>
-            <th>상품명/선택사항</th>
-            <th>상품금액</th>
-            <th>수량</th>
-            <th>할인금액</th>
-            <th>주문금액</th>
-            <th>배송정보</th>
-            <th>주문하기</th>
+            <th className='text-center'>상품명/선택사항</th>
+            <th className='text-center'>상품금액</th>
+            <th className='text-center'>수량</th>
+            <th className='text-center'>할인금액</th>
+            <th className='text-center'>주문금액</th>
+            <th className='text-center'>배송정보</th>
+            <th className='text-center'>주문하기</th>
           </tr>
         </thead>
         <tbody>
@@ -126,17 +127,25 @@ export default function CartTable({
             원
           </li>
         </ul>
-        <div className='mt-4 flex flex-row-reverse'>
-          <button
-            className='text-xl py-6 px-24 rounded-full text-white font-bold brightness-95'
-            style={{
-              background:
-                'linear-gradient(90deg, rgba(255,85,9,1) 0%, rgba(255,0,0,1) 49%, rgba(255,0,247,1) 100%)',
-            }}
-            onClick={handleMoveOrderPage}
+        <div className='mt-4 flex justify-end gap-4'>
+          <Link
+            href={'/'}
+            className='text-xl py-6 px-16 rounded-full text-black font-bold border border-gray-400'
           >
-            구매하기
-          </button>
+            계속 쇼핑하기
+          </Link>
+          {cartItemList.length > 0 && (
+            <button
+              className='text-xl py-6 px-24 rounded-full text-white font-bold brightness-95'
+              style={{
+                background:
+                  'linear-gradient(90deg, rgba(255,85,9,1) 0%, rgba(255,0,0,1) 49%, rgba(255,0,247,1) 100%)',
+              }}
+              onClick={handleMoveOrderPage}
+            >
+              구매하기
+            </button>
+          )}
         </div>
       </div>
     </div>
