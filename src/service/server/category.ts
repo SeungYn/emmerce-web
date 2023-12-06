@@ -2,7 +2,7 @@ import { HttpServer } from '@/network/http';
 import { Category, ProductCategoryInfo } from '../types/category';
 
 export async function getCategoryList() {
-  const res = await fetch('http://localhost:8088/category/list', {
+  const res = await fetch('https://emmerce.duckdns.org/category/list', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

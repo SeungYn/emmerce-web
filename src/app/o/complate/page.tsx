@@ -4,6 +4,8 @@ import OrderHistoryListItem from '@/components/order/OrderHistoryListItem/OrderH
 import { orderItem } from '@/util/mock/data/item';
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic';
+
 export default function page({
   searchParams,
 }: {
