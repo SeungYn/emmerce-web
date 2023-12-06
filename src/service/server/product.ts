@@ -25,7 +25,7 @@ export async function getProductListByCategory({
   }${page ? `page=${page}&` : ''}`;
 
   const res = await fetch(
-    `http://localhost:8088/category/${categoryId}/product/list${query}`,
+    `https://emmerce.duckdns.org/category/${categoryId}/product/list${query}`,
     {
       method: 'GET',
       headers: {

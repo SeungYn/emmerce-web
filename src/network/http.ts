@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8088',
+  baseURL: 'https://emmerce.duckdns.org',
   withCredentials: true,
 });
 
@@ -42,4 +42,4 @@ export class HttpServer {
   }
 }
 
-export const fetchInstance = new HttpServer('http://localhost:8088');
+export const fetchInstance = new HttpServer('https://emmerce.duckdns.org');
