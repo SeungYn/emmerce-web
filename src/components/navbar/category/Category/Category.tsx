@@ -6,6 +6,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import styles from './Category.module.css';
 import { Category, CategoryList } from '@/service/types/category';
 import Link from 'next/link';
+import CustomGlobalLoadingLink from '@/components/common/customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
 
 type Props = {
   categoryList: CategoryList;
@@ -83,12 +84,15 @@ export default function Category({ categoryList }: Props) {
             {categoryList.map((cate) => {
               return (
                 <li key={cate.mainCategory.code}>
-                  <Link
+                  <CustomGlobalLoadingLink
                     href={`/category/${cate.mainCategory.categoryId}?mainCate=${cate.mainCategory.name}${cate.mainCategory.categoryId}`}
                     onMouseEnter={() => {
                       setCurrentCategory(cate.mainCategory);
                     }}
-                    onClick={() => setIsOpenCategory(false)}
+                    onClick={() => {
+                      console.log('카테고리 이벤트');
+                      setIsOpenCategory(false);
+                    }}
                     className='relative w-full inline-block'
                   >
                     {cate.mainCategory.name}
@@ -97,7 +101,7 @@ export default function Category({ categoryList }: Props) {
                     ) : (
                       ''
                     )}
-                  </Link>
+                  </CustomGlobalLoadingLink>
 
                   {/* 현재 카테고리이면 block 아니면 hidden */}
                   <div
@@ -112,22 +116,22 @@ export default function Category({ categoryList }: Props) {
                         key={subCate.subCategory.code + cate.mainCategory.code}
                         className='flex py-2 border-b border-gray-200'
                       >
-                        <Link
+                        <CustomGlobalLoadingLink
                           href={`/category/${subCate.subCategory.categoryId}?mainCate=${cate.mainCategory.name}${cate.mainCategory.categoryId}&subCate=${subCate.subCategory.name}${subCate.subCategory.categoryId}`}
                           className='font-bold w-32 text-black'
                           onClick={() => setIsOpenCategory(false)}
                         >
                           {subCate.subCategory.name}
-                        </Link>
+                        </CustomGlobalLoadingLink>
                         <ul className='flex [&>*]:mr-6'>
                           {subCate.kinds.map((kind) => (
-                            <Link
+                            <CustomGlobalLoadingLink
                               key={kind.code}
                               href={`/category/${kind.categoryId}?mainCate=${cate.mainCategory.name}${cate.mainCategory.categoryId}&subCate=${subCate.subCategory.name}${subCate.subCategory.categoryId}&kind=${kind.name}${kind.categoryId}`}
                               onClick={() => setIsOpenCategory(false)}
                             >
                               <li>{kind.name}</li>
-                            </Link>
+                            </CustomGlobalLoadingLink>
                           ))}
                         </ul>
                       </div>

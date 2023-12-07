@@ -2,6 +2,7 @@ import { ProductCategoryInfo } from '@/service/types/category';
 import { combineCateNameAndId } from '@/util/lib/util';
 import Link from 'next/link';
 import { MdKeyboardArrowRight } from 'react-icons/md';
+import CustomGlobalLoadingLink from '../customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
 
 type Props = {
   productCategoryInfo: ProductCategoryInfo[];
@@ -22,13 +23,13 @@ export default function ProductCategory({ productCategoryInfo }: Props) {
           </li>
 
           <li>
-            <Link
+            <CustomGlobalLoadingLink
               href={`/category/${
                 productCategoryInfo[0].categoryId
               }?mainCate=${combineCateNameAndId(productCategoryInfo[0])}`}
             >
               {productCategoryInfo[0].name}
-            </Link>
+            </CustomGlobalLoadingLink>
           </li>
         </>
       )}
@@ -39,7 +40,7 @@ export default function ProductCategory({ productCategoryInfo }: Props) {
           </li>
 
           <li>
-            <Link
+            <CustomGlobalLoadingLink
               href={`/category/${
                 productCategoryInfo[1].categoryId
               }?mainCate=${combineCateNameAndId(
@@ -47,7 +48,7 @@ export default function ProductCategory({ productCategoryInfo }: Props) {
               )}&subCate=${combineCateNameAndId(productCategoryInfo[1])}`}
             >
               {productCategoryInfo[1].name}
-            </Link>
+            </CustomGlobalLoadingLink>
           </li>
         </>
       )}
@@ -58,7 +59,7 @@ export default function ProductCategory({ productCategoryInfo }: Props) {
           </li>
 
           <li>
-            <Link
+            <CustomGlobalLoadingLink
               href={`/category/${
                 productCategoryInfo[2].categoryId
               }?mainCate=${combineCateNameAndId(
@@ -68,7 +69,7 @@ export default function ProductCategory({ productCategoryInfo }: Props) {
               )}&kind=${combineCateNameAndId(productCategoryInfo[2])}`}
             >
               {productCategoryInfo[2].name}
-            </Link>
+            </CustomGlobalLoadingLink>
           </li>
         </>
       )}

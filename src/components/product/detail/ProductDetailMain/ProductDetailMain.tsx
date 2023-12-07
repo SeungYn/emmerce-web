@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { translateStarScoreToPercent } from '@/util/lib/util';
 import CartBtnAndModal from '@/components/cart/CartBtnAndModal/CartBtnAndModal';
 import CartMoalContextProvider from '@/context/cart/CartModalContext';
+import CustomGlobalLoadingLink from '@/components/common/customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
 
 type Props = {
   productDetail: ProductDetail;
@@ -27,9 +28,9 @@ export default function ProductDetailMain({ productDetail }: Props) {
   return (
     <section>
       <div>
-        <Link href='' className='text-2xl font-bold'>
+        <CustomGlobalLoadingLink href='' className='text-2xl font-bold'>
           {brand}
-        </Link>
+        </CustomGlobalLoadingLink>
       </div>
       {/* 메인 */}
       <div className='flex shrink-0 gap-6'>

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import OrderListItem from '../OrderListItem/OrderListItem';
 import { useCartItemList } from '@/hooks/api/cart/useCart';
 import useInvalidCart from '@/hooks/cart/useInvalidCart';
+import CustomGlobalLoadingLink from '@/components/common/customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
 
 export default function OrderList() {
   const { data: cartItemList } = useCartItemList();
@@ -12,7 +13,9 @@ export default function OrderList() {
     <section>
       <div className='flex justify-between'>
         <h3 className='text-xl font-bold mb-4 '>주문하실 상품</h3>
-        <Link href='#'>장바구니가기</Link>
+        <CustomGlobalLoadingLink href='/o/cart'>
+          장바구니가기
+        </CustomGlobalLoadingLink>
       </div>
       <div className='text-lg p-2 bg-zinc-600 text-white'>
         <span>개수({cartItemList.length})</span>

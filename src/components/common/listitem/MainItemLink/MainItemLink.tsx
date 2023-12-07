@@ -4,6 +4,7 @@ import Image from 'next/image';
 import HeartIcon from '../../icons/HeartIcon';
 import { Product } from '@/service/types/product';
 import Link from 'next/link';
+import CustomGlobalLoadingLink from '../../customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
 
 type Props = {
   item: Product;
@@ -34,7 +35,10 @@ export default function MainItemLink({
   const isDiscount = discountRate > 0;
 
   return (
-    <Link className='relative cursor-pointer' href={targetLink}>
+    <CustomGlobalLoadingLink
+      className='relative cursor-pointer'
+      href={targetLink}
+    >
       <div onClick={() => console.log('div')}>
         <div className='relative shrink-0 rounded-xl w-[240px] overflow-hidden after:content-[""] after:absolute after:inset-0 after:border after:border-gray-400 after:rounded-xl after:z-10'>
           {rank && (
@@ -84,7 +88,7 @@ export default function MainItemLink({
           <HeartIcon className='w-6 h-6' />
         </button>
       )}
-    </Link>
+    </CustomGlobalLoadingLink>
   );
 }
 
