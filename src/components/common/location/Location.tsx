@@ -2,6 +2,7 @@
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import CustomGlobalLoadingLink from '../customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
 
 // 나중에 location 받아오면 HOME를 제외한 아이템 이전에 화살표 넣어주는 로직 필요
 export const categoryRex = /(\D+)(\d+)/;
@@ -36,13 +37,13 @@ export default function Location() {
           </li>
 
           <li>
-            <Link
+            <CustomGlobalLoadingLink
               href={`/category/${mainCateStr[2]}?mainCate=${filterCate(
                 mainCateStr
               )}`}
             >
               {mainCateStr[1]}
-            </Link>
+            </CustomGlobalLoadingLink>
           </li>
         </>
       )}
@@ -53,13 +54,13 @@ export default function Location() {
           </li>
 
           <li>
-            <Link
+            <CustomGlobalLoadingLink
               href={`/category/${subCateStr[2]}?mainCate=${filterCate(
                 mainCateStr!
               )}&subCate=${filterCate(subCateStr)}`}
             >
               {subCateStr[1]}
-            </Link>
+            </CustomGlobalLoadingLink>
           </li>
         </>
       )}
@@ -70,7 +71,7 @@ export default function Location() {
           </li>
 
           <li>
-            <Link
+            <CustomGlobalLoadingLink
               href={`/category/${kindStr[2]}?mainCate=${filterCate(
                 mainCateStr!
               )}&subCate=${filterCate(subCateStr!)}&kind=${filterCate(
@@ -78,7 +79,7 @@ export default function Location() {
               )}`}
             >
               {kindStr[1]}
-            </Link>
+            </CustomGlobalLoadingLink>
           </li>
         </>
       )}

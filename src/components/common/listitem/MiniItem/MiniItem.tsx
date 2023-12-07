@@ -1,6 +1,7 @@
 import { Product } from '@/service/types/product';
 import Image from 'next/image';
 import Link from 'next/link';
+import CustomGlobalLoadingLink from '../../customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
 
 type Props = {
   product: Product;
@@ -18,7 +19,7 @@ export default function MiniItem({ product }: Props) {
     discountRate,
   } = product;
   return (
-    <Link href={`/detail/${productId}`}>
+    <CustomGlobalLoadingLink href={`/detail/${productId}`}>
       <div className='flex gap-2 shrink-0 '>
         {/* after없이 border을 지정하면 미세 틈이 생기는데 after로 border을 해주면 커버 가능 */}
         <div className='relative shrink-0 rounded-xl w-[110px] overflow-hidden after:content-[""] after:absolute after:inset-0 after:border after:border-gray-400 after:rounded-xl'>
@@ -44,6 +45,6 @@ export default function MiniItem({ product }: Props) {
           </div>
         </div>
       </div>
-    </Link>
+    </CustomGlobalLoadingLink>
   );
 }
