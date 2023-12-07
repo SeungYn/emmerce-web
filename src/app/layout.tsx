@@ -2,10 +2,11 @@ import AuthBackground from '@/components/auth/AuthBackground';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import AuthContextProvider from '@/context/auth/AuthFormContext';
 import AuthFormContextProvider from '@/context/auth/AuthFormContext';
 import ReactQueryContext from '@/context/common/ReactQueryContext';
 import UserContextProvider from '@/context/auth/UserContext';
+import { Suspense } from 'react';
+import GlobalLoading from '@/components/common/loading/GlobalLoading/GlobalLoading';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,8 +21,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='kr'>
+    <html lang='kor'>
       <body className={inter.className}>
+        <Suspense fallback={null}>
+          <GlobalLoading />
+        </Suspense>
         <ReactQueryContext>
           <UserContextProvider>
             <AuthFormContextProvider>

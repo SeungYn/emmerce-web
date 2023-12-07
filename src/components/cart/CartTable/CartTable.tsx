@@ -3,6 +3,7 @@
 import { CheckCartItem } from '@/service/types/cart';
 import CartTableItem from '../item/CartTableItem/CartTableItem';
 import Link from 'next/link';
+import CustomGlobalLoadingLink from '@/components/common/customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
 
 type Props = {
   cartItemList: CheckCartItem[];
@@ -128,12 +129,12 @@ export default function CartTable({
           </li>
         </ul>
         <div className='mt-4 flex justify-end gap-4'>
-          <Link
+          <CustomGlobalLoadingLink
             href={'/'}
             className='text-xl py-6 px-16 rounded-full text-black font-bold border border-gray-400'
           >
             계속 쇼핑하기
-          </Link>
+          </CustomGlobalLoadingLink>
           {cartItemList.length > 0 && (
             <button
               className='text-xl py-6 px-24 rounded-full text-white font-bold brightness-95'
