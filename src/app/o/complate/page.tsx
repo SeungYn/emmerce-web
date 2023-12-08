@@ -3,17 +3,30 @@ import CartHeader from '@/components/cart/common/CartHeader/CartHeader';
 import OrderHistoryListItem from '@/components/order/OrderHistoryListItem/OrderHistoryListItem';
 import { orderItem } from '@/util/mock/data/item';
 import Link from 'next/link';
+import CustomGlobalLoadingLink from '@/components/common/customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
+import { serverService } from '@/service/server';
+import { notFound } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
 
-export default function page({
+export default async function page({
   searchParams,
 }: {
   searchParams: { orderId: number | string };
 }) {
   const cookieStore = cookies();
   const { orderId } = searchParams;
-  cookieStore.getAll().map((item) => console.log(item));
+  const accessToken = cookieStore.get('access-token');
+  const refershToken = cookieStore.get('refresh-token');
+
+  if (!accessToken || !refershToken) notFound();
+
+  const data = await serverService.order.getUnitOrder(
+    orderId,
+    {},
+    { accessToken: accessToken?.value, refreshToken: refershToken.value }
+  );
+
   return (
     <>
       <CartHeader currentPage='complate' />
@@ -22,7 +35,7 @@ export default function page({
           <h3 className='text-xl font-bold mb-4 '>주문하신 상품</h3>
         </div>
         <div className='text-lg p-2 bg-zinc-600 text-white'>
-          <span>개수({orderItem.orderProductRespList.length})</span>
+          <span>개수({data.orderProductRespList.length})</span>
         </div>
         <table>
           <thead>
@@ -41,7 +54,7 @@ export default function page({
             </tr>
           </thead>
           <tbody>
-            {orderItem.orderProductRespList.map((item, i) => (
+            {data.orderProductRespList.map((item, i) => (
               <OrderHistoryListItem key={i} item={item} />
             ))}
           </tbody>
@@ -54,7 +67,7 @@ export default function page({
           <li>
             총 상품금액{' '}
             <span className='text-zinc-600 font-bold'>
-              {orderItem.orderProductRespList.reduce(
+              {data.orderProductRespList.reduce(
                 (p, c) => p + c.originalPrice * c.quantity,
                 0
               )}
@@ -65,7 +78,7 @@ export default function page({
           <li>
             할인금액{' '}
             <span className='text-zinc-600 font-bold'>
-              {orderItem.orderProductRespList.reduce(
+              {data.orderProductRespList.reduce(
                 (p, c) => p + (c.originalPrice - c.discountPrice) * c.quantity,
                 0
               )}
@@ -90,12 +103,12 @@ export default function page({
         </ul>
       </div>
       <div className='text-center mt-4'>
-        <Link
+        <CustomGlobalLoadingLink
           href={'/'}
           className='mx-auto border-4 border-zinc-500 text-zinc-500 py-4 px-6 inline-block rounded-full text-2xl font-bold'
         >
           메인으로
-        </Link>
+        </CustomGlobalLoadingLink>
       </div>
     </>
   );
