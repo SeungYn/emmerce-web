@@ -29,6 +29,7 @@ export interface OrderHistoryItem {
   originalPrice: number;
   discountPrice: number;
   quantity: number;
+  reviewStatus: boolean;
 }
 
 export interface OrderHistory {
