@@ -12,7 +12,7 @@ export default class OrderService {
     return data;
   }
 
-  async getOrderHistory() {
+  async getOrderHistories() {
     const { data } = await this.axios.get<OrderHistory[]>('/order');
 
     return data;
