@@ -1,5 +1,5 @@
 import service from '@/service/client';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { useCartItemList } from '../cart/useCart';
 import { useDeliveryFormFluxStore } from '@/store/order';
 import usePaymentMutation from '../payment/usePaymentMutation';
@@ -42,4 +42,24 @@ export function usePostOneOrder(productId: number | string) {
   });
 
   return postOneOrderMutate;
+}
+
+export function useOrderHistories() {
+  const suspenseRes = useSuspenseQuery({
+    queryKey: ['histories'],
+    queryFn: () => service.order.getOrderHistories(),
+    staleTime: Infinity,
+    gcTime: Infinity,
+    refetchOnMount: 'always',
+  });
+
+  const queryRes = useQuery({
+    queryKey: ['histories'],
+    queryFn: () => service.order.getOrderHistories(),
+    staleTime: Infinity,
+    gcTime: Infinity,
+    refetchOnMount: 'always',
+  });
+
+  return { suspenseRes, queryRes };
 }
