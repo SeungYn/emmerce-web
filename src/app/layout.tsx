@@ -30,11 +30,13 @@ export default function RootLayout({
           <UserContextProvider>
             <AuthFormContextProvider>
               {children}
+
               <AuthBackground />
             </AuthFormContextProvider>
           </UserContextProvider>
         </ReactQueryContext>
         <div id='portal'></div>
+        <div id='review-portal'></div>
       </body>
     </html>
   );
