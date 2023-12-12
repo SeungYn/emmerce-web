@@ -17,3 +17,14 @@ export type GetReviewsRes = {
   first: boolean;
   last: boolean;
 };
+
+export type PostReviewReq = {
+  reviewReq: {
+    title: string;
+    description: string;
+    starScore: number;
+    orderId: number;
+    productId: number;
+  };
+  reviewImages: File[];
+};
