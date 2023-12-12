@@ -3,8 +3,15 @@
 import { PropsWithChildren } from 'react';
 import { createPortal } from 'react-dom';
 
-export default function ModalPortal({ children }: PropsWithChildren) {
+type Props = {
+  targetId?: string;
+};
+
+export default function ModalPortal({
+  children,
+  targetId = 'portal',
+}: PropsWithChildren<Props>) {
   //if (typeof window === 'undefined') return null;
-  const parentNode = document.getElementById('portal') as Element;
+  const parentNode = document.getElementById(targetId) as Element;
   return createPortal(children, parentNode);
 }
