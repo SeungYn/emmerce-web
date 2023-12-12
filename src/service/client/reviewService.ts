@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import { GetReviewsRes } from '../types/review';
+import { GetReviewsRes, PostReviewReq } from '../types/review';
 
 export default class ReviewService {
   constructor(private axios: AxiosInstance) {}
@@ -12,10 +12,22 @@ export default class ReviewService {
     return data;
   }
 
-  // async getReviews(productId: number | string) {
-  //   const { data } = await this.axios.get<GetReviewsRes>(
-  //     `/product/${productId}/reviews`
-  //   );
-  //   return data;
-  // }
+  async postReview({ reviewReq, reviewImages }: PostReviewReq) {
+    const query = `/review`;
+    const formdata = new FormData();
+    console.log(reviewReq, reviewImages);
+    formdata.append(
+      'reviewReq',
+      new Blob([JSON.stringify(reviewReq)], {
+        type: 'application/json',
+      })
+    );
+
+    for (const img of reviewImages) {
+      formdata.append('reviewImages', img);
+    }
+
+    const { data } = await this.axios.post<unknown>(query, formdata);
+    return data;
+  }
 }
