@@ -3,6 +3,7 @@
   background-image: url('/assets/icons/review_score_lg_blank.png');
   height: 30px;
   width: 160px;
+  cursor: pointer;
 }
 
 /* 별점 5개 영역 */
