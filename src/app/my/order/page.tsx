@@ -1,6 +1,4 @@
-import OrderTable from '@/components/my/order/OrderTable/OrderTable';
 import OrderHistoriesContiner from '@/container/my/order/OrderHistoriesContiner/OrderHistoriesContiner';
-import { historyItems } from '@/util/mock/data/item';
 
 export default function page() {
   return (
