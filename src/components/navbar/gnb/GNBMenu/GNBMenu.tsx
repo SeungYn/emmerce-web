@@ -4,19 +4,20 @@ import { IoPersonOutline } from 'react-icons/io5';
 import { BsCart } from 'react-icons/bs';
 import { CiDeliveryTruck } from 'react-icons/ci';
 import { useUserContext } from '@/context/auth/UserContext';
-import { useRouter } from 'next/navigation';
 import { useAuthFormContext } from '@/context/auth/AuthFormContext';
 import dynamic from 'next/dynamic';
+import useCustomRouter from '@/hooks/common/useCustomRouter';
 
 const GNBLogin = dynamic(() => import('../GNBLogin/GNBLogin'), { ssr: false });
 
 export default function GNBMenu() {
   const { userInfo } = useUserContext();
   const { handleOpen } = useAuthFormContext();
-  const router = useRouter();
-  const onMoveCartPage = () => {
+  const customRouter = useCustomRouter();
+
+  const onMovePage = (path: string) => {
     if (userInfo?.token) {
-      router.push('/o/cart');
+      customRouter.push(path);
     } else {
       handleOpen();
     }
@@ -27,22 +28,34 @@ export default function GNBMenu() {
       <GNBLogin />
       <ul className='flex text-2xl items-center gap-2'>
         <li>
-          <button className='flex items-center'>
+          <button
+            className='flex items-center'
+            onClick={() => alert('준비중입니다.')}
+          >
             <FaRegHeart />
           </button>
         </li>
         <li>
-          <button className='flex items-center'>
+          <button
+            className='flex items-center'
+            onClick={() => onMovePage('/my/order')}
+          >
             <IoPersonOutline />
           </button>
         </li>
         <li>
-          <button className='flex items-center'>
+          <button
+            className='flex items-center'
+            onClick={() => onMovePage('/my/order')}
+          >
             <CiDeliveryTruck size='32px' />
           </button>
         </li>
         <li>
-          <button className='flex items-center' onClick={onMoveCartPage}>
+          <button
+            className='flex items-center'
+            onClick={() => onMovePage('/o/cart')}
+          >
             <BsCart />
           </button>
         </li>
