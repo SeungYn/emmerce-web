@@ -35,7 +35,7 @@ export default async function page({
   const categoryList = await serverService.category.getCategoryList();
 
   return (
-    <section className='min-h-[70vh]'>
+    <>
       {/* GNB */}
       <GNB categoryList={categoryList} />
       {/* location */}
@@ -81,6 +81,6 @@ export default async function page({
           </div>
         </div>
       </MaxXLContainer>
-    </section>
+    </>
   );
 }
