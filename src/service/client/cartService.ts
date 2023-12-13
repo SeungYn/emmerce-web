@@ -15,8 +15,8 @@ export default class CartService {
     return data;
   }
 
-  async deleteByProductId({ productId }: CheckCartItem) {
-    const query = `/cart/product/${productId}`;
+  async deleteByProductId({ cartProductId }: CheckCartItem) {
+    const query = `/cart/${cartProductId}`;
     const { data } = await this.axios.delete(query);
     return data;
   }
