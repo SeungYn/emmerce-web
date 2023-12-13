@@ -20,7 +20,7 @@ export default function GNBNavbarForm() {
     >
       <input
         type='text'
-        placeholder='메이플 지작 스칸다 60% 할인 판매중'
+        placeholder='검색어를 입력해 주세요.'
         className='text-base flex-grow  py-2'
         onChange={(e) => setSearch(e.target.value)}
         value={search}

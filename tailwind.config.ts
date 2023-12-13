@@ -12,6 +12,8 @@ const config: Config = {
       backgroundImage: {
         icons: "url('/assets/icons/eland-icons.png')",
         paymentIcons: "url('/assets/icons/payment-icons.png')",
+        reviewStarBlank: "url('/assets/icons/review_score_lg_blank.png')",
+        reviewStarOn: "url('/assets/icons/review_score_lg_on.png')",
       },
     },
   },

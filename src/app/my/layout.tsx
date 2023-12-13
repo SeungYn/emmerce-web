@@ -1,4 +1,5 @@
 import MaxXLContainer from '@/components/common/container/MaxXLContainer';
+import GlobalFooter from '@/components/common/footer/GlobalFooter/GlobalFooter';
 import MyNavigation from '@/components/my/MyNavigation/MyNavigation';
 import GNB from '@/components/navbar/gnb/GNB/GNB';
 import { serverService } from '@/service/server';
@@ -16,12 +17,13 @@ export default async function layout({
 
       <GNB categoryList={categoryList} />
 
-      <MaxXLContainer>
+      <MaxXLContainer className='min-h-[70vh]'>
         <section className='flex gap-4 mt-8'>
           <MyNavigation />
           <section className='flex-shrink-0 flex-grow'>{children}</section>
         </section>
       </MaxXLContainer>
+      <GlobalFooter />
     </>
   );
 }

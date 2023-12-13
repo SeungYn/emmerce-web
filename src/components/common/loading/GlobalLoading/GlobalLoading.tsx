@@ -3,7 +3,7 @@ import useNavigationLoadingEvent from '@/hooks/common/useNavigationLoadingEvent'
 import Image from 'next/image';
 
 export default function GlobalLoading() {
-  const isLoading = useNavigationLoadingEvent();
+  const { globalLoading: isLoading } = useNavigationLoadingEvent();
 
   if (!isLoading) return null;
   return (

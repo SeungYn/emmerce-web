@@ -15,7 +15,7 @@ export default class ReviewService {
   async postReview({ reviewReq, reviewImages }: PostReviewReq) {
     const query = `/review`;
     const formdata = new FormData();
-    console.log(reviewReq, reviewImages);
+
     formdata.append(
       'reviewReq',
       new Blob([JSON.stringify(reviewReq)], {

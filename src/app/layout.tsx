@@ -30,7 +30,6 @@ export default function RootLayout({
           <UserContextProvider>
             <AuthFormContextProvider>
               {children}
-
               <AuthBackground />
             </AuthFormContextProvider>
           </UserContextProvider>

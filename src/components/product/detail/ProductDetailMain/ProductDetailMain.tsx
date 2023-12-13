@@ -150,9 +150,12 @@ export default function ProductDetailMain({ productDetail }: Props) {
             <CartMoalContextProvider>
               <CartBtnAndModal productId={productId} />
             </CartMoalContextProvider>
-            <button className='basis-[50%]  h-[53px] border border-black font-medium text-xl text-white bg-black'>
+            <CustomGlobalLoadingLink
+              href={`/o/order/${productId}`}
+              className='basis-[50%]  h-[53px] border border-black font-medium text-xl text-white bg-black flex justify-center items-center'
+            >
               바로구매
-            </button>
+            </CustomGlobalLoadingLink>
           </div>
         </div>
       </div>

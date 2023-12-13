@@ -1,4 +1,5 @@
 import MaxXLContainer from '@/components/common/container/MaxXLContainer';
+import GlobalFooter from '@/components/common/footer/GlobalFooter/GlobalFooter';
 import BrandIconList from '@/components/home/BrandIconList/BrandIconList';
 import CustomItems from '@/components/home/content/CustomItems/CustomItems';
 import HotDeal from '@/components/home/content/HotDeal/HotDeal';
@@ -31,6 +32,7 @@ export default async function Home() {
       <MaxXLContainer className='mt-10'>
         <HotDeal productList={hotdealProductList} />
       </MaxXLContainer>
+      <GlobalFooter />
     </>
   );
 }

@@ -6,17 +6,17 @@ export default class CartService {
 
   async add({ productId, quantity }: CartAddReq) {
     const query = `/cart/product`;
-    console.log('add cart item');
+
     const { data } = await this.axios.post(query, {
       productId,
       quantity,
     });
-    console.log('add res', data);
+
     return data;
   }
 
-  async deleteByProductId({ productId }: CheckCartItem) {
-    const query = `/cart/product/${productId}`;
+  async deleteByProductId({ cartProductId }: CheckCartItem) {
+    const query = `/cart/${cartProductId}`;
     const { data } = await this.axios.delete(query);
     return data;
   }

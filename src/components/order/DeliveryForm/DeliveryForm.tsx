@@ -23,7 +23,6 @@ export default function DeliveryForm() {
   };
 
   const onGetAddress = () => {
-    console.log('daum click');
     new window.daum.Postcode({
       oncomplete: (data: DaumPostRes) => {
         const { roadAddress, zonecode } = data;

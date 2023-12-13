@@ -20,7 +20,6 @@ export default function ReviewItem({ review }: Props) {
 
   review;
 
-  console.log(translateStarScoreToPercent(starScore));
   return (
     <li className='flex'>
       <div className='flex-grow p-6'>

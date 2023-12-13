@@ -1,4 +1,5 @@
 import MaxXLContainer from '@/components/common/container/MaxXLContainer';
+import GlobalFooter from '@/components/common/footer/GlobalFooter/GlobalFooter';
 import MainItemLink from '@/components/common/listitem/MainItemLink/MainItemLink';
 import Location from '@/components/common/location/Location';
 import GNB from '@/components/navbar/gnb/GNB/GNB';
