@@ -90,7 +90,6 @@ export default function Category({ categoryList }: Props) {
                       setCurrentCategory(cate.mainCategory);
                     }}
                     onClick={() => {
-                      console.log('카테고리 이벤트');
                       setIsOpenCategory(false);
                     }}
                     className='relative w-full inline-block'

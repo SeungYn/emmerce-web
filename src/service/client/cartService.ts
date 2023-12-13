@@ -6,12 +6,12 @@ export default class CartService {
 
   async add({ productId, quantity }: CartAddReq) {
     const query = `/cart/product`;
-    console.log('add cart item');
+
     const { data } = await this.axios.post(query, {
       productId,
       quantity,
     });
-    console.log('add res', data);
+
     return data;
   }
 

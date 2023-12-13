@@ -26,7 +26,7 @@ export default function useReviewMutation() {
         },
         reviewImages: reviewForm.reviewImageFile,
       };
-      console.log('data', data);
+
       return service.review.postReview(data);
     },
     onMutate: (data) => data.cb(),

@@ -18,7 +18,7 @@ export default function useAuth() {
     onSuccess: (res) => {
       const token = res.headers.authorization.split(' ')[1];
       const refreshToken = res.headers.refreshtoken as string;
-      console.log(res);
+
       // 나중에 쿠키로 바꾸거나 클래스화 예정
       localStorage.setItem('access-token', token);
       localStorage.setItem('refresh-token', refreshToken);
@@ -37,9 +37,7 @@ export default function useAuth() {
 
   const { mutate: registerMutate } = useMutation({
     mutationFn: (req: RegisterReq) => service.auth.register(req),
-    onSuccess: (res) => {
-      console.log('register success res', res);
-    },
+    onSuccess: (res) => {},
   });
 
   const { mutate: logoutMutate } = useMutation({
