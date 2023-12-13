@@ -20,7 +20,6 @@ export const useGlobalLoading = create<GlobalLoading>()(
     ...initail,
     setLoading: (flag: boolean) => set({ loading: flag }),
     handleStartLoading: (path: string) => {
-      console.log('store path', path);
       set((store) => {
         if (store.visitedPath.includes(path)) {
           return { ...store, loading: false };
