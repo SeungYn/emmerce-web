@@ -2,7 +2,6 @@ import { cookies } from 'next/headers';
 import CartHeader from '@/components/cart/common/CartHeader/CartHeader';
 import OrderHistoryListItem from '@/components/order/OrderHistoryListItem/OrderHistoryListItem';
 import { orderItem } from '@/util/mock/data/item';
-import Link from 'next/link';
 import CustomGlobalLoadingLink from '@/components/common/customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
 import { serverService } from '@/service/server';
 import { notFound } from 'next/navigation';

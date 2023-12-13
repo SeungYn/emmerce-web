@@ -1,3 +1,4 @@
+import GlobalFooter from '@/components/common/footer/GlobalFooter/GlobalFooter';
 import GlobalLoading from '@/components/common/loading/GlobalLoading/GlobalLoading';
 import GNB from '@/components/navbar/gnb/GNB/GNB';
 import { serverService } from '@/service/server';
@@ -13,7 +14,8 @@ export default async function layout({
     <>
       <GlobalLoading />
       <GNB categoryList={categoryList} />
-      {children}
+      <section className='min-h-[70vh]'>{children}</section>
+      <GlobalFooter />
     </>
   );
 }

@@ -1,5 +1,4 @@
 import MaxXLContainer from '@/components/common/container/MaxXLContainer';
-import Location from '@/components/common/location/Location';
 import ProductCategory from '@/components/common/location/ProductCategory';
 import ProductDetailInfo from '@/components/product/detail/ProductDetailInfo/ProductDetailInfo';
 import ProductDetailMain from '@/components/product/detail/ProductDetailMain/ProductDetailMain';
