@@ -17,8 +17,6 @@ export default function SliderBanner() {
         spaceBetween={10}
         navigation
         pagination={{ type: 'fraction' }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log('slide change')}
         loop={true}
       >
         <SwiperSlide>

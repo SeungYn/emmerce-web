@@ -1,10 +1,12 @@
 'use client';
 import { useGlobalLoading } from '@/store/common/globalLoading';
+import { useOrderLoadingStore } from '@/store/order/orderLoading';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
 export default function useNavigationLoadingEvent() {
   const loadingStore = useGlobalLoading();
+  const orderLoadingStore = useOrderLoadingStore();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -30,8 +32,12 @@ export default function useNavigationLoadingEvent() {
   // 두번쨰 방법 해당 이펙트는 url이 변경되면 로딩을 false로 바꿔줌
   useEffect(() => {
     loadingStore.setLoading(false);
+    orderLoadingStore.handleStopLoading();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, searchParams]);
 
-  return loadingStore.loading;
+  return {
+    globalLoading: loadingStore.loading,
+    orderLoading: orderLoadingStore.loading,
+  };
 }

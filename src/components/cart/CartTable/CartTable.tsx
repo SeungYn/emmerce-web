@@ -128,26 +128,6 @@ export default function CartTable({
             원
           </li>
         </ul>
-        <div className='mt-4 flex justify-end gap-4'>
-          <CustomGlobalLoadingLink
-            href={'/'}
-            className='text-xl py-6 px-16 rounded-full text-black font-bold border border-gray-400'
-          >
-            계속 쇼핑하기
-          </CustomGlobalLoadingLink>
-          {cartItemList.length > 0 && (
-            <button
-              className='text-xl py-6 px-24 rounded-full text-white font-bold brightness-95'
-              style={{
-                background:
-                  'linear-gradient(90deg, rgba(255,85,9,1) 0%, rgba(255,0,0,1) 49%, rgba(255,0,247,1) 100%)',
-              }}
-              onClick={handleMoveOrderPage}
-            >
-              구매하기
-            </button>
-          )}
-        </div>
       </div>
     </div>
   );

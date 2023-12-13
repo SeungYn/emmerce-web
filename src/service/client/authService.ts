@@ -1,4 +1,4 @@
-import { LoginReq, RegisterReq } from './types/auth.d';
+import { LoginReq, RegisterReq } from '../types/auth';
 import { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 export default class AuthService {
@@ -36,7 +36,7 @@ export default class AuthService {
   async logout() {
     console.log('logout!!!');
     const dd = await this.axios.post('/auth/logout');
-    console.log(dd, 'logout');
+
     return dd;
   }
 }

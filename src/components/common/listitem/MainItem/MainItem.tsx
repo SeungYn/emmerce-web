@@ -36,7 +36,7 @@ export default function MainItem({
       className='relative cursor-pointer'
       onClick={() => handleMovePage(productId)}
     >
-      <div onClick={() => console.log('div')}>
+      <div>
         <div className='relative shrink-0 rounded-xl w-[240px] overflow-hidden after:content-[""] after:absolute after:inset-0 after:border after:border-gray-400 after:rounded-xl after:z-10'>
           {rank && (
             <div className='absolute p-1 w-6 h-6 bg-black text-white flex justify-center items-center text-xs  rounded-br-lg'>

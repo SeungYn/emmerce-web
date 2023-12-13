@@ -5,7 +5,6 @@ import ProductListPagination from '@/components/product/common/ProductListPagina
 import FilterForm from '@/components/product/filter/FilterForm/FilterForm';
 import ListManipulation from '@/components/product/filter/ListManipulation/ListManipulation';
 import { serverService } from '@/service/server';
-import { getProductListByCategory } from '@/service/server/product';
 
 type Props = {
   params: { id: number };
@@ -23,7 +22,6 @@ export default async function page({
   params: { id },
   searchParams: { keyword, brand, limit, minPrice, maxPrice, page },
 }: Props) {
-  console.log('paramsId', id);
   const data = await serverService.product.getProductListByCategory({
     categoryId: id,
     keyword,
