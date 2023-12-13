@@ -1,4 +1,4 @@
-import { LoginReq, RegisterReq } from './types/auth.d';
+import { LoginReq, RegisterReq } from '../types/auth';
 import { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 export default class AuthService {

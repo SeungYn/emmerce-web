@@ -2,7 +2,6 @@
 import { AuthFormContextType } from '@/context/auth/AuthFormContext';
 import useAuth, { useAuthRegister } from '@/hooks/api/auth/useAuth';
 import useInput from '@/hooks/auth/useInput';
-import service from '@/service/client';
 import { motion } from 'framer-motion';
 import { FormEvent, useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';

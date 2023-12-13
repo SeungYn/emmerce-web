@@ -5,7 +5,7 @@ import { useAuthFormContext } from '@/context/auth/AuthFormContext';
 import { useUserContext } from '@/context/auth/UserContext';
 import browserStorage from '@/db';
 import service from '@/service/client';
-import { LoginReq, RegisterReq } from '@/service/client/types/auth';
+import { LoginReq, RegisterReq } from '@/service/types/auth';
 import { useMutation } from '@tanstack/react-query';
 import { Dispatch, SetStateAction } from 'react';
 
