@@ -13,3 +13,8 @@ export interface LoginReq {
   name: string;
   password: string;
 }
+
+export type Tokens = {
+  accessToken: string;
+  refreshToken: string;
+};

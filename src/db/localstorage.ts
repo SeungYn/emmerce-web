@@ -14,7 +14,7 @@ export default class LocalStorage implements Storage {
   }
 
   set(key: string, value: string) {
-    localStorage.set(key, value);
+    localStorage.setItem(key, value);
   }
 
   remove(key: string) {

@@ -1,30 +1,40 @@
 'use client'; // Error components must be Client Components
 
+import { useAuthReissue } from '@/hooks/api/auth/useAuth';
+import { ErrorCode, GlobalErrorException } from '@/util/lib/exception';
 import { useEffect } from 'react';
 
-export default function Error({
+export default function ErrorFallback({
   error,
   reset,
 }: {
-  error: Error & { digest?: string };
+  error: Error | GlobalErrorException;
   reset: () => void;
 }) {
+  const reissueMutate = useAuthReissue();
+
   useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error);
+    // ServerRes인 경우
+    if (error.message === ErrorCode.ACCESS_TOKEN_EXPIRED.message) {
+      alert('세션이 만료되어 재발급 처리중입니다.');
+      reissueMutate.mutate();
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error]);
 
   return (
     <div>
       <h2>Something went wrong!</h2>
       <button
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
+        onClick={() => {
+          reset();
+        }}
       >
-        Try again
+        에러
       </button>
     </div>
   );
 }
+
+function test() {}
