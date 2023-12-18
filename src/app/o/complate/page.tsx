@@ -19,7 +19,6 @@ export default async function page({
   const refershToken = cookieStore.get('refresh-token');
 
   if (!accessToken || !refershToken) {
-    alert('로그인 정보가 올바르지 않습니다. 다시 시도해주세요.');
     notFound();
   }
 

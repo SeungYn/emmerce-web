@@ -44,7 +44,6 @@ export class GlobalErrorException extends Error {
   constructor(error: string);
   constructor(error: ServerErrorRes);
   constructor(error: string | ServerErrorRes) {
-    console.log(error, 'error class');
     if (typeof error === 'string') {
       super(error);
     } else {

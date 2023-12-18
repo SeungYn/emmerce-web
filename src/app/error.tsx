@@ -15,7 +15,6 @@ export default function ErrorFallback({
 
   useEffect(() => {
     // ServerRes인 경우
-
     if (error.message === ErrorCode.ACCESS_TOKEN_EXPIRED.message) {
       alert('세션이 만료되어 재발급 처리중입니다.');
       reissueMutate.mutate();
