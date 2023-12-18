@@ -1,8 +1,9 @@
+import { CustomAxiosInstance } from '@/network/client';
 import { LoginReq, RegisterReq } from '../types/auth';
 import { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 export default class AuthService {
-  constructor(private axios: AxiosInstance) {}
+  constructor(private axios: CustomAxiosInstance) {}
 
   async register({
     name,
@@ -38,5 +39,10 @@ export default class AuthService {
     const dd = await this.axios.post('/auth/logout');
 
     return dd;
+  }
+
+  async reissue() {
+    const res = await this.axios.reissue?.();
+    return res;
   }
 }
