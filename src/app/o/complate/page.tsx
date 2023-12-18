@@ -18,7 +18,9 @@ export default async function page({
   const accessToken = cookieStore.get('access-token');
   const refershToken = cookieStore.get('refresh-token');
 
-  if (!accessToken || !refershToken) notFound();
+  if (!accessToken || !refershToken) {
+    notFound();
+  }
 
   const data = await serverService.order.getUnitOrder(
     orderId,

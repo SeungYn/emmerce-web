@@ -1,4 +1,4 @@
-import { HttpServer } from '@/network/http';
+import { HttpServer } from '@/network/server';
 import { Category, ProductCategoryInfo } from '../types/category';
 
 export async function getCategoryList() {

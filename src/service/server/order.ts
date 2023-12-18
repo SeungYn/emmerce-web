@@ -1,4 +1,4 @@
-import { HttpServer } from '@/network/http';
+import { HttpServer } from '@/network/server';
 import { OrderHistory } from '../types/order';
 
 export default class OrderServerService {
@@ -23,7 +23,7 @@ export default class OrderServerService {
     };
 
     const url = `/order/${orderId}`;
-    const data = await this.http.fetch<OrderHistory>(url, opt);
+    const data = await this.http.fetch<OrderHistory>(url, opt, token);
 
     return data;
   }

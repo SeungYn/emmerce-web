@@ -1,4 +1,4 @@
-import { HttpServer } from '@/network/http';
+import { HttpServer } from '@/network/server';
 import { PaymentApproveReq, PaymentApproveRes } from '../types/payment';
 
 export default class PaymentServerService {
