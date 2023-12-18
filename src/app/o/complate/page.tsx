@@ -18,7 +18,10 @@ export default async function page({
   const accessToken = cookieStore.get('access-token');
   const refershToken = cookieStore.get('refresh-token');
 
-  if (!accessToken || !refershToken) notFound();
+  if (!accessToken || !refershToken) {
+    alert('로그인 정보가 올바르지 않습니다. 다시 시도해주세요.');
+    notFound();
+  }
 
   const data = await serverService.order.getUnitOrder(
     orderId,

@@ -3,7 +3,7 @@ type CookieOption = {
   samesite?: 'strict' | 'lax' | 'None';
   secure?: 'secure';
   expires?: number | string | Date;
-  'max-age'?: number;
+  'max-age'?: number; // 초단위
   domain?: string;
   path?: string;
 };

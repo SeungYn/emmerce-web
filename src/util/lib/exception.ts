@@ -1,6 +1,6 @@
-import { GlobalErrorType, ServerErrorRes } from '@/service/types/error';
+import { ServerErrorRes } from '@/service/types/error';
 
-export class AccessTokenError extends Error {
+export class AccessTokenErrorException extends Error {
   name: string;
   err?: ServerErrorRes;
 
@@ -18,7 +18,7 @@ export class AccessTokenError extends Error {
   }
 }
 
-export class RefreshTokenError extends Error {
+export class RefreshTokenErrorException extends Error {
   name: string;
   err?: ServerErrorRes;
 
@@ -36,19 +36,30 @@ export class RefreshTokenError extends Error {
   }
 }
 
-export class GlobalError extends Error {
+export class GlobalErrorException extends Error {
   name: string;
+  digest?: string;
   status?: number;
+  error?: string;
   constructor(error: string);
-  constructor(error: GlobalErrorType);
-  constructor(error: string | GlobalErrorType) {
+  constructor(error: ServerErrorRes);
+  constructor(error: string | ServerErrorRes) {
+    console.log(error, 'error class');
     if (typeof error === 'string') {
       super(error);
     } else {
       super(error.message);
       this.status = error.status;
+      this.error = error.error;
     }
 
     this.name = 'GlobalError';
   }
 }
+
+export const ErrorCode = {
+  ACCESS_TOKEN_EXPIRED: {
+    message: '만료된 토큰입니다.',
+    status: 610,
+  },
+};
