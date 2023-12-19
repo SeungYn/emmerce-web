@@ -2,8 +2,6 @@
 
 import { CheckCartItem } from '@/service/types/cart';
 import CartTableItem from '../item/CartTableItem/CartTableItem';
-import Link from 'next/link';
-import CustomGlobalLoadingLink from '@/components/common/customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
 
 type Props = {
   cartItemList: CheckCartItem[];

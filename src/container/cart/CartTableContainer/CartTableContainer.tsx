@@ -14,6 +14,7 @@ import {
   useCartUpCountItem,
 } from '@/hooks/api/cart/useCart';
 import { useRouter } from 'next/navigation';
+import { BsCart3 } from 'react-icons/bs';
 
 export default function CartTableContainer() {
   return (
@@ -36,19 +37,26 @@ function CartTableSuspense() {
 
   return (
     <>
-      <CartTable
-        cartItemList={data}
-        handleToggleCartItem={handleToggleCartItem}
-        handleDeleteCartItem={handleDeleteCartItem}
-        handleCheckAllCartItems={handleCheckAllCartItems}
-        handleUnCheckAllCartItems={handleUnCheckAllCartItems}
-        handleUpCountCartItem={handleUpCountCartItem}
-        handleDownCountCartItem={handleDownCountCartItem}
-        handleClearCart={handleClearCart}
-        handleMoveOrderPage={() => {
-          router.push('/o/order');
-        }}
-      />
+      {data.length > 0 ? (
+        <CartTable
+          cartItemList={data}
+          handleToggleCartItem={handleToggleCartItem}
+          handleDeleteCartItem={handleDeleteCartItem}
+          handleCheckAllCartItems={handleCheckAllCartItems}
+          handleUnCheckAllCartItems={handleUnCheckAllCartItems}
+          handleUpCountCartItem={handleUpCountCartItem}
+          handleDownCountCartItem={handleDownCountCartItem}
+          handleClearCart={handleClearCart}
+          handleMoveOrderPage={() => {
+            router.push('/o/order');
+          }}
+        />
+      ) : (
+        <div className='flex flex-col gap-2 items-center border-b border-gray-300 py-64'>
+          <BsCart3 className='text-9xl' />
+          <p className='text-2xl'>장바구니에 담긴 상품이 없습니다.</p>
+        </div>
+      )}
       {/* button section */}
       <div className='mt-4 flex justify-end gap-4'>
         <CustomGlobalLoadingLink
