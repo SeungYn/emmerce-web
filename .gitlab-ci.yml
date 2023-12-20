@@ -6,6 +6,7 @@ build:
   stage: build
   before_script:
     - echo "$ENV" > .env
+    - cat .env
   script:
     - npm run build
   only:
