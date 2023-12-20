@@ -10,11 +10,11 @@ stages:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   tags:
-   - web
+    - web
 
 build:
   stage: build
-  image: node:18-alpine
+  image: docker:latest
   extends:
     - .master-rules
   before_script:
@@ -24,7 +24,7 @@ build:
 
 deploy:
   stage: deploy
-  image: node:18-alpine
+  image: docker:latest
   extends:
     - .master-rules
   script:
