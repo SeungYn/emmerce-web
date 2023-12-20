@@ -1,0 +1,14 @@
+stages:
+  - build
+
+build:
+  image: node:18-alpine
+  stage: build
+  before_script:
+    - echo "$ENV" > .env
+  script:
+    - npm run build
+  only:
+    - master
+  tags:
+    - web
