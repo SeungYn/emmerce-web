@@ -1,4 +1,5 @@
 'use client';
+import CustomGlobalLoadingLink from '@/components/common/customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
 import { CheckCartItem } from '@/service/types/cart';
 import Image from 'next/image';
 
@@ -75,9 +76,19 @@ export default function CartTableItem({
       <td>{((originalPrice - discountPrice) * quantity).toLocaleString()}원</td>
       <td>{(discountPrice * quantity).toLocaleString()}원</td>
       <td>무료배송</td>
-      <td className='flex flex-col'>
-        <button>바로구매</button>
-        <button onClick={() => handleDeleteCartItem(item)}>삭제</button>
+      <td className='flex flex-col text-sm gap-1'>
+        <CustomGlobalLoadingLink
+          href={`/o/order/${productId}`}
+          className='px-6 py-1 bg-black text-white rounded-3xl'
+        >
+          바로구매
+        </CustomGlobalLoadingLink>
+        <button
+          className='px-6 py-1 border border-gray-300 rounded-3xl'
+          onClick={() => handleDeleteCartItem(item)}
+        >
+          삭제
+        </button>
       </td>
     </tr>
   );

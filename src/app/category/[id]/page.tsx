@@ -5,6 +5,7 @@ import ProductListPagination from '@/components/product/common/ProductListPagina
 import FilterForm from '@/components/product/filter/FilterForm/FilterForm';
 import ListManipulation from '@/components/product/filter/ListManipulation/ListManipulation';
 import { serverService } from '@/service/server';
+import { sortProductList } from '@/util/lib/product';
 
 type Props = {
   params: { id: number };
@@ -15,12 +16,13 @@ type Props = {
     minPrice: string;
     maxPrice: string;
     page: string;
+    sortkey: string;
   };
 };
 
 export default async function page({
   params: { id },
-  searchParams: { keyword, brand, limit, minPrice, maxPrice, page },
+  searchParams: { keyword, brand, limit, minPrice, maxPrice, page, sortkey },
 }: Props) {
   const data = await serverService.product.getProductListByCategory({
     categoryId: id,
@@ -31,6 +33,8 @@ export default async function page({
     maxPrice,
     page,
   });
+
+  const filteredList = sortProductList(sortkey, [...data.content]);
 
   return (
     <>
@@ -44,7 +48,7 @@ export default async function page({
             <ListManipulation />
             <div className='mt-4 mx-3'>
               <ul className='w-full flex flex-shrink-0 flex-wrap mt-4 gap-4 '>
-                {data.content?.map((item, i) => (
+                {filteredList.map((item, i) => (
                   <li key={item.productId}>
                     <MainItemLink
                       item={item}
