@@ -25,7 +25,7 @@ export class HttpServer {
     }
     if (res.status > 299 || res.status < 200) {
       const errorData = data! as unknown as ServerErrorRes;
-
+      console.error(errorData);
       throw new GlobalErrorException(errorData);
     }
 
