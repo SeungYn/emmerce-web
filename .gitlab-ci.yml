@@ -20,7 +20,7 @@ build:
   before_script:
     - echo "$ENV" > .env
   script:
-    - docker build -t $DOCKER_IMAGE_NAME
+    - docker build -t $DOCKER_IMAGE_NAME .
 
 deploy:
   stage: deploy
