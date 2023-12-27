@@ -46,7 +46,7 @@ export async function getCategoryList() {
 export class CategoryServerService {
   constructor(private http: HttpServer) {}
 
-  async getCategoryList() {
+  async getOriginCategoryList() {
     const data = await this.http.fetch<Category[]>('/category/list', {
       method: 'GET',
       headers: {
@@ -56,6 +56,11 @@ export class CategoryServerService {
         revalidate: false,
       },
     });
+    return data;
+  }
+
+  async getCategoryList() {
+    const data = await this.getOriginCategoryList();
 
     const firstCategories = [] as Category[];
     const secondCategories = [] as Category[];

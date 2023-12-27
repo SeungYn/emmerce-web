@@ -6,6 +6,7 @@ import { categoryRex } from '@/components/common/location/Location';
 import NextURLSearchParams from '@/util/lib/urlSearchParams';
 import { Product } from '@/service/types/product';
 import { filterBrandList } from '@/util/lib/util';
+import useCustomRouter from '@/hooks/common/useCustomRouter';
 
 type Props = {
   keyword?: string;
@@ -13,7 +14,7 @@ type Props = {
 };
 
 export default function FilterForm({ keyword, productList }: Props) {
-  const router = useRouter();
+  const router = useCustomRouter();
   const searchParams = new NextURLSearchParams(useSearchParams());
   const pathname = usePathname();
   const mainCateStr = searchParams

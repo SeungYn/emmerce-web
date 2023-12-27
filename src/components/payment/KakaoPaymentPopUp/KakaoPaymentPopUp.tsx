@@ -28,7 +28,8 @@ export default function KakaoPaymentPopUp() {
       if (
         e.origin === process.env.NEXT_PUBLIC_DEV_HOST ||
         e.origin === process.env.NEXT_PUBLIC_LOCAL_HOST ||
-        e.origin === process.env.NEXT_PUBLIC_VERCEL_HOST
+        e.origin === process.env.NEXT_PUBLIC_VERCEL_HOST ||
+        e.origin === process.env.NEXT_PUBLIC_PRODUCTION_HOST
       ) {
         if (e.data.approveResult === 'SUCCESS') {
           approveSuccessCallback(e.data.orderId);

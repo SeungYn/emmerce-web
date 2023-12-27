@@ -6,6 +6,7 @@ import FilterForm from '@/components/product/filter/FilterForm/FilterForm';
 import ListManipulation from '@/components/product/filter/ListManipulation/ListManipulation';
 import { serverService } from '@/service/server';
 import { sortProductList } from '@/util/lib/product';
+import { Metadata } from 'next';
 
 type Props = {
   params: { id: number };
@@ -19,6 +20,23 @@ type Props = {
     sortkey: string;
   };
 };
+
+export async function generateMetadata({
+  params: { id },
+}: {
+  params: { id: number };
+}): Promise<Metadata> {
+  const categoryList = await serverService.category.getOriginCategoryList();
+  const findCategoryName = categoryList.find((i) => {
+    return i.categoryId === Number(id);
+  });
+  const categoryName = findCategoryName ? findCategoryName.name : '';
+
+  return {
+    title: categoryName,
+    description: `${categoryName} 관련 상품 정보를 확인하세요.`,
+  };
+}
 
 export default async function page({
   params: { id },

@@ -7,6 +7,7 @@ import ProductListPagination from '@/components/product/common/ProductListPagina
 import FilterForm from '@/components/product/filter/FilterForm/FilterForm';
 import ListManipulation from '@/components/product/filter/ListManipulation/ListManipulation';
 import { serverService } from '@/service/server';
+import { Metadata } from 'next';
 
 //export const dynamic = 'force-dynamic';
 
@@ -20,6 +21,15 @@ type Props = {
     page: string;
   };
 };
+
+export async function generateMetadata({
+  searchParams: { keyword },
+}: Props): Promise<Metadata> {
+  return {
+    title: keyword,
+    description: `${keyword} 관련 상품 정보를 확인하세요.`,
+  };
+}
 
 export default async function page({
   searchParams: { keyword, brand, limit, minPrice, maxPrice, page },

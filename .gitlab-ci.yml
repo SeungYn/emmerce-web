@@ -1,0 +1,37 @@
+variables:
+  DOCKER_IMAGE_NAME: 'emmerce-web-image'
+  DOCKER_CONTAINER_NAME: 'emmerce-web-container'
+
+stages:
+  - build
+  - deploy
+
+.master-rules:
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  tags:
+    - web
+
+build:
+  stage: build
+  image: docker:24.0.7
+  extends:
+    - .master-rules
+  before_script:
+    - echo "$ENV" > .env
+  script:
+    - docker build -t $DOCKER_IMAGE_NAME .
+
+
+deploy:
+  stage: deploy
+  image: docker:24.0.7
+  extends:
+    - .master-rules
+  script:
+    - docker stop $DOCKER_CONTAINER_NAME || true
+    - docker rm $DOCKER_CONTAINER_NAME || true
+    - docker image prune -f
+    - docker container run -d -p 3000:3000 --name $DOCKER_CONTAINER_NAME $DOCKER_IMAGE_NAME
+  extends:
+    - .master-rules
