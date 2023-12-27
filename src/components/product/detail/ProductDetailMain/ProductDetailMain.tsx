@@ -38,8 +38,8 @@ export default function ProductDetailMain({ productDetail }: Props) {
         <div className='relative basis-[640px] '>
           <div>
             {/* 이미지 서버 생기면 이미지 연동 */}
-            <img
-              src='/assets/slide/1.png'
+            <Image
+              src={titleImg}
               width={640}
               height={640}
               style={{ width: '640px', height: '640px' }}
