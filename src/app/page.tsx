@@ -9,6 +9,8 @@ import SliderBannerContainer from '@/container/home/banner/SliderBannerContainer
 import RecommendProductsContainer from '@/container/product/RecommendProductsContainer';
 import { serverService } from '@/service/server';
 
+//https://emmerce1.duckdns.org
+
 export default async function Home() {
   const categoryList = await serverService.category.getCategoryList();
   const hotdealProductList = await serverService.product.getHotdealProducts();
