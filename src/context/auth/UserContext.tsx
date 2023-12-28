@@ -1,4 +1,6 @@
 'use client';
+import browserStorage from '@/db';
+import service from '@/service/client';
 import {
   Dispatch,
   PropsWithChildren,
@@ -6,6 +8,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useState,
 } from 'react';
 
@@ -28,14 +31,23 @@ const UserContext = createContext<UserContext>({
 export default function UserContextProvider({ children }: PropsWithChildren) {
   const [userInfo, setUserInfo] = useState<User | null>(() => {
     if (typeof window !== 'undefined')
-      return { token: localStorage.getItem('access-token') };
+      return {
+        token:
+          localStorage.getItem('access-token') ||
+          browserStorage.cookie.getCookie('access-token'),
+      };
     return null;
   });
 
   const resetUserInfo = useCallback(() => {
     localStorage.removeItem('access-token');
+    browserStorage.cookie.deleteCookie('access-token');
     setUserInfo(null);
   }, []);
+
+  useEffect(() => {
+    service.authErrorEventBus.listen = resetUserInfo;
+  }, [resetUserInfo]);
 
   return (
     <UserContext.Provider
