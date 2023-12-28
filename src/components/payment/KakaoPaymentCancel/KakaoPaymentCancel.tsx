@@ -1,10 +1,11 @@
 'use client';
 
+import { whereIsHost } from '@/util/lib/util';
 import { ImCancelCircle } from 'react-icons/im';
 
 export default function KakaoPaymentCancel() {
   const onSendParentWindowMsg = (data: any) => {
-    window.parent.postMessage(data);
+    window.parent.postMessage(data, whereIsHost() || '');
   };
 
   return (
