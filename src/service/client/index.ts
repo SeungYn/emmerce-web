@@ -13,6 +13,7 @@ const service = {
   cart: new CartService(axiosInstance),
   order: new OrderService(axiosInstance),
   payment: new PaymentService(axiosInstance),
+  authErrorEventBus: axiosInstance.authErrorEventBus!,
 };
 
 export default service;
