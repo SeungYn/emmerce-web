@@ -31,3 +31,9 @@ export function pick<T extends object, K extends keyof T>(
     return obj;
   }, {} as T);
 }
+
+export function whereIsHost() {
+  return process.env.NODE_ENV === 'production'
+    ? process.env.NEXT_PUBLIC_PRODUCTION_HOST
+    : process.env.NEXT_PUBLIC_LOCAL_HOST;
+}

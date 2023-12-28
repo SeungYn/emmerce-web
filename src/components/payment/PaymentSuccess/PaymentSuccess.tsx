@@ -4,6 +4,7 @@ import { usePaymentApproveMutate } from '@/hooks/api/payment/usePaymentMutation'
 import { useEffect, useState } from 'react';
 import { BeatLoader } from 'react-spinners';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
+import { whereIsHost } from '@/util/lib/util';
 
 type Props = {
   orderId: number | string;
@@ -18,11 +19,12 @@ export default function PaymentSuccess({ orderId, pg_token }: Props) {
   const approveMutate = usePaymentApproveMutate(setApproveResult);
 
   const onSendParentWindowMsg = (data: any) => {
-    window.parent.postMessage(data);
+    window.parent.postMessage(data, whereIsHost() || '');
   };
 
   useEffect(() => {
     approveMutate.mutate({ orderId, pg_token });
+    //eslint-disable-next-line
   }, []);
 
   if (approveResult.isLoading)
