@@ -32,7 +32,6 @@ export default function ProductListPagination({
     (_, i) => i + currentBlock
   );
 
-  console.log(totalPages, 'totalpages');
   return (
     <ul className='flex gap-4 items-center'>
       {!first && (

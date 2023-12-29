@@ -15,7 +15,7 @@ type Props = {
 };
 
 export default function GNBRecentSearch({ setOpenState }: Props) {
-  const { clear } = useRecentSearchStoreAction();
+  const { clear, removeItem } = useRecentSearchStoreAction();
   const recentSearchList = useHydrateStore(
     useRecentSearchStore,
     (state: RecentSearchStore) => state.recentSearchList
@@ -50,7 +50,13 @@ export default function GNBRecentSearch({ setOpenState }: Props) {
               >
                 {v}
               </CustomGlobalLoadingLink>
-              <button className='text-lg'>&times;</button>
+              <button
+                className='text-lg'
+                type='button'
+                onClick={() => removeItem(v)}
+              >
+                &times;
+              </button>
             </li>
           ))}
         </ul>
