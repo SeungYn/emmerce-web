@@ -19,7 +19,7 @@ export default class CookiStorage {
           '=([^;]*)'
       )
     );
-    return matches ? decodeURIComponent(matches[1]) : undefined;
+    return matches ? decodeURIComponent(matches[1]) : null;
   }
 
   setCookie(name: string, value: string, options: CookieOption = {}) {

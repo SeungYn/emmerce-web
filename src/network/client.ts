@@ -22,6 +22,7 @@ type ReIssueObj = {
 
 export interface CustomAxiosInstance extends AxiosInstance {
   reissue?: () => Promise<string>;
+  authErrorEventBus?: AuthErrorEventBus;
 }
 
 const reissueObj: ReIssueObj = {
@@ -53,6 +54,7 @@ export const createAxiosInstance = (baseURL: string) => {
     withCredentials: true,
   });
   axiosInstance.reissue = reissue;
+  axiosInstance.authErrorEventBus = new AuthErrorEventBus();
 
   axiosInstance.interceptors.request.use((req) => {
     const token = localStorage.getItem('access-token');
@@ -124,10 +126,12 @@ export const createAxiosInstance = (baseURL: string) => {
       browserStorage.local.remove('refresh-token');
 
       if (axios.isAxiosError(e)) {
+        axiosInstance.authErrorEventBus?.notify();
         throw new RefreshTokenErrorException(
           e.response?.data as ServerErrorRes
         );
       }
+      axiosInstance.authErrorEventBus?.notify();
       throw new GlobalErrorException({
         message: (e as any).message,
         status: 699,
@@ -137,3 +141,15 @@ export const createAxiosInstance = (baseURL: string) => {
 
   return axiosInstance;
 };
+
+class AuthErrorEventBus {
+  private callback: null | (() => void) = null;
+
+  listen(callback: () => void) {
+    this.callback = callback;
+  }
+
+  notify() {
+    this.callback?.();
+  }
+}
