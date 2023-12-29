@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import { SlMagnifier } from 'react-icons/sl';
 import GNBRecentSearch from '../GNBRecentSearch/GNBRecentSearch';
 import { useRecentSearchStoreAction } from '@/store/common/recentSearchStore';
@@ -10,6 +10,7 @@ import useCustomRouter from '@/hooks/common/useCustomRouter';
 export default function GNBNavbarForm() {
   const [search, setSearch] = useState<string>('');
   const [openRecentSearch, setOpenRecentSearch] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
   const { ref } = useRefOutClickHelper<HTMLFormElement>({
     setOpenState: setOpenRecentSearch,
   });
@@ -21,6 +22,11 @@ export default function GNBNavbarForm() {
     if (search === '') return;
     addItem(search);
     setOpenRecentSearch(false);
+
+    if (inputRef.current) {
+      inputRef.current.blur();
+    }
+
     router.push('/search?keyword=' + search);
   };
 
@@ -32,6 +38,7 @@ export default function GNBNavbarForm() {
     >
       <input
         type='text'
+        ref={inputRef}
         placeholder='검색어를 입력해 주세요.'
         className='text-base flex-grow  py-2'
         onChange={(e) => setSearch(e.target.value)}
