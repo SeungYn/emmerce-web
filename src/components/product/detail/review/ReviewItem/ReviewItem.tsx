@@ -11,7 +11,7 @@ export default function ReviewItem({ review }: Props) {
     reviewId,
     title,
     description,
-    starScore,
+    ratings,
     reviewImgList,
     writer,
     writeDate,
@@ -33,7 +33,7 @@ export default function ReviewItem({ review }: Props) {
             className={` bg-no-repeat h-[30px] block bg-icons absolute t-0 l-0`}
             style={{
               backgroundPosition: '-331px -68px',
-              width: `${translateStarScoreToPercent(starScore)}%`,
+              width: `${translateStarScoreToPercent(ratings)}%`,
             }}
           ></span>
         </div>

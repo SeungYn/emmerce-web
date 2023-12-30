@@ -9,7 +9,7 @@ import { Dispatch, SetStateAction, useCallback, useRef, useState } from 'react';
 export type ReviewForm = {
   title: string;
   description: string;
-  starScore: number;
+  ratings: number;
   reviewImageFile: File[];
   reviewImageSrc: string[];
 };
@@ -17,7 +17,7 @@ export type ReviewForm = {
 const initialForm: ReviewForm = {
   title: '',
   description: '',
-  starScore: 0,
+  ratings: 0,
   reviewImageFile: [],
   reviewImageSrc: [],
 };

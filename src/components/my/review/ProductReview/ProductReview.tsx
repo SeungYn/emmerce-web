@@ -81,33 +81,33 @@ export default function ProductReview({
             <div className={styles.reviewParent}>
               <div
                 className={`${styles.reviewStarFive} ${
-                  reviewForm.starScore === 5 ? styles.reviewActive : ''
+                  reviewForm.ratings === 5 ? styles.reviewActive : ''
                 }`}
-                onClick={() => setReviewForm((f) => ({ ...f, starScore: 5 }))}
+                onClick={() => setReviewForm((f) => ({ ...f, ratings: 5 }))}
               ></div>
               <div
                 className={`${styles.reviewStarFour} ${
-                  reviewForm.starScore === 4 ? styles.reviewActive : ''
+                  reviewForm.ratings === 4 ? styles.reviewActive : ''
                 }`}
-                onClick={() => setReviewForm((f) => ({ ...f, starScore: 4 }))}
+                onClick={() => setReviewForm((f) => ({ ...f, ratings: 4 }))}
               ></div>
               <div
                 className={`${styles.reviewStarThree} ${
-                  reviewForm.starScore === 3 ? styles.reviewActive : ''
+                  reviewForm.ratings === 3 ? styles.reviewActive : ''
                 }`}
-                onClick={() => setReviewForm((f) => ({ ...f, starScore: 3 }))}
+                onClick={() => setReviewForm((f) => ({ ...f, ratings: 3 }))}
               ></div>
               <div
                 className={`${styles.reviewStarTwo} ${
-                  reviewForm.starScore === 2 ? styles.reviewActive : ''
+                  reviewForm.ratings === 2 ? styles.reviewActive : ''
                 }`}
-                onClick={() => setReviewForm((f) => ({ ...f, starScore: 2 }))}
+                onClick={() => setReviewForm((f) => ({ ...f, ratings: 2 }))}
               ></div>
               <div
                 className={`${styles.reviewStarOne} ${
-                  reviewForm.starScore === 1 ? styles.reviewActive : ''
+                  reviewForm.ratings === 1 ? styles.reviewActive : ''
                 }`}
-                onClick={() => setReviewForm((f) => ({ ...f, starScore: 1 }))}
+                onClick={() => setReviewForm((f) => ({ ...f, ratings: 1 }))}
               ></div>
             </div>
           </label>

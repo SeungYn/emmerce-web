@@ -24,7 +24,7 @@ export default function MainItem({
     discountPrice,
     brand,
     discountRate,
-    starScore,
+    ratings,
     titleImg,
     likeCount,
   } = item;
@@ -88,15 +88,3 @@ export default function MainItem({
     </div>
   );
 }
-
-type TemporaryItemType = {
-  productId: number;
-  brand: string;
-  name: string;
-  originalPrice: number;
-  discountPrice: number;
-  discountRate: number;
-  starScore: number;
-  titleImg: string;
-  likeCount: number;
-};

@@ -2,7 +2,7 @@ export type Review = {
   reviewId: number;
   title: string;
   description: string;
-  starScore: number;
+  ratings: number;
   reviewImgList: string[];
   memberId: number;
   writer: string;
@@ -22,7 +22,7 @@ export type PostReviewReq = {
   reviewReq: {
     title: string;
     description: string;
-    starScore: number;
+    ratings: number;
     orderId: number;
     productId: number;
   };
