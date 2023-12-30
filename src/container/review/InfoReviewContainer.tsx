@@ -2,6 +2,7 @@
 
 import SSRSuspense from '@/components/common/util/SSRSuspense';
 import InfoReview from '@/components/product/detail/review/InfoReview/InfoReview';
+import ReviewSkeleton from '@/components/product/detail/review/ReviewSkeleton/ReviewSkeleton';
 import useReviewList from '@/hooks/api/review/useReviewList';
 import { useCallback, useState } from 'react';
 
@@ -17,7 +18,7 @@ export default function InfoReviewContainer({ productId }: ContainerProps) {
   );
 
   return (
-    <SSRSuspense fallback={<div className='text-9xl'>로딩딩딩중</div>}>
+    <SSRSuspense fallback={<ReviewSkeleton />}>
       <InfoReviewSuspense
         currentPage={currentPage}
         productId={productId}
