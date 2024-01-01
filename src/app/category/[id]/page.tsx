@@ -67,7 +67,7 @@ export default async function page({
             <div className='mt-4 mx-3'>
               <ul className='w-full flex flex-shrink-0 flex-wrap mt-4 gap-4 '>
                 {filteredList.map((item, i) => (
-                  <li key={item.productId}>
+                  <li key={item.productId} className='h-[350px]'>
                     <MainItemLink
                       item={item}
                       targetLink={`/detail/${item.productId}`}

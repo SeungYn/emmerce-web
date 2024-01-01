@@ -5,7 +5,7 @@ export type Product = {
   originalPrice: number;
   discountPrice: number;
   discountRate: number;
-  starScore: number;
+  ratings: number;
   titleImg: string;
   likeCount: number;
 };
@@ -18,7 +18,7 @@ export type ProductDetail = {
   discountPrice: number;
   discountRate: number;
   stockQuantity: number;
-  starScore: number;
+  ratings: number;
   titleImg: string;
   detailImgList: string[];
   brand: string;

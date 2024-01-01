@@ -2,11 +2,12 @@
 import SSRSuspense from '@/components/common/util/SSRSuspense';
 import OrderTable from '@/components/my/order/OrderTable/OrderTable';
 import { useOrderHistories } from '@/hooks/api/order/useOrder';
+import OrderHistoriesSkeletonContainer from '../OrderHistoriesSkeletonContainer/OrderHistoriesSkeletonContainer';
 
 export default function OrderHistoriesContiner() {
   return (
     <>
-      <SSRSuspense fallback={<div>로딩딩중중</div>}>
+      <SSRSuspense fallback={<OrderHistoriesSkeletonContainer />}>
         <SuspenseOrderHistories />
       </SSRSuspense>
     </>
