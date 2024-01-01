@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import HeartIcon from '../../icons/HeartIcon';
 import { Product } from '@/service/types/product';
-import Link from 'next/link';
 import CustomGlobalLoadingLink from '../../customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
 
 type Props = {
@@ -22,12 +21,11 @@ export default function MainItemLink({
   const {
     productId,
     name,
-
     originalPrice,
     discountPrice,
     brand,
     discountRate,
-    starScore,
+    ratings,
     titleImg,
     likeCount,
   } = item;
@@ -91,15 +89,3 @@ export default function MainItemLink({
     </CustomGlobalLoadingLink>
   );
 }
-
-type TemporaryItemType = {
-  productId: number;
-  brand: string;
-  name: string;
-  originalPrice: number;
-  discountPrice: number;
-  discountRate: number;
-  starScore: number;
-  titleImg: string;
-  likeCount: number;
-};

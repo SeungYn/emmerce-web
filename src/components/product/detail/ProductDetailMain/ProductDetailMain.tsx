@@ -14,7 +14,7 @@ type Props = {
 export default function ProductDetailMain({ productDetail }: Props) {
   const {
     brand,
-    starScore,
+    ratings,
     name,
     originalPrice,
     discountPrice,
@@ -60,11 +60,11 @@ export default function ProductDetailMain({ productDetail }: Props) {
                 className={`bg-no-repeat h-[24px] block bg-icons absolute t-0 l-0`}
                 style={{
                   backgroundPosition: '-174px -146px',
-                  width: `${translateStarScoreToPercent(starScore)}%`,
+                  width: `${translateStarScoreToPercent(ratings)}%`,
                 }}
               ></span>
             </div>
-            <p className='pr-2 mr-2 border-r border-gray-300'>{starScore}점</p>
+            <p className='pr-2 mr-2 border-r border-gray-300'>{ratings}점</p>
             <a
               href='#'
               className='border-b border-gray-300 text-gray-300 leading-5'

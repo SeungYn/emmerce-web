@@ -22,41 +22,8 @@ export default function MyNavigation() {
                 주문/배송조회
               </Link>
             </li>
-            <li>
-              <Link href='#' className={`${LinkStyle} `}>
-                주문/배송조회
-              </Link>
-            </li>
-            <li>
-              <Link href='#' className={`${LinkStyle} `}>
-                주문/배송조회
-              </Link>
-            </li>
           </ul>
           <div className='h-[1px] bg-gray-300 mx-6'></div>
-        </div>
-
-        <div>
-          <div className='px-6 pt-4 text-lg'>
-            <strong>나의 쇼핑정보</strong>
-          </div>
-          <ul className='pb-4 text-gray-500'>
-            <li>
-              <Link href='#' className={`${LinkStyle} `}>
-                주문/배송조회
-              </Link>
-            </li>
-            <li>
-              <Link href='#' className={`${LinkStyle} `}>
-                주문/배송조회
-              </Link>
-            </li>
-            <li>
-              <Link href='#' className={`${LinkStyle} `}>
-                주문/배송조회
-              </Link>
-            </li>
-          </ul>
         </div>
       </div>
     </nav>

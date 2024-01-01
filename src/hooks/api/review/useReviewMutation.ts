@@ -20,7 +20,7 @@ export default function useReviewMutation() {
       console.log('reviewForm', reviewForm);
       const data = {
         reviewReq: {
-          ...pick(reviewForm, ['title', 'starScore', 'description']),
+          ...pick(reviewForm, ['title', 'ratings', 'description']),
           orderId,
           productId,
         },

@@ -10,6 +10,7 @@ export default function useReviewList(
   const res = useSuspenseQuery({
     queryKey: ['reviews', productId, page],
     queryFn: () => service.review.getReviews(productId, page, size),
+    staleTime: 30 * 60 * 1000,
   });
 
   return { ...res };

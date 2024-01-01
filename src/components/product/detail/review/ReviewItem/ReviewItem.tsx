@@ -11,7 +11,7 @@ export default function ReviewItem({ review }: Props) {
     reviewId,
     title,
     description,
-    starScore,
+    ratings,
     reviewImgList,
     writer,
     writeDate,
@@ -33,20 +33,20 @@ export default function ReviewItem({ review }: Props) {
             className={` bg-no-repeat h-[30px] block bg-icons absolute t-0 l-0`}
             style={{
               backgroundPosition: '-331px -68px',
-              width: `${translateStarScoreToPercent(starScore)}%`,
+              width: `${translateStarScoreToPercent(ratings)}%`,
             }}
           ></span>
         </div>
 
         <p className='text-gray-400 pt-4'>{title}</p>
         <p className='whitespace-pre-line pt-4'>{description}</p>
-        <ul>
+        <ul className='flex flex-wrap'>
           {/* {reviewImgList && (
             <Image src={'/assets/slide/1.png'} alt={'상품이미지'} />
           )} */}
           {reviewImgList.map((img) => (
             <li key={img}>
-              <img src={img} width={100} height={100} alt={'상품이미지'} />
+              <img src={img} width={200} height={200} alt={'상품이미지'} />
             </li>
           ))}
         </ul>

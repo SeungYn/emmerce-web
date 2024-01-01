@@ -1,5 +1,11 @@
 import { GetReviewsRes, Review } from '@/service/types/review';
 import ReviewItem from '../ReviewItem/ReviewItem';
+import {
+  MdKeyboardArrowLeft,
+  MdKeyboardArrowRight,
+  MdKeyboardDoubleArrowLeft,
+  MdKeyboardDoubleArrowRight,
+} from 'react-icons/md';
 
 type Props = {
   currentPage: number;
@@ -29,35 +35,46 @@ export default function InfoReview({
       <h3 className='text-lg font-normal border-b border-black py-6'>
         리뷰({totalElements})
       </h3>
-      <ul className='[&>*]:border-b border-gray-300'>
+      <ul className='[&>*]:border-b border-gray-300 '>
         {reviews.map((r) => (
           <ReviewItem key={r.reviewId} review={r} />
         ))}
       </ul>
       <div className='flex justify-center mt-4'>
-        <ul className='flex gap-4'>
+        <ul className='flex gap-3 items-center [&>li]:flex'>
           {!first && (
             <>
               <li>
-                <button>이이전</button>
+                <button onClick={() => handlePageMove(1)}>
+                  <MdKeyboardDoubleArrowLeft />
+                </button>
               </li>
               <li>
-                <button>이전</button>
+                <button onClick={() => handlePageMove(currentPage - 1)}>
+                  <MdKeyboardArrowLeft />
+                </button>
               </li>
             </>
           )}
           {pageArr.map((v) => (
-            <li key={v}>
+            <li
+              key={v}
+              className={`${v === pageNumber ? 'text-black' : 'text-gray-400'}`}
+            >
               <button onClick={() => handlePageMove(v)}>{v}</button>
             </li>
           ))}
           {!last && (
             <>
               <li>
-                <button>다음</button>
+                <button onClick={() => handlePageMove(currentPage + 1)}>
+                  <MdKeyboardArrowRight />
+                </button>
               </li>
               <li>
-                <button>다다음</button>
+                <button onClick={() => handlePageMove(totalPages)}>
+                  <MdKeyboardDoubleArrowRight />
+                </button>
               </li>
             </>
           )}

@@ -2,6 +2,7 @@
 
 import { CheckCartItem } from '@/service/types/cart';
 import CartTableItem from '../item/CartTableItem/CartTableItem';
+import CartTableHeaderBtn from './CartTableHeaderBtn';
 
 type Props = {
   cartItemList: CheckCartItem[];
@@ -29,15 +30,15 @@ export default function CartTable({
   return (
     <div>
       <div className='flex text-base gap-2 mb-3 '>
-        <button className='border p-1 px-3' onClick={handleCheckAllCartItems}>
+        <CartTableHeaderBtn onClick={handleCheckAllCartItems}>
           상품 전체선택
-        </button>
-        <button className='border p-1 px-3' onClick={handleUnCheckAllCartItems}>
+        </CartTableHeaderBtn>
+        <CartTableHeaderBtn onClick={handleUnCheckAllCartItems}>
           상품 선택해지
-        </button>
-        <button className='border p-1 px-3' onClick={handleClearCart}>
+        </CartTableHeaderBtn>
+        <CartTableHeaderBtn onClick={handleClearCart}>
           선택상품 삭제
-        </button>
+        </CartTableHeaderBtn>
       </div>
 
       <div className='text-lg p-2 bg-zinc-600 text-white'>
@@ -115,7 +116,7 @@ export default function CartTable({
             배송비 <span className='text-zinc-600 font-bold'>0원</span>
           </li>
           <li>=</li>
-          <li className='text-red-600 flex items-center  '>
+          <li className='text-red-600 flex items-center gap-2 '>
             총 결제금액{' '}
             <span className='font-bold text-3xl'>
               {cartItemList.reduce(

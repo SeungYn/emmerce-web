@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        skeletonBG: 'rgb(209, 213, 219, 1)',
+      },
       backgroundImage: {
         icons: "url('/assets/icons/eland-icons.png')",
         paymentIcons: "url('/assets/icons/payment-icons.png')",
