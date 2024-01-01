@@ -1,6 +1,6 @@
 'use client';
 
-import CartTable from '@/components/cart/CartTable/CartTable';
+import CartTable from '@/components/cart/cart-table/CartTable';
 import CustomGlobalLoadingLink from '@/components/common/customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
 import SSRSuspense from '@/components/common/util/SSRSuspense';
 import {
@@ -15,10 +15,11 @@ import {
 } from '@/hooks/api/cart/useCart';
 import { useRouter } from 'next/navigation';
 import { BsCart3 } from 'react-icons/bs';
+import CartTableSkeletonContainer from './CartTableSkeletonContainer';
 
 export default function CartTableContainer() {
   return (
-    <SSRSuspense fallback={<div>로로딩딩중중</div>}>
+    <SSRSuspense fallback={<CartTableSkeletonContainer />}>
       <CartTableSuspense />
     </SSRSuspense>
   );
