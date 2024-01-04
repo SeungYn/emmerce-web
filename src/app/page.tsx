@@ -1,6 +1,6 @@
 import MaxXLContainer from '@/components/common/container/MaxXLContainer';
 import GlobalFooter from '@/components/common/footer/GlobalFooter/GlobalFooter';
-import BrandIconList from '@/components/home/BrandIconList/BrandIconList';
+import BrandIconList from '@/components/home/brand-icons/BrandIconList/BrandIconList';
 import CustomItems from '@/components/home/content/CustomItems/CustomItems';
 import HotDeal from '@/components/home/content/HotDeal/HotDeal';
 import RankingItems from '@/components/home/content/RankingItems/RankingItems';
