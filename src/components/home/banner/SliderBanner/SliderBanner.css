@@ -1,5 +1,5 @@
 .swiper {
-  width: 1080px;
+  width: 1140px;
   height: 100%;
 }
 
@@ -9,19 +9,13 @@
   background: #fff;
   border-radius: 1rem;
   overflow: hidden;
-  width: 350px;
-  height: 448px;
+  width: 370px;
+  height: 450px;
 
   /* Center slide text vertically */
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
-.swiper-slide img {
-  filter: brightness(0.9);
-}
-
-.sss {
-  color: red;
-}
+/* swiper에 width를 설정하면 내용물은 자동으로 크기가 커짐 3개를 맞춰야해서 */
