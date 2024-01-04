@@ -78,10 +78,7 @@ export default function MainItem({
       </div>
       {/* 유저 정보로 좋아요 여부 필요 */}
       {handleLike && (
-        <button
-          className='absolute right-2 top-2 z-10'
-          onClick={() => console.log('button')}
-        >
+        <button className='absolute right-2 top-2 z-10'>
           <HeartIcon className='w-6 h-6' />
         </button>
       )}

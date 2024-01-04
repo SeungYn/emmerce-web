@@ -6,7 +6,6 @@ import NavbarForm from '../NavbarForm/NavbarForm';
 import { useAuthFormContext } from '@/context/auth/AuthFormContext';
 import { useUserContext } from '@/context/auth/UserContext';
 import useAuth from '@/hooks/api/auth/useAuth';
-import CategoryContainer from '@/container/common/category/CategoryContainer';
 import { CategoryList } from '@/service/types/category';
 
 type Props = {

@@ -7,7 +7,6 @@ export default function IframeTestBtn() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
-    console.log('iframe 등장');
     const testCallback = () => {
       alert('test callback');
     };
@@ -30,7 +29,6 @@ export default function IframeTestBtn() {
       <iframe ref={iframeRef} src='/iframetest/iframe'></iframe>
       <button
         onClick={() => {
-          console.log('click');
           iframeRef.current?.contentWindow?.postMessage({ d: 123 });
         }}
       >
