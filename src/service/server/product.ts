@@ -145,6 +145,9 @@ export class ProductServerService {
         headers: {
           'Content-Type': 'application/json',
         },
+        next: {
+          revalidate: 0,
+        },
       }
     );
 
