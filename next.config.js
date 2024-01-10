@@ -14,6 +14,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'emmerce-bucket.s3.ap-northeast-2.amazonaws.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'item.elandrs.com',
+      },
     ],
   },
 };
