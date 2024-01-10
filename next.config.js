@@ -16,7 +16,15 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'item.elandrs.com',
+        hostname: '*.elandrs.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'blskorea.hgodo.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.coupangcdn.com',
       },
     ],
   },
