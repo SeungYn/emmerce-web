@@ -148,7 +148,6 @@ export default function SliderBanner() {
           <button
             onClick={() => {
               swiperInstance?.autoplay.stop();
-              console.log('direct pause');
             }}
           >
             <IoPauseOutline size={20} />

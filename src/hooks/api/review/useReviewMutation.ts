@@ -17,7 +17,6 @@ export default function useReviewMutation() {
       productId: number;
       cb: () => void;
     }) => {
-      console.log('reviewForm', reviewForm);
       const data = {
         reviewReq: {
           ...pick(reviewForm, ['title', 'ratings', 'description']),

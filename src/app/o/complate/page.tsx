@@ -16,7 +16,7 @@ export default async function page({
   const { orderId } = searchParams;
   const accessToken = cookieStore.get('access-token');
   const refershToken = cookieStore.get('refresh-token');
-  console.log(accessToken, refershToken);
+
   if (!accessToken || !refershToken) {
     notFound();
   }
