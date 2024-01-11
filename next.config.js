@@ -20,6 +20,22 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: '*.elandmall.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.esmplus.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.partnerbk.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'fit6.cre.ma',
+      },
+      {
+        protocol: 'https',
         hostname: 'blskorea.hgodo.com',
       },
       {
