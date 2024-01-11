@@ -30,12 +30,18 @@ const UserContext = createContext<UserContext>({
 
 export default function UserContextProvider({ children }: PropsWithChildren) {
   const [userInfo, setUserInfo] = useState<User | null>(() => {
-    if (typeof window !== 'undefined')
-      return {
-        token:
-          localStorage.getItem('access-token') ||
-          browserStorage.cookie.getCookie('access-token'),
-      };
+    if (typeof window !== 'undefined') {
+      const token =
+        localStorage.getItem('access-token') ||
+        browserStorage.cookie.getCookie('access-token');
+      return token
+        ? {
+            token:
+              localStorage.getItem('access-token') ||
+              browserStorage.cookie.getCookie('access-token'),
+          }
+        : null;
+    }
     return null;
   });
 
