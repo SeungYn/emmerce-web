@@ -38,7 +38,7 @@ export default function MainItemLink({
 
   return (
     <CustomGlobalLoadingLink
-      className='relative cursor-pointer'
+      className='relative cursor-pointer inline-block'
       href={targetLink}
     >
       <div>
@@ -47,7 +47,7 @@ export default function MainItemLink({
           style={{ width, height }}
         >
           {rank && (
-            <div className='absolute p-1 w-6 h-6 bg-black text-white flex justify-center items-center text-xs  rounded-br-lg'>
+            <div className='absolute p-1 w-6 h-6 bg-black text-white flex justify-center items-center text-xs  rounded-br-lg z-50'>
               {rank}
             </div>
           )}
