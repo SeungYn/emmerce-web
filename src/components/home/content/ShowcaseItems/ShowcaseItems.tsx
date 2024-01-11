@@ -1,7 +1,6 @@
 'use client';
 import { Dispatch, SetStateAction, useState } from 'react';
 import Header from '../Header/Header';
-import MainItem from '@/components/common/listitem/MainItem/MainItem';
 import { RecommendCategory } from '@/service/types/category';
 import { ProductList } from '@/service/types/product';
 import MainItemLink from '@/components/common/listitem/MainItemLink/MainItemLink';
