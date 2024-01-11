@@ -19,7 +19,6 @@ export default class PaymentService {
   async approve({ orderId, pg_token }: PaymentApproveReq) {
     const url = `/payment/success?orderId=${orderId}&pg_token=${pg_token}`;
     const { data } = await this.axios.get<PaymentApproveRes>(url);
-
     return data;
   }
 

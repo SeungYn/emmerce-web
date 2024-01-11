@@ -36,6 +36,7 @@ export default function KakaoPaymentPopUp() {
           cartClearMutate.mutate();
         }
         if (e.data.approveResult === 'FAIL') {
+          alert('결제를 실패하였습니다. 다시 시도해주세요.');
           reset();
         }
       }

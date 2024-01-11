@@ -23,7 +23,6 @@ export default function ProductListPagination({
 }: Props) {
   const pathname = usePathname();
   const searchParam = new NextURLSearchParams(useSearchParams());
-  console.log(pageNumber, totalPages, totalElements, first, last);
   const currentBlock = Math.floor(pageNumber / PAGES_PER_BLOCK) + 1;
   const pageArr = Array.from(
     {

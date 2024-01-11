@@ -43,7 +43,7 @@ export function usePaymentApproveMutate(
       setResult({ isLoading: false, result: 'SUCCESS' });
     },
     onError: () => {
-      setResult({ isLoading: false, result: 'FAIL' });
+      setResult({ isLoading: true, result: 'FAIL' });
     },
   });
 

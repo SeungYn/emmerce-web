@@ -13,7 +13,7 @@ export default function CustomGlobalLoadingLink(props: Props) {
       {...props}
       onClick={(e) => {
         props.onClick?.(e);
-        handleStartLoading(props.href as string);
+        handleStartLoading(props.href.toString());
       }}
     />
   );
