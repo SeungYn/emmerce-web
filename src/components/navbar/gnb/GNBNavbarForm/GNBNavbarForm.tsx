@@ -30,10 +30,6 @@ export default function GNBNavbarForm() {
     router.push('/search?keyword=' + search);
   };
 
-  useEffect(() => {
-    alert('현재 페이지 재조정 중입니다. 불편을 드려셔 죄송합니다...');
-  }, []);
-
   return (
     <form
       ref={ref}

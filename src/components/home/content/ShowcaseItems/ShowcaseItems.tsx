@@ -1,9 +1,9 @@
 'use client';
 import { Dispatch, SetStateAction, useState } from 'react';
 import Header from '../Header/Header';
-import MainItem from '@/components/common/listitem/MainItem/MainItem';
 import { RecommendCategory } from '@/service/types/category';
 import { ProductList } from '@/service/types/product';
+import MainItemLink from '@/components/common/listitem/MainItemLink/MainItemLink';
 
 type Props = {
   categoryList: RecommendCategory[];
@@ -40,8 +40,16 @@ export default function ShowcaseItems({
         </nav>
         <ul className='w-full flex flex-shrink-0 flex-wrap justify-between mt-4'>
           {recommendProductList.content.map((item) => (
-            <li key={item.productId} className='[&:nth-child(n+6)]:mt-10'>
-              <MainItem item={item} handleMovePage={handleMovePage} />
+            <li
+              key={item.productId}
+              className='[&:nth-child(n+6)]:mt-10 w-[256px] h-[340px] px-[5px]'
+            >
+              <MainItemLink
+                item={item}
+                targetLink={`/detail/${item.productId}`}
+                width={246}
+                height={240}
+              />
             </li>
           ))}
         </ul>

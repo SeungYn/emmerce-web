@@ -23,7 +23,7 @@ export default function ProductListPagination({
 }: Props) {
   const pathname = usePathname();
   const searchParam = new NextURLSearchParams(useSearchParams());
-
+  console.log(pageNumber, totalPages, totalElements, first, last);
   const currentBlock = Math.floor(pageNumber / PAGES_PER_BLOCK) + 1;
   const pageArr = Array.from(
     {
@@ -63,7 +63,14 @@ export default function ProductListPagination({
           key={v}
           className={`${v === pageNumber ? 'text-black' : 'text-gray-400'}`}
         >
-          <Link href=''>{v}</Link>
+          <Link
+            href={`${pathname}?${searchParam.setQueryString(
+              'page',
+              v.toString()
+            )}`}
+          >
+            {v}
+          </Link>
         </li>
       ))}
       {!last && (

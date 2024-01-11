@@ -1,5 +1,7 @@
 import MaxXLContainer from '@/components/common/container/MaxXLContainer';
+import MainItemListWrapper from '@/components/common/list-wrapper/MainItemListWrapper/MainItemListWrapper';
 import MainItemLink from '@/components/common/listitem/MainItemLink/MainItemLink';
+import MainItemWrapper from '@/components/common/listitem/MainItemWrapper/MainItemWrapper';
 import Location from '@/components/common/location/Location';
 import ProductListPagination from '@/components/product/common/ProductListPagination/ProductListPagination';
 import FilterForm from '@/components/product/filter/FilterForm/FilterForm';
@@ -60,21 +62,31 @@ export default async function page({
         <Location />
       </MaxXLContainer>
       <MaxXLContainer className='mt-4'>
-        <div className='flex gap-10'>
-          <FilterForm productList={data.content} />
-          <div className='w-full'>
+        <div className='flex justify-between gap-4'>
+          <div className='basis-[220px]'>
+            <FilterForm productList={data.content} />
+          </div>
+          <div className='basis-[1044px]'>
             <ListManipulation />
-            <div className='mt-4 mx-3'>
-              <ul className='w-full flex flex-shrink-0 flex-wrap mt-4 gap-4 '>
+            <div className='mt-4 pl-[2px]'>
+              <MainItemListWrapper>
                 {filteredList.map((item, i) => (
-                  <li key={item.productId} className='h-[350px]'>
+                  <MainItemWrapper
+                    key={item.productId}
+                    width={260}
+                    height={400}
+                    pr={5}
+                    pl={5}
+                  >
                     <MainItemLink
                       item={item}
                       targetLink={`/detail/${item.productId}`}
+                      width={250}
+                      height={240}
                     />
-                  </li>
+                  </MainItemWrapper>
                 ))}
-              </ul>
+              </MainItemListWrapper>
             </div>
             <div className='flex justify-center mt-4'>
               <ProductListPagination
