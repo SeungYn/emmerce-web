@@ -1,7 +1,6 @@
 import { cookies } from 'next/headers';
 import CartHeader from '@/components/cart/common/CartHeader/CartHeader';
 import OrderHistoryListItem from '@/components/order/OrderHistoryListItem/OrderHistoryListItem';
-import { orderItem } from '@/util/mock/data/item';
 import CustomGlobalLoadingLink from '@/components/common/customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
 import { serverService } from '@/service/server';
 import { notFound } from 'next/navigation';
@@ -17,7 +16,7 @@ export default async function page({
   const { orderId } = searchParams;
   const accessToken = cookieStore.get('access-token');
   const refershToken = cookieStore.get('refresh-token');
-
+  console.log(accessToken, refershToken);
   if (!accessToken || !refershToken) {
     notFound();
   }
@@ -94,7 +93,7 @@ export default async function page({
           <li className='text-red-600 flex items-center  '>
             총 결제금액{' '}
             <span className='font-bold text-3xl'>
-              {orderItem.orderProductRespList.reduce(
+              {data.orderProductRespList.reduce(
                 (p, c) => p + c.discountPrice * c.quantity,
                 0
               )}
