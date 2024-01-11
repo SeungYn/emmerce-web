@@ -1,11 +1,13 @@
+'use client';
+
 import Image from 'next/image';
 import TopBottomPaddingBox from '../../common/TopBottomPaddingBox/TopBottomPaddingBox';
 import { ProductDetail } from '@/service/types/product';
-import Link from 'next/link';
 import { translateStarScoreToPercent } from '@/util/lib/util';
 import CartBtnAndModal from '@/components/cart/CartBtnAndModal/CartBtnAndModal';
 import CartMoalContextProvider from '@/context/cart/CartModalContext';
 import CustomGlobalLoadingLink from '@/components/common/customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
+import AuthGuardRunterBtn from '@/components/common/button/auth-guard/AuthGuardRouterBtn/AuthGuardRouterBtn';
 
 type Props = {
   productDetail: ProductDetail;
@@ -150,12 +152,12 @@ export default function ProductDetailMain({ productDetail }: Props) {
             <CartMoalContextProvider>
               <CartBtnAndModal productId={productId} />
             </CartMoalContextProvider>
-            <CustomGlobalLoadingLink
-              href={`/o/order/${productId}`}
-              className='basis-[50%]  h-[53px] border border-black font-medium text-xl text-white bg-black flex justify-center items-center'
+            <AuthGuardRunterBtn
+              targetRouterHref={`/o/order/${productId}`}
+              className='basis-[50%] h-[53px] border border-black font-medium text-xl text-white bg-black flex justify-center items-center'
             >
               바로구매
-            </CustomGlobalLoadingLink>
+            </AuthGuardRunterBtn>
           </div>
         </div>
       </div>
