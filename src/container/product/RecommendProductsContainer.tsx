@@ -2,6 +2,7 @@
 
 import SSRSuspense from '@/components/common/util/SSRSuspense';
 import ShowcaseItems from '@/components/home/content/ShowcaseItems/ShowcaseItems';
+import CommonMainSkeleton from '@/components/home/content/skeleton/CommonMainSkeleton';
 import useRecommendProducts from '@/hooks/api/product/useRecommendProducts';
 import useRecommendProductsPrefetch from '@/hooks/api/product/useRecommendProductsPrefetch';
 import { useRouter } from 'next/navigation';
@@ -42,7 +43,7 @@ export default function RecommendProductsContainer() {
   useRecommendProductsPrefetch(categories[3].categoryId);
 
   return (
-    <SSRSuspense fallback={<div>로딩중</div>}>
+    <SSRSuspense fallback={<CommonMainSkeleton />}>
       <RecommendProductsSuspense
         categoryList={categories}
         currentCategory={currentCategory}
