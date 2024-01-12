@@ -51,14 +51,7 @@ export default function MainItemLink({
               {rank}
             </div>
           )}
-          <Image
-            src={titleImg}
-            // width={width ? width : 240}
-            // height={height ? height : 240}
-            // style={{ width: '240px', height: '240px' }}
-            alt='상품 이미지'
-            fill
-          />
+          <Image src={titleImg} alt='상품 이미지' fill sizes='200px' />
         </div>
         <div className='flex flex-col justify-center'>
           <h4 className='text-base font-bold'>{brand}</h4>

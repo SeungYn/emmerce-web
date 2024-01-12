@@ -72,6 +72,7 @@ export default function SliderBanner() {
               text: '간편식&밀키트',
             }}
             className='relative w-[370px] h-[450px]'
+            priority
           />
         </SwiperSlide>
         <SwiperSlide style={{ marginRight: '15px' }}>
@@ -83,12 +84,14 @@ export default function SliderBanner() {
               text: '몰리엘리',
             }}
             className='relative w-[370px] h-[450px]'
+            priority
           />
         </SwiperSlide>
         <SwiperSlide style={{ marginRight: '15px' }}>
           <SliderBannerItem
             src={'/assets/slide/banner-img3.jpeg'}
             className='relative w-[370px] h-[450px]'
+            priority
           />
         </SwiperSlide>
         <SwiperSlide style={{ marginRight: '15px' }}>

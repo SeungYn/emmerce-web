@@ -16,7 +16,7 @@ export function MiniItemWrapper({
   className,
 }: PropsWithChildren<MiniItemWrapperProps>) {
   return (
-    <li className={`${className}`} style={{ width, height }}>
+    <li className={`${className || ''}`} style={{ width, height }}>
       {children}
     </li>
   );
@@ -44,7 +44,7 @@ export default function MiniItem({ product }: MiniItemProps) {
         {/* after없이 border을 지정하면 미세 틈이 생기는데 after로 border을 해주면 커버 가능 */}
         <div className='relative shrink-0 grow-0 rounded-xl w-[110px] h-[110px] overflow-hidden after:content-[""] after:absolute after:inset-0 after:border after:border-gray-300 after:rounded-xl'>
           {/* 이미지 태그가 */}
-          <Image src={titleImg} fill alt='상품 이미지' />
+          <Image src={titleImg} fill alt='상품 이미지' sizes='130px' />
         </div>
 
         <div className='flex flex-col justify-center grow gap-1'>
