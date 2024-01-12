@@ -4,16 +4,25 @@ type Props = {
   className: string;
   src: string;
   description?: { title1: string; title2: string; text: string };
+  priority?: boolean;
 };
 
 export default function SliderBannerItem({
   className,
   src,
   description,
+  priority = false,
 }: Props) {
   return (
     <div className={className}>
-      <Image src={src} className='brightness-75' fill alt='배너 이미지' />
+      <Image
+        src={src}
+        className='brightness-75'
+        fill
+        alt='배너 이미지'
+        priority={priority}
+        sizes='370px'
+      />
       {description && (
         <div className='text-white z-[99] absolute flex flex-col justify-end h-full w-full items-start px-8 py-10 gap-6'>
           <strong className='block text-3xl font-medium leading-8 text-left'>
