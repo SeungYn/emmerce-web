@@ -101,7 +101,7 @@ export class ProductServerService {
   }) {
     const query = `?${keyword ? `keyword=${keyword}&` : ''}${
       brand ? `brand=${brand}&` : ''
-    }${limit ? `limit=${limit}&` : ''}${
+    }${limit ? `size=${limit}&` : ''}${
       maxPrice ? `maxPrice=${maxPrice}&` : ''
     }${minPrice ? `minPrice=${minPrice}&` : ''}${page ? `page=${page}&` : ''}`;
 
@@ -134,7 +134,7 @@ export class ProductServerService {
   }) {
     const query = `?${keyword ? `keyword=${keyword}&` : ''}${
       brand ? `brand=${brand}&` : ''
-    }${limit ? `limit=${limit}&` : ''}${
+    }${limit ? `size=${limit}&` : ''}${
       maxPrice ? `maxPrice=${maxPrice}&` : ''
     }${minPrice ? `minPrice=${minPrice}&` : ''}${page ? `page=${page}&` : ''}`;
 
