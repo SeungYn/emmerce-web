@@ -10,19 +10,6 @@ import { serverService } from '@/service/server';
 import { sortProductList } from '@/util/lib/product';
 import { Metadata } from 'next';
 
-type Props = {
-  params: { id: number };
-  searchParams: {
-    keyword: string;
-    brand: string;
-    limit: string;
-    minPrice: string;
-    maxPrice: string;
-    page: string;
-    sortkey: string;
-  };
-};
-
 export async function generateMetadata({
   params: { id },
 }: {
@@ -39,6 +26,19 @@ export async function generateMetadata({
     description: `${categoryName} 관련 상품 정보를 확인하세요.`,
   };
 }
+
+type Props = {
+  params: { id: number };
+  searchParams: {
+    keyword: string;
+    brand: string;
+    limit: string;
+    minPrice: string;
+    maxPrice: string;
+    page: string;
+    sortkey: string;
+  };
+};
 
 export default async function page({
   params: { id },
@@ -58,48 +58,36 @@ export default async function page({
 
   return (
     <>
-      <MaxXLContainer className='mt-4'>
-        <Location />
-      </MaxXLContainer>
-      <MaxXLContainer className='mt-4'>
-        <div className='flex justify-between gap-4'>
-          <div className='basis-[220px]'>
-            <FilterForm productList={data.content} />
-          </div>
-          <div className='basis-[1044px]'>
-            <ListManipulation />
-            <div className='mt-4 pl-[2px]'>
-              <MainItemListWrapper>
-                {filteredList.map((item, i) => (
-                  <MainItemWrapper
-                    key={item.productId}
-                    width={260}
-                    height={400}
-                    pr={5}
-                    pl={5}
-                  >
-                    <MainItemLink
-                      item={item}
-                      targetLink={`/detail/${item.productId}`}
-                      width={250}
-                      height={240}
-                    />
-                  </MainItemWrapper>
-                ))}
-              </MainItemListWrapper>
-            </div>
-            <div className='flex justify-center mt-4'>
-              <ProductListPagination
-                pageNumber={data.pageNumber}
-                totalPages={data.totalPages}
-                first={data.first}
-                last={data.last}
-                totalElements={data.totalElements}
+      <ListManipulation />
+      <div className='mt-4 pl-[2px]'>
+        <MainItemListWrapper>
+          {filteredList.map((item, i) => (
+            <MainItemWrapper
+              key={item.productId}
+              width={260}
+              height={400}
+              pr={5}
+              pl={5}
+            >
+              <MainItemLink
+                item={item}
+                targetLink={`/detail/${item.productId}`}
+                width={250}
+                height={240}
               />
-            </div>
-          </div>
-        </div>
-      </MaxXLContainer>
+            </MainItemWrapper>
+          ))}
+        </MainItemListWrapper>
+      </div>
+      <div className='flex justify-center mt-4'>
+        <ProductListPagination
+          pageNumber={data.pageNumber}
+          totalPages={data.totalPages}
+          first={data.first}
+          last={data.last}
+          totalElements={data.totalElements}
+        />
+      </div>
     </>
   );
 }
