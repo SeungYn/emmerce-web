@@ -1,10 +1,7 @@
 import MaxXLContainer from '@/components/common/container/MaxXLContainer';
-import GlobalFooter from '@/components/common/footer/GlobalFooter/GlobalFooter';
 import MainItemListWrapper from '@/components/common/list-wrapper/MainItemListWrapper/MainItemListWrapper';
 import MainItemLink from '@/components/common/listitem/MainItemLink/MainItemLink';
 import MainItemWrapper from '@/components/common/listitem/MainItemWrapper/MainItemWrapper';
-import Location from '@/components/common/location/Location';
-import GNB from '@/components/navbar/gnb/GNB/GNB';
 import ProductListPagination from '@/components/product/common/ProductListPagination/ProductListPagination';
 import FilterForm from '@/components/product/filter/FilterForm/FilterForm';
 import ListManipulation from '@/components/product/filter/ListManipulation/ListManipulation';
@@ -38,6 +35,9 @@ export async function generateMetadata({
 export default async function page({
   searchParams: { keyword, brand, limit, minPrice, maxPrice, page, sortkey },
 }: Props) {
+  const brandData = await serverService.product.getProductListByKeyword({
+    keyword,
+  });
   const data = await serverService.product.getProductListByKeyword({
     keyword,
     brand,
@@ -46,17 +46,11 @@ export default async function page({
     maxPrice,
     page,
   });
-  const categoryList = await serverService.category.getCategoryList();
+
   const filteredList = sortProductList(sortkey, [...data.content]);
 
   return (
     <>
-      {/* GNB */}
-      <GNB categoryList={categoryList} />
-      {/* location */}
-      <MaxXLContainer className='mt-4'>
-        <Location />
-      </MaxXLContainer>
       {/* search mention */}
       <MaxXLContainer className='mt-6'>
         <h2 className='text-xl'>
@@ -68,7 +62,7 @@ export default async function page({
       <MaxXLContainer className='mt-4'>
         <div className='flex justify-between gap-4'>
           <div className='basis-[220px]'>
-            <FilterForm keyword={keyword} productList={data.content} />
+            <FilterForm keyword={keyword} productList={brandData.content} />
           </div>
           <div className='basis-[1044px]'>
             <ListManipulation />
@@ -77,7 +71,7 @@ export default async function page({
                 {filteredList.map((item, i) => (
                   <MainItemWrapper
                     key={item.productId}
-                    width={265}
+                    width={260}
                     height={400}
                     pr={5}
                     pl={5}
