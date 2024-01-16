@@ -58,7 +58,7 @@ function Body({ orderProductRespList, orderDate, orderId }: BodyProps) {
             className='grid border-b border-gray-300'
             style={{
               gridTemplateColumns: '5fr  2fr 1fr 2fr 2fr 2fr',
-              gridAutoRows: '133px',
+              gridAutoRows: 'minmax(133px, 133px)',
               alignItems: 'center',
               justifyItems: 'center',
             }}
@@ -75,7 +75,7 @@ function Body({ orderProductRespList, orderDate, orderId }: BodyProps) {
               />
               <div className='flex-grow'>
                 <p className='text-gray-500'>{brand}</p>
-                <p className='font-blod'>{name}</p>
+                <p className='font-blod line-clamp-2 leading-4'>{name}</p>
                 <p>옵션</p>
               </div>
             </td>

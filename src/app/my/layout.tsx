@@ -18,14 +18,11 @@ export default async function layout({
 
   return (
     <>
-      {/* 다음 주소 api */}
-
       <GNB categoryList={categoryList} />
-
       <MaxXLContainer className='min-h-[70vh]'>
         <section className='flex gap-4 mt-8'>
           <MyNavigation />
-          <section className='flex-shrink-0 flex-grow'>{children}</section>
+          <section className='grow'>{children}</section>
         </section>
       </MaxXLContainer>
       <GlobalFooter />
