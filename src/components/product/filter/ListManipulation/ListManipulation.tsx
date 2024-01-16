@@ -66,12 +66,9 @@ export default function ListManipulation() {
         </li>
       </ul>
       <select onChange={onChange}>
-        <option value='10'>10개씩보기</option>
-        <option value='20'>20개씩보기</option>
-        <option value='30'>30개씩보기</option>
         <option value='40'>40개씩보기</option>
-        <option value='50'>50개씩보기</option>
         <option value='60'>60개씩보기</option>
+        <option value='80'>80개씩보기</option>
       </select>
     </div>
   );

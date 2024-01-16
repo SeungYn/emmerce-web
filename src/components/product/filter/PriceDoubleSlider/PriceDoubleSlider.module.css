@@ -1,0 +1,19 @@
+.rangeInput {
+  position: absolute;
+  /* transform: translateX(-7px) translateY(-5px); */
+  pointer-events: none;
+  appearance: none;
+  width: 100%;
+  z-index: 10;
+  opacity: 0;
+}
+
+.rangeInput::-webkit-slider-thumb {
+  pointer-events: all;
+  width: 16px;
+  height: 16px;
+  background-color: red;
+  cursor: pointer;
+  transform: scale(1.5);
+  appearance: none;
+}

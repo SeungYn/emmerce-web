@@ -15,7 +15,7 @@ export function combineCateNameAndId({
 
 // productlist를 받아 브랜드 명의 배열을 반환하는 함수
 export function filterBrandList(productList: Product[]) {
-  const set = new Set();
+  const set = new Set<string>();
   productList?.map((v) => set.add(v.brand));
 
   return set.values();
