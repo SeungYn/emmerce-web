@@ -19,6 +19,7 @@ const INITIAL_MAGINIFIER_COORDNATE = {
   height: 200,
   scale: 1,
 };
+
 export default function DetailZoom({ titleImg }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const magnifierRef = useRef<HTMLDivElement>(null);
@@ -113,6 +114,7 @@ export default function DetailZoom({ titleImg }: Props) {
       <div
         className={`absolute  left-[660px] w-[640px] h-[640px] top-0 `}
         style={{
+          display: isEnter ? 'block' : 'none',
           backgroundImage: `url(${titleImg})`,
           backgroundSize: `${
             INITIAL_IMAGE_SIZE.width * ratioMagnifierZoomTarget
