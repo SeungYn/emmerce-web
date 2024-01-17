@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 
 type Props = {
   titleImg: string;
+  imgSize?: number;
 };
 
 const INITIAL_IMAGE_SIZE = { width: 640, height: 640 };
@@ -20,7 +21,7 @@ const INITIAL_MAGINIFIER_COORDNATE = {
   scale: 1,
 };
 
-export default function DetailZoom({ titleImg }: Props) {
+export default function DetailZoom({ titleImg, imgSize = 640 }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const magnifierRef = useRef<HTMLDivElement>(null);
   const [isEnter, setIsEnter] = useState(false);
@@ -38,12 +39,11 @@ export default function DetailZoom({ titleImg }: Props) {
   // container 최초 좌표
   useEffect(() => {
     if (containerRef.current) {
-      const { x, y } = containerRef.current.getBoundingClientRect();
-      setContainerCoordnate({ left: x, top: y });
+      setContainerCoordnate({
+        left: containerRef.current.offsetLeft,
+        top: containerRef.current.offsetTop,
+      });
     }
-    // document.addEventListener('mousemove', (e) => {
-    //   console.log(e.clientY);
-    // });
   }, []);
 
   useEffect(() => {
@@ -104,10 +104,8 @@ export default function DetailZoom({ titleImg }: Props) {
         if (magnifierRef.current) {
           // const { x: cx, y: cy } = magnifierRef.current.getBoundingClientRect();
           //console.log(containerCoordnate.top, e.clientY);
-          x =
-            e.clientX - containerCoordnate.left - maginifierCoordnate.width / 2;
-          y =
-            e.clientY - containerCoordnate.top - maginifierCoordnate.width / 2;
+          x = e.pageX - containerCoordnate.left - maginifierCoordnate.width / 2;
+          y = e.pageY - containerCoordnate.top - maginifierCoordnate.width / 2;
 
           if (x < 0) x = 0;
           if (y < 0) y = 0;
@@ -123,14 +121,17 @@ export default function DetailZoom({ titleImg }: Props) {
         src={titleImg}
         width={INITIAL_IMAGE_SIZE.width}
         height={INITIAL_IMAGE_SIZE.height}
-        style={{ width: '640px', height: '640px' }}
-        sizes='640px'
+        style={{ width: `${imgSize}px`, height: `${imgSize}px` }}
+        sizes={`${imgSize}px`}
         alt='아이템 이미지'
       />
       {/* 확대 이미지 */}
       <div
-        className={`absolute  left-[660px] w-[640px] h-[640px] top-0 `}
+        className={`absolute   top-0 `}
         style={{
+          left: `${imgSize + 20}px`,
+          width: `${imgSize}px`,
+          height: `${imgSize}px`,
           display: isEnter ? 'block' : 'none',
           backgroundImage: `url(${titleImg})`,
           backgroundSize: `${
