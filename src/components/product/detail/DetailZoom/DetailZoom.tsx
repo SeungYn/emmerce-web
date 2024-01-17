@@ -153,8 +153,9 @@ export default function DetailZoom({ titleImg, imgSize = 640 }: Props) {
           width: maginifierCoordnate.width,
           height: maginifierCoordnate.height,
           opacity: isEnter ? 1 : 0,
+          willChange: 'left, top',
         }}
-        className='top-0 absolute  bg-slate-100  bg-opacity-50 border border-black transition-all duration-75'
+        className='top-0 absolute  bg-slate-100  bg-opacity-50 border border-black transition-all duration-75 '
       ></div>
     </div>
   );
