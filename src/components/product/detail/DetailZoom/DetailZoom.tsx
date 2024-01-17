@@ -46,10 +46,27 @@ export default function DetailZoom({ titleImg }: Props) {
     // });
   }, []);
 
+  useEffect(() => {
+    const event = (e: WheelEvent) => {
+      e.preventDefault();
+    };
+    const options: AddEventListenerOptions = { passive: false };
+    if (isEnter) {
+      document.addEventListener('wheel', event, options);
+    } else {
+      document.removeEventListener('wheel', event, options);
+    }
+
+    return () => {
+      document.removeEventListener('wheel', event, options);
+    };
+  }, [isEnter]);
+
   return (
     <div
       ref={containerRef}
       className='relative cursor-crosshair'
+      onScroll={(e) => e.preventDefault()}
       onMouseEnter={() => setIsEnter(true)}
       onMouseLeave={() => setIsEnter(false)}
       onWheel={(e) => {
