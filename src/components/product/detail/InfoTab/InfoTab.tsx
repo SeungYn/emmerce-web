@@ -1,26 +1,50 @@
 'use client';
 
-import Link from 'next/link';
-import { useState } from 'react';
+import { SCROLL_TARGET_ID, ScrollTargetName } from '@/util/lib/productDetail';
+import { MouseEvent, useEffect, useState } from 'react';
 
 export default function InfoTab() {
   const [currentTab, setCurrentTab] = useState(0);
+  const [domList, setDomList] = useState<{
+    [key in ScrollTargetName]: Element | null;
+  }>({ info: null, review: null });
+
+  const onClick = (n: number, targetName: ScrollTargetName) => {
+    return (e: MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault();
+      setCurrentTab(n);
+
+      domList[targetName]?.scrollIntoView({
+        block: 'start',
+        behavior: 'smooth',
+      });
+      return domList.info ? false : true;
+    };
+  };
+
+  useEffect(() => {
+    const infoDom = document.querySelector(SCROLL_TARGET_ID.info);
+    const reviewDom = document.querySelector(SCROLL_TARGET_ID.review);
+    if (infoDom && reviewDom) {
+      setDomList({ info: infoDom, review: reviewDom });
+    }
+  }, [currentTab]);
+
   return (
-    <div className='pt-10'>
-      <ul className='flex text-base text-center'>
+    <div className='sticky top-0 bg-white'>
+      <ul className='flex text-base text-center  '>
         <li
           className={`basis-[25%]  font-semibold border  border-b border-b-black ${isActive(
             currentTab === 0
           )}`}
         >
-          <Link
+          <a
             href='#p-info'
             className='inline-block py-4 w-full'
-            onClick={() => setCurrentTab(0)}
-            id='p-info'
+            onClick={onClick(0, 'info')}
           >
             상품 상세정보
-          </Link>
+          </a>
         </li>
 
         <li
@@ -28,13 +52,13 @@ export default function InfoTab() {
             currentTab === 1
           )}`}
         >
-          <Link
+          <a
             href='#p-review'
             className='inline-block py-4 w-full'
-            onClick={() => setCurrentTab(1)}
+            onClick={onClick(1, 'review')}
           >
             고객리뷰
-          </Link>
+          </a>
         </li>
 
         <li
@@ -42,13 +66,13 @@ export default function InfoTab() {
             currentTab === 2
           )}`}
         >
-          <Link
+          <a
             href='#'
             className='inline-block py-4 w-full'
             onClick={() => setCurrentTab(2)}
           >
-            상품 Q&A(23)
-          </Link>
+            상품 Q&A
+          </a>
         </li>
 
         <li
@@ -56,13 +80,13 @@ export default function InfoTab() {
             currentTab === 3
           )}`}
         >
-          <Link
+          <a
             href='#'
             className='inline-block py-4 w-full'
             onClick={() => setCurrentTab(3)}
           >
             배송/반품/교환
-          </Link>
+          </a>
         </li>
       </ul>
     </div>
