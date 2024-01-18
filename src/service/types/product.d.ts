@@ -8,6 +8,7 @@ export type Product = {
   starScore: number;
   titleImg: string;
   likeCount: number;
+  totalReviews: number;
 };
 
 export type ProductDetail = {
@@ -24,6 +25,7 @@ export type ProductDetail = {
   brand: string;
   enrollTime: string;
   likeCount: number;
+  totalReviews: number;
 };
 
 export type Paging = {
