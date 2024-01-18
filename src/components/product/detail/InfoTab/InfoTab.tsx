@@ -1,10 +1,15 @@
 'use client';
 
+import {
+  useInfoTabAction,
+  useInfoTabState,
+} from '@/store/product-detail/infoTabStore';
 import { SCROLL_TARGET_ID, ScrollTargetName } from '@/util/lib/productDetail';
 import { MouseEvent, useEffect, useState } from 'react';
 
 export default function InfoTab() {
-  const [currentTab, setCurrentTab] = useState(0);
+  const currentTab = useInfoTabState();
+  const setCurrentTab = useInfoTabAction();
   const [domList, setDomList] = useState<{
     [key in ScrollTargetName]: Element | null;
   }>({ info: null, review: null });
