@@ -24,7 +24,7 @@ export default function MainItem({
     discountPrice,
     brand,
     discountRate,
-    ratings,
+    starScore,
     titleImg,
     likeCount,
   } = item;
