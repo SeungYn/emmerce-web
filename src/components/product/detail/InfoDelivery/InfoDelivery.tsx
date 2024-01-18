@@ -122,7 +122,9 @@ export default function InfoDelivery() {
             </p>
           </InformationTable.SecondColumn>
         </InformationTable.Body>
+      </InformationTable>
 
+      <InformationTable>
         <InformationTable.Header title='환불안내' />
         <InformationTable.Body>
           <InformationTable.FirstColumn>
