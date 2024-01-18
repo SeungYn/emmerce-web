@@ -1,7 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import {
+  MouseEventHandler,
+  WheelEventHandler,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 type Props = {
   titleImg: string;
@@ -36,6 +42,51 @@ export default function DetailZoom({ titleImg, imgSize = 640 }: Props) {
     INITIAL_IMAGE_SIZE.width
   );
 
+  const onWheel: WheelEventHandler<HTMLDivElement> = (e) => {
+    let scale = maginifierCoordnate.scale + e.deltaY * -0.01;
+    scale = Math.min(Math.max(1, scale), 2);
+    let sizeDifference = 1;
+
+    // 휠 다운에 따른 크기 전, 후의 차이
+    if (e.deltaY < 0) {
+      sizeDifference *= -1;
+      sizeDifference *=
+        scale * INITIAL_MAGINIFIER_COORDNATE.width - maginifierCoordnate.width;
+    } else {
+      sizeDifference *=
+        maginifierCoordnate.width - scale * INITIAL_MAGINIFIER_COORDNATE.width;
+    }
+
+    if (scale === maginifierCoordnate.scale) sizeDifference = 0;
+
+    setMaginifierCoordnate((v) => ({
+      ...v,
+      scale,
+      width: scale * INITIAL_MAGINIFIER_COORDNATE.width,
+      height: scale * INITIAL_MAGINIFIER_COORDNATE.height,
+      left: v.left + sizeDifference / 2,
+      top: v.top + sizeDifference / 2,
+    }));
+  };
+
+  const onMouseMove: MouseEventHandler<HTMLDivElement> = (e) => {
+    //console.log(e);
+    let x = 0,
+      y = 0;
+    if (magnifierRef.current) {
+      x = e.pageX - containerCoordnate.left - maginifierCoordnate.width / 2;
+      y = e.pageY - containerCoordnate.top - maginifierCoordnate.width / 2;
+
+      if (x < 0) x = 0;
+      if (y < 0) y = 0;
+      if (x + maginifierCoordnate.width > INITIAL_IMAGE_SIZE.width)
+        x = INITIAL_IMAGE_SIZE.width - maginifierCoordnate.width;
+      if (y + maginifierCoordnate.height > INITIAL_IMAGE_SIZE.height)
+        y = INITIAL_IMAGE_SIZE.height - maginifierCoordnate.height;
+      setMaginifierCoordnate((v) => ({ ...v, left: x, top: y }));
+    }
+  };
+
   // container 최초 좌표
   useEffect(() => {
     if (containerRef.current) {
@@ -69,53 +120,8 @@ export default function DetailZoom({ titleImg, imgSize = 640 }: Props) {
       onScroll={(e) => e.preventDefault()}
       onMouseEnter={() => setIsEnter(true)}
       onMouseLeave={() => setIsEnter(false)}
-      onWheel={(e) => {
-        let scale = maginifierCoordnate.scale + e.deltaY * -0.01;
-        scale = Math.min(Math.max(1, scale), 2);
-        let sizeDifference = 1;
-
-        // 휠 다운에 따른 크기 전, 후의 차이
-        if (e.deltaY < 0) {
-          sizeDifference *= -1;
-          sizeDifference *=
-            scale * INITIAL_MAGINIFIER_COORDNATE.width -
-            maginifierCoordnate.width;
-        } else {
-          sizeDifference *=
-            maginifierCoordnate.width -
-            scale * INITIAL_MAGINIFIER_COORDNATE.width;
-        }
-
-        if (scale === maginifierCoordnate.scale) sizeDifference = 0;
-
-        setMaginifierCoordnate((v) => ({
-          ...v,
-          scale,
-          width: scale * INITIAL_MAGINIFIER_COORDNATE.width,
-          height: scale * INITIAL_MAGINIFIER_COORDNATE.height,
-          left: v.left + sizeDifference / 2,
-          top: v.top + sizeDifference / 2,
-        }));
-      }}
-      onMouseMove={(e) => {
-        //console.log(e);
-        let x = 0,
-          y = 0;
-        if (magnifierRef.current) {
-          // const { x: cx, y: cy } = magnifierRef.current.getBoundingClientRect();
-          //console.log(containerCoordnate.top, e.clientY);
-          x = e.pageX - containerCoordnate.left - maginifierCoordnate.width / 2;
-          y = e.pageY - containerCoordnate.top - maginifierCoordnate.width / 2;
-
-          if (x < 0) x = 0;
-          if (y < 0) y = 0;
-          if (x + maginifierCoordnate.width > INITIAL_IMAGE_SIZE.width)
-            x = INITIAL_IMAGE_SIZE.width - maginifierCoordnate.width;
-          if (y + maginifierCoordnate.height > INITIAL_IMAGE_SIZE.height)
-            y = INITIAL_IMAGE_SIZE.height - maginifierCoordnate.height;
-          setMaginifierCoordnate((v) => ({ ...v, left: x, top: y }));
-        }
-      }}
+      onWheel={onWheel}
+      onMouseMove={onMouseMove}
     >
       <Image
         src={titleImg}
@@ -127,7 +133,7 @@ export default function DetailZoom({ titleImg, imgSize = 640 }: Props) {
       />
       {/* 확대 이미지 */}
       <div
-        className={`absolute   top-0 `}
+        className={`absolute top-0 border border-black`}
         style={{
           left: `${imgSize + 20}px`,
           width: `${imgSize}px`,
