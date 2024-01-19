@@ -5,8 +5,8 @@ import { MdKeyboardArrowRight, MdOutlineKeyboardArrowUp } from 'react-icons/md';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import styles from './Category.module.css';
 import { Category, CategoryList } from '@/service/types/category';
-import Link from 'next/link';
 import CustomGlobalLoadingLink from '@/components/common/customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
+import MaxXLContainer from '@/components/common/container/MaxXLContainer';
 
 type Props = {
   categoryList: CategoryList;
@@ -42,35 +42,37 @@ export default function Category({ categoryList }: Props) {
 
   return (
     <section className='relative' ref={categoryRef}>
-      <div className='flex flex-grow shrink-0 justify-between  px-1 border-b border-gray-300 py-2'>
-        <div className='flex shrink-0 justify-between w-full px-2 font-bold text-sm max-w-screen-xl mx-auto'>
-          <div className='flex py-2 shrink-0'>
-            <div
-              className='flex items-center border-r border-gray-200 pr-6'
-              role='button'
-              onClick={toggleCategory}
-            >
-              <GiHamburgerMenu className='text-2xl' />
-              <span className='px-2'>전체카테고리</span>
-              <MdOutlineKeyboardArrowUp
-                className={`text-xl ${
-                  isOpenCategory ? styles.categoryOpen : styles.categoryOff
-                }`}
-              />
+      <div className='px-1 border-b border-gray-300 py-2 '>
+        <MaxXLContainer>
+          <div className='flex shrink-0 justify-between w-full px-2 font-bold text-sm max-w-screen-xl mx-auto'>
+            <div className='flex py-2 shrink-0'>
+              <div
+                className='flex items-center border-r border-gray-200 pr-6'
+                role='button'
+                onClick={toggleCategory}
+              >
+                <GiHamburgerMenu className='text-2xl' />
+                <span className='px-2'>전체카테고리</span>
+                <MdOutlineKeyboardArrowUp
+                  className={`text-xl ${
+                    isOpenCategory ? styles.categoryOpen : styles.categoryOff
+                  }`}
+                />
+              </div>
+
+              <ul className='flex items-center shrink-0 [&>*]:px-5'>
+                <li>베스트</li>
+                <li>럭키딜</li>
+                <li>스파오아울렛</li>
+                <li>모던하우스</li>
+                <li>더데이걸</li>
+                <li>백화점</li>
+              </ul>
             </div>
 
-            <ul className='flex items-center shrink-0 [&>*]:px-5'>
-              <li>베스트</li>
-              <li>럭키딜</li>
-              <li>스파오아울렛</li>
-              <li>모던하우스</li>
-              <li>더데이걸</li>
-              <li>백화점</li>
-            </ul>
+            <div className='flex items-center'>이벤트•혜택</div>
           </div>
-
-          <div className='flex items-center'>이벤트•혜택</div>
-        </div>
+        </MaxXLContainer>
       </div>
 
       <div
@@ -78,7 +80,7 @@ export default function Category({ categoryList }: Props) {
           isOpenCategory ? 'block' : 'hidden'
         }`}
       >
-        <nav className='relative mx-auto max-w-screen-xl px-2'>
+        <nav className='relative mx-auto max-w-screen-xl w-[1280px] px-2'>
           {/* 이랜드 기준 기본 height 458px 내용이 넘치면 528px */}
           <ul className='[&>*]:leading-7 border-r border-gray-200 pr-10 w-44 h-[458px]'>
             {categoryList.map((cate) => {
@@ -113,7 +115,7 @@ export default function Category({ categoryList }: Props) {
                     {cate.subCategories.map((subCate) => (
                       <div
                         key={subCate.subCategory.code + cate.mainCategory.code}
-                        className='flex py-2 border-b border-gray-200'
+                        className='flex py-2 border-b border-gray-200 '
                       >
                         <CustomGlobalLoadingLink
                           href={`/category/${subCate.subCategory.categoryId}?mainCate=${cate.mainCategory.name}${cate.mainCategory.categoryId}&subCate=${subCate.subCategory.name}${subCate.subCategory.categoryId}`}
@@ -122,7 +124,7 @@ export default function Category({ categoryList }: Props) {
                         >
                           {subCate.subCategory.name}
                         </CustomGlobalLoadingLink>
-                        <ul className='flex [&>*]:mr-6'>
+                        <ul className='flex shrink-0 [&>*]:mr-6'>
                           {subCate.kinds.map((kind) => (
                             <CustomGlobalLoadingLink
                               key={kind.code}
