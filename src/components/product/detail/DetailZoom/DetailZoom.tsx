@@ -129,6 +129,7 @@ export default function DetailZoom({ titleImg, imgSize = 640 }: Props) {
         height={INITIAL_IMAGE_SIZE.height}
         style={{ width: `${imgSize}px`, height: `${imgSize}px` }}
         sizes={`${imgSize}px`}
+        priority
         alt='아이템 이미지'
       />
       {/* 확대 이미지 */}
