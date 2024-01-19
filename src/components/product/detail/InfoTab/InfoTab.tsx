@@ -4,49 +4,63 @@ import {
   useInfoTabAction,
   useInfoTabState,
 } from '@/store/product-detail/infoTabStore';
-import { SCROLL_TARGET_ID, ScrollTargetName } from '@/util/lib/productDetail';
-import { MouseEvent, useEffect, useState } from 'react';
+import {
+  INFOTAB_NUMBER,
+  SCROLL_TARGET_ID,
+  ScrollTargetName,
+} from '@/util/lib/productDetail';
+import { MouseEvent, useEffect, useRef } from 'react';
 
 export default function InfoTab() {
   const currentTab = useInfoTabState();
   const setCurrentTab = useInfoTabAction();
-  const [domList, setDomList] = useState<{
+  const domList = useRef<{
     [key in ScrollTargetName]: Element | null;
-  }>({ info: null, review: null });
+  }>();
 
   const onClick = (n: number, targetName: ScrollTargetName) => {
     return (e: MouseEvent<HTMLAnchorElement>) => {
       e.preventDefault();
       setCurrentTab(n);
 
-      domList[targetName]?.scrollIntoView({
+      if (!domList.current) return true;
+
+      domList.current[targetName]!.scrollIntoView({
         block: 'start',
         behavior: 'smooth',
       });
-      return domList.info ? false : true;
+      return false;
     };
   };
 
   useEffect(() => {
-    const infoDom = document.querySelector(SCROLL_TARGET_ID.info);
-    const reviewDom = document.querySelector(SCROLL_TARGET_ID.review);
-    if (infoDom && reviewDom) {
-      setDomList({ info: infoDom, review: reviewDom });
+    const infoDom = document.getElementById(SCROLL_TARGET_ID.info);
+    const reviewDom = document.getElementById(SCROLL_TARGET_ID.review);
+    const qnaDom = document.getElementById(SCROLL_TARGET_ID.qna);
+    const deliveryDom = document.getElementById(SCROLL_TARGET_ID.delivery);
+
+    if (infoDom && reviewDom && qnaDom && deliveryDom) {
+      domList.current = {
+        info: infoDom,
+        review: reviewDom,
+        qna: qnaDom,
+        delivery: deliveryDom,
+      };
     }
-  }, [currentTab]);
+  }, []);
 
   return (
     <div className='sticky top-0 bg-white'>
-      <ul className='flex text-base text-center  '>
+      <ul className='flex text-base text-center text-gray-300'>
         <li
           className={`basis-[25%]  font-semibold border  border-b border-b-black ${isActive(
-            currentTab === 0
+            currentTab === INFOTAB_NUMBER.info
           )}`}
         >
           <a
             href='#p-info'
             className='inline-block py-4 w-full'
-            onClick={onClick(0, 'info')}
+            onClick={onClick(INFOTAB_NUMBER.info, 'info')}
           >
             상품 상세정보
           </a>
@@ -54,13 +68,13 @@ export default function InfoTab() {
 
         <li
           className={`basis-[25%]  font-semibold border  border-b border-b-black ${isActive(
-            currentTab === 1
+            currentTab === INFOTAB_NUMBER.review
           )}`}
         >
           <a
             href='#p-review'
             className='inline-block py-4 w-full'
-            onClick={onClick(1, 'review')}
+            onClick={onClick(INFOTAB_NUMBER.review, 'review')}
           >
             고객리뷰
           </a>
@@ -68,13 +82,13 @@ export default function InfoTab() {
 
         <li
           className={`basis-[25%]  font-semibold border  border-b border-b-black ${isActive(
-            currentTab === 2
+            currentTab === INFOTAB_NUMBER.qna
           )}`}
         >
           <a
             href='#'
             className='inline-block py-4 w-full'
-            onClick={() => setCurrentTab(2)}
+            onClick={onClick(INFOTAB_NUMBER.qna, 'qna')}
           >
             상품 Q&A
           </a>
@@ -82,13 +96,13 @@ export default function InfoTab() {
 
         <li
           className={`basis-[25%]  font-semibold border  border-b border-b-black ${isActive(
-            currentTab === 3
+            currentTab === INFOTAB_NUMBER.delivery
           )}`}
         >
           <a
             href='#'
             className='inline-block py-4 w-full'
-            onClick={() => setCurrentTab(3)}
+            onClick={onClick(INFOTAB_NUMBER.delivery, 'delivery')}
           >
             배송/반품/교환
           </a>
@@ -99,6 +113,6 @@ export default function InfoTab() {
 }
 const isActive = (flag: boolean) => {
   return flag
-    ? 'border border-black border-b-0 border-t-4 border-x-1  '
+    ? 'border border-black border-b-0 border-t-4 border-x-1 text-black'
     : 'border-gray-300';
 };
