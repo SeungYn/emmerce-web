@@ -1,8 +1,16 @@
 'use client';
 
+import useInfoTabIntersectionObserver from '@/hooks/product-detail/useInfoTabIntersectionObserver';
+import { INFOTAB_NUMBER, SCROLL_TARGET_ID } from '@/util/lib/productDetail';
+
 export default function QnA() {
+  const containerRef = useInfoTabIntersectionObserver<HTMLDivElement>({
+    intersectionOption: { threshold: 1 },
+    targetNumber: INFOTAB_NUMBER.qna,
+  });
   return (
-    <div id='p-qna' className='mb-20'>
+    <div ref={containerRef} id={SCROLL_TARGET_ID.qna} className='mb-20'>
+      {/* <div></div> */}
       <div className='flex justify-between pb-8  '>
         <h3 className='text-base font-normalpy-6'>전체(0)</h3>
         <button

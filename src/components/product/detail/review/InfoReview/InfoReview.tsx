@@ -1,4 +1,4 @@
-import { GetReviewsRes, Review } from '@/service/types/review';
+import { GetReviewsRes } from '@/service/types/review';
 import ReviewItem from '../ReviewItem/ReviewItem';
 import {
   MdKeyboardArrowLeft,
@@ -6,6 +6,8 @@ import {
   MdKeyboardDoubleArrowLeft,
   MdKeyboardDoubleArrowRight,
 } from 'react-icons/md';
+import useInfoTabIntersectionObserver from '@/hooks/product-detail/useInfoTabIntersectionObserver';
+import { INFOTAB_NUMBER } from '@/util/lib/productDetail';
 
 type Props = {
   currentPage: number;
@@ -24,6 +26,10 @@ export default function InfoReview({
   last,
   handlePageMove,
 }: Props) {
+  const containerRef = useInfoTabIntersectionObserver<HTMLDivElement>({
+    intersectionOption: { threshold: 0.2 },
+    targetNumber: INFOTAB_NUMBER.review,
+  });
   const currentBlock = Math.floor(pageNumber / 10) + 1;
   const pageArr = Array.from(
     { length: 10 >= totalPages ? totalPages : 10 },
@@ -31,15 +37,23 @@ export default function InfoReview({
   );
 
   return (
-    <div id='p-review'>
-      <h3 className='text-lg font-normal border-b border-black py-6'>
+    <div ref={containerRef} className='mb-20'>
+      {/* <div ref={containerRef}></div> */}
+      <h3 className='text-base font-normal border-b border-black py-6'>
         리뷰({totalElements})
       </h3>
-      <ul className='[&>*]:border-b border-gray-300 '>
-        {reviews.map((r) => (
-          <ReviewItem key={r.reviewId} review={r} />
-        ))}
-      </ul>
+      {reviews.length === 0 && (
+        <div className='text-center py-40 text-lg border-b border-b-gray-300 border-t '>
+          등록된 상품 리뷰가 없습니다.
+        </div>
+      )}
+      {reviews.length > 0 && (
+        <ul className='[&>*]:border-b border-gray-300 '>
+          {reviews.map((r) => (
+            <ReviewItem key={r.reviewId} review={r} />
+          ))}
+        </ul>
+      )}
       <div className='flex justify-center mt-4'>
         <ul className='flex gap-3 items-center [&>li]:flex'>
           {!first && (

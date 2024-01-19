@@ -1,8 +1,17 @@
+'use client';
+
 import InformationTable from '@/components/common/InformationTable/InformationTable';
+import useInfoTabIntersectionObserver from '@/hooks/product-detail/useInfoTabIntersectionObserver';
+import { INFOTAB_NUMBER, SCROLL_TARGET_ID } from '@/util/lib/productDetail';
 
 export default function InfoDelivery() {
+  const containerRef = useInfoTabIntersectionObserver<HTMLDivElement>({
+    intersectionOption: { threshold: 1 },
+    targetNumber: INFOTAB_NUMBER.delivery,
+  });
   return (
-    <div>
+    <div id={SCROLL_TARGET_ID.delivery} ref={containerRef}>
+      {/* <div ref={containerRef}></div> */}
       <InformationTable>
         <InformationTable.Header title='배송안내' />
         <InformationTable.Body>
