@@ -14,8 +14,6 @@ type Props = {
   handlePageMove: (page: number) => void;
 } & GetReviewsRes;
 
-// 페이징은 데이터 더 넣어서 다음 다다음 적용시켜야함
-
 export default function InfoReview({
   content: reviews,
   currentPage,
@@ -49,8 +47,8 @@ export default function InfoReview({
       )}
       {reviews.length > 0 && (
         <ul className='[&>*]:border-b border-gray-300 '>
-          {reviews.map((r) => (
-            <ReviewItem key={r.reviewId} review={r} />
+          {reviews.map((r, i) => (
+            <ReviewItem key={r.reviewId + i} review={r} />
           ))}
         </ul>
       )}
