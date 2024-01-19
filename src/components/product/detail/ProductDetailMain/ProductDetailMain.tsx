@@ -30,7 +30,7 @@ export default function ProductDetailMain({ productDetail }: Props) {
     totalReviews,
     detail,
   } = productDetail;
-  console.log(productDetail);
+
   return (
     <section>
       <div className='mb-4'>
@@ -50,7 +50,7 @@ export default function ProductDetailMain({ productDetail }: Props) {
               {starScore}점
             </p>
             <Link
-              href='#'
+              href='#p-review'
               className='text-sm border-b border-gray-500 text-gray-500 leading-6'
             >
               리뷰({totalReviews})
@@ -104,6 +104,10 @@ export default function ProductDetailMain({ productDetail }: Props) {
             <div className='flex shrink-0 items-center '>
               <span className='basis-[140px]'>최대구매수량</span>
               <p className='text-gray-400'>1회 10개 / 1인 10개</p>
+            </div>
+            <div className='flex shrink-0 items-center '>
+              <span className='basis-[140px]'>남은수량</span>
+              <p className='text-gray-400'>{stockQuantity}개</p>
             </div>
           </TopBottomPaddingBox>
 
