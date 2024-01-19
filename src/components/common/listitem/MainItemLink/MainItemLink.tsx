@@ -29,7 +29,7 @@ export default function MainItemLink({
     discountPrice,
     brand,
     discountRate,
-    ratings,
+    starScore,
     titleImg,
     likeCount,
   } = item;
