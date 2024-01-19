@@ -10,8 +10,8 @@ export default function InfoDelivery() {
     targetNumber: INFOTAB_NUMBER.delivery,
   });
   return (
-    <div id={SCROLL_TARGET_ID.delivery} ref={containerRef}>
-      {/* <div ref={containerRef}></div> */}
+    <div id={SCROLL_TARGET_ID.delivery}>
+      <div ref={containerRef}></div>
       <InformationTable>
         <InformationTable.Header title='배송안내' />
         <InformationTable.Body>

@@ -9,8 +9,8 @@ export default function QnA() {
     targetNumber: INFOTAB_NUMBER.qna,
   });
   return (
-    <div ref={containerRef} id={SCROLL_TARGET_ID.qna} className='mb-20'>
-      {/* <div></div> */}
+    <div id={SCROLL_TARGET_ID.qna} className='mb-20'>
+      <div ref={containerRef}></div>
       <div className='flex justify-between pb-8  '>
         <h3 className='text-base font-normalpy-6'>전체(0)</h3>
         <button

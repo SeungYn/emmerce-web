@@ -25,7 +25,7 @@ export default function InfoReview({
   handlePageMove,
 }: Props) {
   const containerRef = useInfoTabIntersectionObserver<HTMLDivElement>({
-    intersectionOption: { threshold: 0.2 },
+    intersectionOption: { threshold: 1 },
     targetNumber: INFOTAB_NUMBER.review,
   });
   const currentBlock = Math.floor(pageNumber / 10) + 1;
@@ -35,8 +35,8 @@ export default function InfoReview({
   );
 
   return (
-    <div ref={containerRef} className='mb-20'>
-      {/* <div ref={containerRef}></div> */}
+    <div className='mb-20'>
+      <div ref={containerRef}></div>
       <h3 className='text-base font-normal border-b border-black py-6'>
         리뷰({totalElements})
       </h3>
