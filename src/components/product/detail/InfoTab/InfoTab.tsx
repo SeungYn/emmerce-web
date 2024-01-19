@@ -50,7 +50,7 @@ export default function InfoTab() {
   }, []);
 
   return (
-    <div className='sticky top-0 bg-white'>
+    <div className='sticky top-0 bg-white z-50'>
       <ul className='flex text-base text-center text-gray-300'>
         <li
           className={`basis-[25%]  font-semibold border  border-b border-b-black ${isActive(
@@ -86,7 +86,7 @@ export default function InfoTab() {
           )}`}
         >
           <a
-            href='#'
+            href={`#${SCROLL_TARGET_ID.qna}`}
             className='inline-block py-4 w-full'
             onClick={onClick(INFOTAB_NUMBER.qna, 'qna')}
           >
@@ -100,7 +100,7 @@ export default function InfoTab() {
           )}`}
         >
           <a
-            href='#'
+            href={`#${SCROLL_TARGET_ID.delivery}`}
             className='inline-block py-4 w-full'
             onClick={onClick(INFOTAB_NUMBER.delivery, 'delivery')}
           >
