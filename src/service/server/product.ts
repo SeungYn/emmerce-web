@@ -1,42 +1,6 @@
 import { HttpServer } from '@/network/server';
 import { Product, ProductDetail, ProductList } from '../types/product';
 
-export async function getProductListByCategory({
-  categoryId,
-  keyword,
-  brand,
-  limit,
-  maxPrice,
-  minPrice,
-  page,
-}: {
-  categoryId: number | string;
-  page?: string | number;
-  keyword?: string;
-  brand?: string;
-  limit?: number | string;
-  minPrice?: number | string;
-  maxPrice?: number | string;
-}): Promise<ProductList> {
-  const query = `?${keyword ? `keyword=${keyword}&` : ''}${
-    brand ? `brand=${brand}&` : ''
-  }${limit ? `limit=${limit}&` : ''}${maxPrice ? `maxPrice=${maxPrice}&` : ''}${
-    minPrice ? `minPrice=${minPrice}&` : ''
-  }${page ? `page=${page}&` : ''}`;
-
-  const res = await fetch(
-    `https://emmerce.duckdns.org/category/${categoryId}/product/list${query}`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
-
-  return res.json();
-}
-
 export class ProductServerService {
   constructor(private http: HttpServer) {}
 
