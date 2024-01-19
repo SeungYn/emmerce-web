@@ -1,13 +1,10 @@
 'use client';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { useSearchParams } from 'next/navigation';
-import Link from 'next/link';
 import CustomGlobalLoadingLink from '../customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
 
 // 나중에 location 받아오면 HOME를 제외한 아이템 이전에 화살표 넣어주는 로직 필요
 export const categoryRex = /(\D+)(\d+)/;
-
-type CateReg = [string, string, string, RegExpMatchArray];
 
 export default function Location() {
   const searchParmas = useSearchParams();

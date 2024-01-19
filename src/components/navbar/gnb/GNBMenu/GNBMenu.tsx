@@ -5,10 +5,8 @@ import { BsCart } from 'react-icons/bs';
 import { CiDeliveryTruck } from 'react-icons/ci';
 import { useUserContext } from '@/context/auth/UserContext';
 import { useAuthFormContext } from '@/context/auth/AuthFormContext';
-import dynamic from 'next/dynamic';
 import useCustomRouter from '@/hooks/common/useCustomRouter';
-
-const GNBLogin = dynamic(() => import('../GNBLogin/GNBLogin'), { ssr: false });
+import GNBLogin from '../GNBLogin/GNBLogin';
 
 export default function GNBMenu() {
   const { userInfo } = useUserContext();
