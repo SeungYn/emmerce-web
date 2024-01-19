@@ -6,7 +6,7 @@ export type Review = {
   reviewImgList: string[];
   memberId: number;
   writer: string;
-  writeDate: Date;
+  writeDate: string;
 };
 
 export type GetReviewsRes = {
