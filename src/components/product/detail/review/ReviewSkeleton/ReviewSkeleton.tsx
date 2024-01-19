@@ -1,6 +1,6 @@
 export default function ReviewSkeleton() {
   return (
-    <div id='p-review'>
+    <div>
       <h3 className='text-lg font-normal border-b border-black py-6 '>
         리뷰()
       </h3>

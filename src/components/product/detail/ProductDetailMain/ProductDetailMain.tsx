@@ -8,6 +8,9 @@ import CartBtnAndModal from '@/components/cart/CartBtnAndModal/CartBtnAndModal';
 import CartMoalContextProvider from '@/context/cart/CartModalContext';
 import CustomGlobalLoadingLink from '@/components/common/customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
 import AuthGuardRunterBtn from '@/components/common/button/auth-guard/AuthGuardRouterBtn/AuthGuardRouterBtn';
+import DetailZoom from '../DetailZoom/DetailZoom';
+import StarScoreView from '@/components/common/star-score/StarScoreView/StarScoreView';
+import Link from 'next/link';
 
 type Props = {
   productDetail: ProductDetail;
@@ -16,7 +19,7 @@ type Props = {
 export default function ProductDetailMain({ productDetail }: Props) {
   const {
     brand,
-    ratings,
+    starScore,
     name,
     originalPrice,
     discountPrice,
@@ -24,55 +27,34 @@ export default function ProductDetailMain({ productDetail }: Props) {
     productId,
     titleImg,
     stockQuantity,
+    totalReviews,
     detail,
   } = productDetail;
 
   return (
     <section>
-      <div>
+      <div className='mb-4'>
         <CustomGlobalLoadingLink href='' className='text-2xl font-bold'>
           {brand}
         </CustomGlobalLoadingLink>
       </div>
       {/* 메인 */}
-      <div className='flex shrink-0 gap-6'>
+      <div className='flex shrink-0 gap-4'>
         {/* left */}
-        <div className='relative basis-[640px] '>
-          <div>
-            {/* 이미지 서버 생기면 이미지 연동 */}
-            <Image
-              src={titleImg}
-              width={640}
-              height={640}
-              style={{ width: '640px', height: '640px' }}
-              alt='아이템 이미지'
-            />
-          </div>
-
+        <div className=' basis-[640px] shrink-0'>
+          <DetailZoom titleImg={titleImg} />
           <div className='flex items-center text-lg gap-2 pt-4 border-t border-gray-300 mt-4'>
             <p className=' font-semibold'>고객리뷰</p>
-
-            <div
-              className='bg-no-repeat w-[150px] h-[24px] block bg-icons relative'
-              style={{
-                backgroundPosition: '-174px -177px',
-              }}
+            <StarScoreView score={starScore} starWidth={20} starHeight={20} />
+            <p className='pr-2 mr-2 border-r border-gray-300 text-sm'>
+              {starScore}점
+            </p>
+            <Link
+              href='#p-review'
+              className='text-sm border-b border-gray-500 text-gray-500 leading-6'
             >
-              <span
-                className={`bg-no-repeat h-[24px] block bg-icons absolute t-0 l-0`}
-                style={{
-                  backgroundPosition: '-174px -146px',
-                  width: `${translateStarScoreToPercent(ratings)}%`,
-                }}
-              ></span>
-            </div>
-            <p className='pr-2 mr-2 border-r border-gray-300'>{ratings}점</p>
-            <a
-              href='#'
-              className='border-b border-gray-300 text-gray-300 leading-5'
-            >
-              리뷰
-            </a>
+              리뷰({totalReviews})
+            </Link>
           </div>
         </div>
         {/* right */}
@@ -122,6 +104,10 @@ export default function ProductDetailMain({ productDetail }: Props) {
             <div className='flex shrink-0 items-center '>
               <span className='basis-[140px]'>최대구매수량</span>
               <p className='text-gray-400'>1회 10개 / 1인 10개</p>
+            </div>
+            <div className='flex shrink-0 items-center '>
+              <span className='basis-[140px]'>남은수량</span>
+              <p className='text-gray-400'>{stockQuantity}개</p>
             </div>
           </TopBottomPaddingBox>
 

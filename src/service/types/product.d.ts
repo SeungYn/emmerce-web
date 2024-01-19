@@ -5,9 +5,10 @@ export type Product = {
   originalPrice: number;
   discountPrice: number;
   discountRate: number;
-  ratings: number;
+  starScore: number;
   titleImg: string;
   likeCount: number;
+  totalReviews: number;
 };
 
 export type ProductDetail = {
@@ -18,12 +19,13 @@ export type ProductDetail = {
   discountPrice: number;
   discountRate: number;
   stockQuantity: number;
-  ratings: number;
+  starScore: number;
   titleImg: string;
   detailImgList: string[];
   brand: string;
   enrollTime: string;
   likeCount: number;
+  totalReviews: number;
 };
 
 export type Paging = {

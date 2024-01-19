@@ -1,6 +1,6 @@
 import { Review } from '@/service/types/review';
 import { translateStarScoreToPercent } from '@/util/lib/util';
-import Image from 'next/image';
+import ExpansionReviewImg from '../ExpansionReviewImg/ExpansionReviewImg';
 
 type Props = {
   review: Review;
@@ -40,13 +40,10 @@ export default function ReviewItem({ review }: Props) {
 
         <p className='text-gray-400 pt-4'>{title}</p>
         <p className='whitespace-pre-line pt-4'>{description}</p>
-        <ul className='flex flex-wrap'>
-          {/* {reviewImgList && (
-            <Image src={'/assets/slide/1.png'} alt={'상품이미지'} />
-          )} */}
-          {reviewImgList.map((img) => (
-            <li key={img}>
-              <img src={img} width={200} height={200} alt={'상품이미지'} />
+        <ul className='flex flex-wrap mt-4'>
+          {reviewImgList.map((img, i) => (
+            <li key={img + i}>
+              <ExpansionReviewImg imgSrc={img} />
             </li>
           ))}
         </ul>

@@ -34,7 +34,7 @@ export default function MiniItem({ product }: MiniItemProps) {
     brand,
     originalPrice,
     titleImg,
-    ratings,
+    starScore,
     discountPrice,
     discountRate,
   } = product;
