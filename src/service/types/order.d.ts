@@ -21,6 +21,8 @@ export interface OrderRes {
   orderId: number;
 }
 
+export type DeliveryStatus = 'READY' | 'ING' | 'COMPLETE' | 'CANCEL';
+
 export interface OrderHistoryItem {
   productId: string | number;
   name: string;
@@ -30,11 +32,12 @@ export interface OrderHistoryItem {
   discountPrice: number;
   quantity: number;
   reviewStatus: boolean;
+  deliveryStatus: DeliveryStatus;
 }
 
 export interface OrderHistory {
   orderId: string | number;
-  orderDate: Date;
+  orderDate: string;
   orderStatus: string;
   orderProductRespList: OrderHistoryItem[];
 }
