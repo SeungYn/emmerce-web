@@ -1,7 +1,7 @@
 'use client';
 import SSRSuspense from '@/components/common/util/SSRSuspense';
-import OrderTable from '@/components/my/order/OrderTable/OrderTable';
-import { useOrderHistories } from '@/hooks/api/order/useOrder';
+import OrderHistoryTable from '@/components/my/order/OrderHistoryTable/OrderHistoryTable';
+import { useOrderHistorySuspense } from '@/hooks/api/order/useOrder';
 import OrderHistoriesSkeletonContainer from '../OrderHistoriesSkeletonContainer/OrderHistoriesSkeletonContainer';
 
 export default function OrderHistoriesContiner() {
@@ -15,17 +15,21 @@ export default function OrderHistoriesContiner() {
 }
 
 function SuspenseOrderHistories() {
-  const {
-    suspenseRes: { data },
-  } = useOrderHistories();
+  const { data } = useOrderHistorySuspense();
 
   return (
-    <OrderTable>
-      <OrderTable.Header />
-      {data.length === 0 && <div>주문내역이 존재하지 않습니다.</div>}
+    <OrderHistoryTable>
+      <OrderHistoryTable.Header />
+      {data.length === 0 && (
+        <tbody>
+          <tr>
+            <td className='text-center pt-10'>주문내역이 존재하지 않습니다.</td>
+          </tr>
+        </tbody>
+      )}
       {data.map((item) => (
-        <OrderTable.Body {...item} key={item.orderId} />
+        <OrderHistoryTable.Body {...item} key={item.orderId} />
       ))}
-    </OrderTable>
+    </OrderHistoryTable>
   );
 }
