@@ -75,9 +75,19 @@ export const createAxiosInstance = (baseURL: string) => {
     async (error) => {
       if (axios.isAxiosError(error)) {
         const { config, response } = error;
-        //토큰 만료 외 에러
-        if (response?.status !== 610) {
+        const flag =
+          response?.status === 610
+            ? true
+            : response?.status === 599
+            ? true
+            : false;
+        // 610, 599가 아니면 에러 발생 599가 생긴이유가 NextRouteHandler로 api를 작성시 599 이상 번호를 status로 작성할 수 없기 때문
+        if (!flag) {
           throw new GlobalErrorException(error.message);
+        }
+        if (response?.status === 599) {
+          if (response?.data?.status !== 610)
+            throw new GlobalErrorException(error.message);
         }
 
         if (!reissueObj.isWait) {
