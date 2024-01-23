@@ -1,14 +1,12 @@
 'use client';
 
-import Link from 'next/link';
 import OrderListItem from '../OrderListItem/OrderListItem';
 import { useCartItemList } from '@/hooks/api/cart/useCart';
-import useInvalidCart from '@/hooks/cart/useInvalidCart';
 import CustomGlobalLoadingLink from '@/components/common/customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
 
 export default function OrderList() {
-  const { data: cartItemList } = useCartItemList();
-  //useInvalidCart();
+  const { data: cartItemList } = useCartItemList(true);
+
   return (
     <section>
       <div className='flex justify-between'>
