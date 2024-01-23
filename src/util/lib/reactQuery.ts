@@ -4,8 +4,8 @@ export const queryConfig: QueryClientConfig = {
   defaultOptions: {
     queries: {
       retry: 0,
-      staleTime: 600000,
-      gcTime: 600000,
+      staleTime: Infinity,
+      gcTime: Infinity,
       refetchOnMount: true,
       refetchOnReconnect: false,
       refetchOnWindowFocus: false,
