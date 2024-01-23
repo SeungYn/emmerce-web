@@ -33,7 +33,7 @@ export default function CartTableItem({
 
   return (
     <tr
-      className='grid'
+      className='grid '
       style={{
         gridTemplateColumns: '79px 457px 133px 79px 133px 133px 133px 133px',
         gridAutoRows: '133px',
@@ -52,29 +52,37 @@ export default function CartTableItem({
         />
       </td>
       <td className='flex shrink-0 justify-self-start gap-4'>
-        <img
+        <Image
           src={titleImg}
+          width={85}
+          height={85}
           alt='카트 상품 이미지'
-          width='85'
           className='w-[85px] aspect-square'
+          sizes='85px'
         />
         <div className=''>
           <p>{brand}</p>
-          <p>{name}</p>
+          <p className='line-clamp-2 leading-4'>{name}</p>
           <p>옵션</p>
         </div>
       </td>
 
-      <td>{(originalPrice * quantity).toLocaleString()}</td>
-      <td className='flex items-center gap-2'>
-        <div>{quantity}</div>
+      <td className='w-full text-center'>
+        {(originalPrice * quantity).toLocaleString()}
+      </td>
+      <td className='flex items-center gap-2 w-full'>
+        <div className='w-full text-center'>{quantity}</div>
         <div className='flex flex-col'>
           <button onClick={() => handleUpCountCartItem(item)}>🔼</button>
           <button onClick={() => handleDownCountCartItem(item)}>🔽</button>
         </div>
       </td>
-      <td>{((originalPrice - discountPrice) * quantity).toLocaleString()}원</td>
-      <td>{(discountPrice * quantity).toLocaleString()}원</td>
+      <td className='w-full text-center'>
+        {((originalPrice - discountPrice) * quantity).toLocaleString()}원
+      </td>
+      <td className='w-full text-center'>
+        {(discountPrice * quantity).toLocaleString()}원
+      </td>
       <td>무료배송</td>
       <td className='flex flex-col text-sm gap-1'>
         <CustomGlobalLoadingLink
