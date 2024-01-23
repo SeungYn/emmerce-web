@@ -7,14 +7,15 @@ import {
   useSuspenseQuery,
 } from '@tanstack/react-query';
 
-export function useCartItemList() {
+export function useCartItemList(selected: boolean = false) {
   const res = useQuery({
     queryKey: ['cart'],
     queryFn: () => service.cart.getCartItemList(),
     staleTime: Infinity,
     gcTime: Infinity,
-    refetchOnMount: 'always',
+    refetchOnMount: false,
     initialData: [],
+    select: (data) => (selected ? data.filter((item) => item.isCheck) : data),
   });
   return res;
 }

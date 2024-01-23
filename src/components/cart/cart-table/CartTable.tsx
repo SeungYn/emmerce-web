@@ -93,10 +93,9 @@ export default function CartTable({
           <li>
             총 상품금액{' '}
             <span className='text-zinc-600 font-bold'>
-              {cartItemList.reduce(
-                (p, c) => p + c.originalPrice * c.quantity,
-                0
-              )}
+              {cartItemList
+                .reduce((p, c) => p + c.originalPrice * c.quantity, 0)
+                .toLocaleString()}
             </span>
             원
           </li>
@@ -104,10 +103,13 @@ export default function CartTable({
           <li>
             할인금액{' '}
             <span className='text-zinc-600 font-bold'>
-              {cartItemList.reduce(
-                (p, c) => p + (c.originalPrice - c.discountPrice) * c.quantity,
-                0
-              )}
+              {cartItemList
+                .reduce(
+                  (p, c) =>
+                    p + (c.originalPrice - c.discountPrice) * c.quantity,
+                  0
+                )
+                .toLocaleString()}
             </span>
             원
           </li>
@@ -119,10 +121,9 @@ export default function CartTable({
           <li className='text-red-600 flex items-center gap-2 '>
             총 결제금액{' '}
             <span className='font-bold text-3xl'>
-              {cartItemList.reduce(
-                (p, c) => p + c.discountPrice * c.quantity,
-                0
-              )}
+              {cartItemList
+                .reduce((p, c) => p + c.discountPrice * c.quantity, 0)
+                .toLocaleString()}
             </span>
             원
           </li>

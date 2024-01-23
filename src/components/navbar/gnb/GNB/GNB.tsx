@@ -1,7 +1,6 @@
 import Category from '../../category/Category/Category';
 import { CategoryList } from '@/service/types/category';
 import GNBLogo from '../GNBLogo/GNBLogo';
-import NavbarForm from '../../NavbarForm/NavbarForm';
 import GNBMenu from '../GNBMenu/GNBMenu';
 import MaxXLContainer from '@/components/common/container/MaxXLContainer';
 import GNBNavbarForm from '../GNBNavbarForm/GNBNavbarForm';

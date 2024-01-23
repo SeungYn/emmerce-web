@@ -42,7 +42,7 @@ export default async function page({
       <MaxXLContainer className='mt-4'>
         <ProductDetailMain productDetail={productDetail} />
       </MaxXLContainer>
-      <MaxXLContainer className='mt-4'>
+      <MaxXLContainer className='mt-8'>
         <ProductDetailInfo productDetail={productDetail} />
       </MaxXLContainer>
     </>

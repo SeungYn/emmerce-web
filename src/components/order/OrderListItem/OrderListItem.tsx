@@ -37,15 +37,17 @@ export default function OrderListItem({ item }: Props) {
       }}
     >
       <td className='flex shrink-0 justify-self-start gap-4 p-2'>
-        <img
+        <Image
           src={titleImg}
           alt='카트 상품 이미지'
           width={85}
-          className='w-[85px] aspect-square'
+          height={85}
+          className='w-[85px] aspect-square shrink-0'
+          sizes='85px'
         />
         <div className='flex-grow'>
           <p>{brand}</p>
-          <p>{name}</p>
+          <p className='leading-4 line-clamp-2'>{name}</p>
           <p>옵션</p>
         </div>
       </td>

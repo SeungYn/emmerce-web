@@ -67,10 +67,9 @@ export default async function page({
           <li>
             총 상품금액{' '}
             <span className='text-zinc-600 font-bold'>
-              {data.orderProductRespList.reduce(
-                (p, c) => p + c.originalPrice * c.quantity,
-                0
-              )}
+              {data.orderProductRespList
+                .reduce((p, c) => p + c.originalPrice * c.quantity, 0)
+                .toLocaleString()}
             </span>
             원
           </li>
@@ -78,10 +77,13 @@ export default async function page({
           <li>
             할인금액{' '}
             <span className='text-zinc-600 font-bold'>
-              {data.orderProductRespList.reduce(
-                (p, c) => p + (c.originalPrice - c.discountPrice) * c.quantity,
-                0
-              )}
+              {data.orderProductRespList
+                .reduce(
+                  (p, c) =>
+                    p + (c.originalPrice - c.discountPrice) * c.quantity,
+                  0
+                )
+                .toLocaleString()}
             </span>
             원
           </li>
@@ -93,10 +95,9 @@ export default async function page({
           <li className='text-red-600 flex items-center  '>
             총 결제금액{' '}
             <span className='font-bold text-3xl'>
-              {data.orderProductRespList.reduce(
-                (p, c) => p + c.discountPrice * c.quantity,
-                0
-              )}
+              {data.orderProductRespList
+                .reduce((p, c) => p + c.discountPrice * c.quantity, 0)
+                .toLocaleString()}
             </span>
             원
           </li>

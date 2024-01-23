@@ -1,5 +1,6 @@
 'use client'; // Error components must be Client Components
 
+import { useUserContext } from '@/context/auth/UserContext';
 import { useAuthReissue } from '@/hooks/api/auth/useAuth';
 import useCustomRouter from '@/hooks/common/useCustomRouter';
 import { ErrorCode, GlobalErrorException } from '@/util/lib/exception';
@@ -13,6 +14,7 @@ export default function ErrorFallback({
   reset: () => void;
 }) {
   const reissueMutate = useAuthReissue();
+  const { resetUserInfo } = useUserContext();
   const router = useCustomRouter();
 
   useEffect(() => {
@@ -20,6 +22,10 @@ export default function ErrorFallback({
     if (error.message === ErrorCode.ACCESS_TOKEN_EXPIRED.message) {
       alert('세션이 만료되어 재발급 처리중입니다.');
       reissueMutate.mutate();
+    }
+    if (error instanceof GlobalErrorException) {
+      // 토큰이 재발급 될 수 없는 상황
+      resetUserInfo();
     }
 
     router.push('/');
@@ -40,5 +46,3 @@ export default function ErrorFallback({
     </div>
   );
 }
-
-function test() {}
