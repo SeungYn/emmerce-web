@@ -117,7 +117,7 @@ export default function ProductReview({
               name='description'
               onChange={onChange}
               value={reviewForm.description}
-              className='border border-gray-300 p-1 outline-none resize-none text-sm p-1'
+              className='border border-gray-300 p-1 outline-none resize-none text-sm'
               rows={10}
             />
           </label>
