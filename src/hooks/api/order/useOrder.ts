@@ -3,6 +3,10 @@ import { useMutation, useQuery, useSuspenseQuery } from '@tanstack/react-query';
 import { useCartItemList } from '../cart/useCart';
 import { useDeliveryFormFluxStore } from '@/store/order';
 import usePaymentMutation from '../payment/usePaymentMutation';
+import { useOrderHistoryState } from '@/store/my/order/dateStore';
+import { OrderHistory } from '@/service/types/order';
+import { axiosInstance } from '@/network/http';
+import { whereIsHost } from '@/util/lib/util';
 
 export function usePostOrder() {
   const { data: cartList } = useCartItemList();
@@ -62,4 +66,24 @@ export function useOrderHistories() {
   });
 
   return { suspenseRes, queryRes };
+}
+
+export function useOrderHistorySuspense() {
+  const { startDate, endDate } = useOrderHistoryState();
+  const suspenseRes = useSuspenseQuery({
+    queryKey: ['histories', startDate + endDate],
+    queryFn: async () => {
+      const { data } = await axiosInstance.post<OrderHistory[]>(
+        '/api/my/orderhistory',
+        { startDate, endDate },
+        {
+          baseURL: whereIsHost(),
+        }
+      );
+      return data;
+    },
+    refetchOnMount: 'always',
+  });
+
+  return suspenseRes;
 }
