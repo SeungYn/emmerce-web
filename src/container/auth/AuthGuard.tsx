@@ -1,6 +1,6 @@
 'use client';
 import { useUserContext } from '@/context/auth/UserContext';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { PropsWithChildren } from 'react';
 
 export default function AuthGuard({ children }: PropsWithChildren) {
