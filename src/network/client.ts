@@ -1,5 +1,6 @@
 import browserStorage from '@/db';
 import { ServerErrorRes } from '@/service/types/error';
+import { TOKEN_NAME } from '@/util/constants/auth';
 import {
   GlobalErrorException,
   RefreshTokenErrorException,
@@ -57,13 +58,13 @@ export const createAxiosInstance = (baseURL: string) => {
   axiosInstance.authErrorEventBus = new AuthErrorEventBus();
 
   axiosInstance.interceptors.request.use((req) => {
-    const token = localStorage.getItem('access-token');
+    const token = localStorage.getItem(TOKEN_NAME.access);
     if (token) {
       req.headers.Authorization = `Bearer ${token}`;
     }
 
     if (req.url === '/auth/reissue') {
-      req.headers.RefreshToken = browserStorage.local.get('refresh-token');
+      req.headers.RefreshToken = browserStorage.local.get(TOKEN_NAME.refesh);
     }
     return req;
   });
@@ -118,22 +119,26 @@ export const createAxiosInstance = (baseURL: string) => {
     try {
       const { headers } = await axiosInstance.post('/auth/reissue');
       const accessToken = headers.authorization.split(' ')[1];
-      browserStorage.local.set('access-token', accessToken);
-      browserStorage.local.set('refresh-token', headers.refreshtoken);
-      browserStorage.cookie.setCookie('access-token', accessToken, {
+      browserStorage.local.set(TOKEN_NAME.access, accessToken);
+      browserStorage.local.set(TOKEN_NAME.refesh, headers.refreshtoken);
+      browserStorage.cookie.setCookie(TOKEN_NAME.access, accessToken, {
         'max-age': 3600,
       });
-      browserStorage.cookie.setCookie('refresh-token', headers.authorization, {
-        'max-age': 60 * 60 * 24 * 7,
-      });
+      browserStorage.cookie.setCookie(
+        TOKEN_NAME.refesh,
+        headers.authorization,
+        {
+          'max-age': 60 * 60 * 24 * 7,
+        }
+      );
 
       return accessToken;
     } catch (e) {
-      console.log('토큰 재발급 처리중 에러: ');
-      browserStorage.cookie.deleteCookie('access-token');
-      browserStorage.cookie.deleteCookie('refresh-token');
-      browserStorage.local.remove('access-token');
-      browserStorage.local.remove('refresh-token');
+      console.log('토큰 재발급 처리 못 함');
+      browserStorage.cookie.deleteCookie(TOKEN_NAME.access);
+      browserStorage.cookie.deleteCookie(TOKEN_NAME.refesh);
+      browserStorage.local.remove(TOKEN_NAME.access);
+      browserStorage.local.remove(TOKEN_NAME.refesh);
 
       if (axios.isAxiosError(e)) {
         axiosInstance.authErrorEventBus?.notify();
