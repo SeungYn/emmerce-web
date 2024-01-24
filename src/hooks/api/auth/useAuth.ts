@@ -7,7 +7,7 @@ import browserStorage from '@/db';
 import service from '@/service/client';
 import { LoginReq, RegisterReq } from '@/service/types/auth';
 import { useMutation } from '@tanstack/react-query';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Dispatch, SetStateAction } from 'react';
 
 export default function useAuth() {
@@ -80,5 +80,21 @@ export function useAuthReissue() {
     },
   });
 
+  return mutate;
+}
+
+export function useAuthCookieReissue() {
+  const router = useRouter();
+  const { mutate } = useMutation({
+    mutationFn: () => {
+      alert('재발급 처리중');
+      return service.auth.reissue();
+    },
+    onSuccess: () => {
+      alert('세션이 재발급 처리되었습니다.');
+      router.back();
+    },
+    onError: () => router.push('/'),
+  });
   return mutate;
 }
