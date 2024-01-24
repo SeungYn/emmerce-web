@@ -1,3 +1,4 @@
+'use client';
 import { useUserContext } from '@/context/auth/UserContext';
 import { useRouter } from 'next/router';
 import { PropsWithChildren } from 'react';
