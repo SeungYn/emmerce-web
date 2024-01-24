@@ -2,9 +2,13 @@ import MaxXLContainer from '@/components/common/container/MaxXLContainer';
 import GlobalFooter from '@/components/common/footer/GlobalFooter/GlobalFooter';
 import MyNavigation from '@/components/my/MyNavigation/MyNavigation';
 import GNB from '@/components/navbar/gnb/GNB/GNB';
-import AuthGuard from '@/container/auth/AuthGuard';
 import { serverService } from '@/service/server';
 import { Metadata } from 'next';
+import dynamic from 'next/dynamic';
+
+const AuthGuard = dynamic(() => import('@/container/auth/AuthGuard'), {
+  ssr: false,
+});
 
 export const metadata: Metadata = {
   title: '마이페이지',

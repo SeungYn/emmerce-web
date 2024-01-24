@@ -2,9 +2,13 @@ import MaxXLContainer from '@/components/common/container/MaxXLContainer';
 import GlobalFooter from '@/components/common/footer/GlobalFooter/GlobalFooter';
 import OrderLoading from '@/components/common/loading/OrderLoading/OrderLoading';
 import GNB from '@/components/navbar/gnb/GNB/GNB';
-import AuthGuard from '@/container/auth/AuthGuard';
 import { serverService } from '@/service/server';
+import dynamic from 'next/dynamic';
 import Script from 'next/script';
+
+const AuthGuard = dynamic(() => import('@/container/auth/AuthGuard'), {
+  ssr: false,
+});
 
 export default async function layout({
   children,
