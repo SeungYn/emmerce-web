@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { TOKEN_NAME } from './util/constants/auth';
 
 export function middleware(request: NextRequest) {
-  const accessTokenCookie = request.cookies.get('access-token');
+  const accessTokenCookie = request.cookies.get(TOKEN_NAME.access);
+  const refreshTokenCookie = request.cookies.get(TOKEN_NAME.refesh);
+
+  if (!accessTokenCookie && refreshTokenCookie) {
+    return NextResponse.redirect(new URL('/auth', request.url));
+  }
 
   if (!accessTokenCookie) {
     const previousPath = request.headers.get('referer')!;
@@ -10,6 +16,8 @@ export function middleware(request: NextRequest) {
       : new URL('/', request.url);
     return NextResponse.redirect(redirectURL);
   }
+
+  return NextResponse.next();
 }
 
 export const config = {

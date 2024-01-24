@@ -25,6 +25,7 @@ export default function ErrorFallback({
     }
     if (error instanceof GlobalErrorException) {
       // 토큰이 재발급 될 수 없는 상황
+      alert('세션이 만료되어 로그아웃되었습니다.');
       resetUserInfo();
     }
 
@@ -35,7 +36,7 @@ export default function ErrorFallback({
 
   return (
     <div>
-      <h2>Something went wrong!</h2>
+      <h2>알수없는 에러 발생</h2>
       <button
         onClick={() => {
           reset();
