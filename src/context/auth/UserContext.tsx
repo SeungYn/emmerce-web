@@ -1,6 +1,8 @@
 'use client';
 import browserStorage from '@/db';
+import { axiosInstance } from '@/network/http';
 import service from '@/service/client';
+import { TOKEN_NAME } from '@/util/constants/auth';
 import {
   Dispatch,
   PropsWithChildren,
@@ -32,13 +34,13 @@ export default function UserContextProvider({ children }: PropsWithChildren) {
   const [userInfo, setUserInfo] = useState<User | null>(() => {
     if (typeof window !== 'undefined') {
       const token =
-        localStorage.getItem('access-token') ||
-        browserStorage.cookie.getCookie('access-token');
+        localStorage.getItem(TOKEN_NAME.access) ||
+        browserStorage.cookie.getCookie(TOKEN_NAME.access);
       return token
         ? {
             token:
-              localStorage.getItem('access-token') ||
-              browserStorage.cookie.getCookie('access-token'),
+              localStorage.getItem(TOKEN_NAME.access) ||
+              browserStorage.cookie.getCookie(TOKEN_NAME.access),
           }
         : null;
     }
@@ -46,13 +48,15 @@ export default function UserContextProvider({ children }: PropsWithChildren) {
   });
 
   const resetUserInfo = useCallback(() => {
-    localStorage.removeItem('access-token');
-    browserStorage.cookie.deleteCookie('access-token');
+    localStorage.removeItem(TOKEN_NAME.access);
+    localStorage.removeItem(TOKEN_NAME.refesh);
+    browserStorage.cookie.deleteCookie(TOKEN_NAME.access);
+    browserStorage.cookie.deleteCookie(TOKEN_NAME.refesh);
     setUserInfo(null);
   }, []);
 
   useEffect(() => {
-    service.authErrorEventBus.listen = resetUserInfo;
+    service.authErrorEventBus.listen(resetUserInfo);
   }, [resetUserInfo]);
 
   return (
