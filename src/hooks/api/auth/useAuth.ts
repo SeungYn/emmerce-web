@@ -6,6 +6,7 @@ import { useUserContext } from '@/context/auth/UserContext';
 import browserStorage from '@/db';
 import service from '@/service/client';
 import { LoginReq, RegisterReq } from '@/service/types/auth';
+import { COOKIE_OPTIONS } from '@/util/constants/auth';
 import { useMutation } from '@tanstack/react-query';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Dispatch, SetStateAction } from 'react';
@@ -24,11 +25,11 @@ export default function useAuth() {
       localStorage.setItem('access-token', token);
       localStorage.setItem('refresh-token', refreshToken);
       browserStorage.cookie.setCookie('access-token', token, {
-        'max-age': 60 * 60 * 24 * 7, //7일
+        'max-age': COOKIE_OPTIONS['max-age'],
         samesite: 'lax',
       });
       browserStorage.cookie.setCookie('refresh-token', refreshToken, {
-        'max-age': 60 * 60 * 24 * 7, //7일
+        'max-age': COOKIE_OPTIONS['max-age'],
         samesite: 'lax',
       });
       setUserInfo((user) => ({ ...user, token: token }));
