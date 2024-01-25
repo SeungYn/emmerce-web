@@ -3,14 +3,18 @@
 import { useUserContext } from '@/context/auth/UserContext';
 import { useAuthReissue } from '@/hooks/api/auth/useAuth';
 import useCustomRouter from '@/hooks/common/useCustomRouter';
-import { ErrorCode, GlobalErrorException } from '@/util/lib/exception';
+import {
+  AuthTokenErrorException,
+  ErrorCode,
+  GlobalErrorException,
+} from '@/util/lib/exception';
 import { useEffect } from 'react';
 
 export default function ErrorFallback({
   error,
   reset,
 }: {
-  error: Error | GlobalErrorException;
+  error: Error | AuthTokenErrorException;
   reset: () => void;
 }) {
   const reissueMutate = useAuthReissue();
@@ -23,7 +27,7 @@ export default function ErrorFallback({
       alert('세션이 만료되어 재발급 처리중입니다.');
       reissueMutate.mutate();
     }
-    if (error instanceof GlobalErrorException) {
+    if (error instanceof AuthTokenErrorException) {
       // 토큰이 재발급 될 수 없는 상황
       alert('세션이 만료되어 로그아웃되었습니다.');
       resetUserInfo();

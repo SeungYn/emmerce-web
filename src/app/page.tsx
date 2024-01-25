@@ -22,16 +22,16 @@ export default async function Home() {
       <GNB categoryList={categoryList} />
       <SliderBannerContainer />
       <BrandIconList />
-      <MaxXLContainer className='mt-10'>
+      <MaxXLContainer className='mt-20'>
         <CustomItems productList={latestProductList} />
       </MaxXLContainer>
-      <MaxXLContainer className='mt-10'>
+      <MaxXLContainer className='mt-20'>
         <RecommendProductsContainer />
       </MaxXLContainer>
-      <MaxXLContainer className='mt-10'>
+      <MaxXLContainer className='mt-20'>
         <RankingItems productList={rankingProductList} />
       </MaxXLContainer>
-      <MaxXLContainer className='mt-10'>
+      <MaxXLContainer className='mt-20'>
         <HotDeal productList={hotdealProductList} />
       </MaxXLContainer>
       <GlobalFooter />

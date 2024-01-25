@@ -29,7 +29,11 @@ export default function FilterForm({ keyword, productList }: Props) {
     : '';
 
   return (
-    <form>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
+    >
       <div className='border-b border-black py-4'>
         {keyword ? (
           <h2 className=' '>

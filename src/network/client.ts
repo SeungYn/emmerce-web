@@ -1,9 +1,8 @@
 import browserStorage from '@/db';
-import { ServerErrorRes } from '@/service/types/error';
-import { TOKEN_NAME } from '@/util/constants/auth';
+import { COOKIE_OPTIONS, TOKEN_NAME } from '@/util/constants/auth';
 import {
+  AuthTokenErrorException,
   GlobalErrorException,
-  RefreshTokenErrorException,
 } from '@/util/lib/exception';
 import axios, {
   AxiosInstance,
@@ -122,13 +121,13 @@ export const createAxiosInstance = (baseURL: string) => {
       browserStorage.local.set(TOKEN_NAME.access, accessToken);
       browserStorage.local.set(TOKEN_NAME.refesh, headers.refreshtoken);
       browserStorage.cookie.setCookie(TOKEN_NAME.access, accessToken, {
-        'max-age': 3600,
+        'max-age': COOKIE_OPTIONS['max-age'],
       });
       browserStorage.cookie.setCookie(
         TOKEN_NAME.refesh,
         headers.authorization,
         {
-          'max-age': 60 * 60 * 24 * 7,
+          'max-age': COOKIE_OPTIONS['max-age'],
         }
       );
 
@@ -142,15 +141,10 @@ export const createAxiosInstance = (baseURL: string) => {
 
       if (axios.isAxiosError(e)) {
         axiosInstance.authErrorEventBus?.notify();
-        throw new RefreshTokenErrorException(
-          e.response?.data as ServerErrorRes
-        );
+        throw new AuthTokenErrorException('토큰 에러');
       }
       axiosInstance.authErrorEventBus?.notify();
-      throw new GlobalErrorException({
-        message: (e as any).message,
-        status: 699,
-      });
+      throw new AuthTokenErrorException('토큰 에러');
     }
   }
 

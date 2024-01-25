@@ -1,5 +1,14 @@
 import { ServerErrorRes } from '@/service/types/error';
 
+export class AuthTokenErrorException extends Error {
+  name: string;
+
+  constructor(message: string) {
+    super(message);
+    this.name = 'AccessTokenError';
+  }
+}
+
 export class AccessTokenErrorException extends Error {
   name: string;
   err?: ServerErrorRes;

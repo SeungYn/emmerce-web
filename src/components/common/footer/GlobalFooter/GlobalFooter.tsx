@@ -5,16 +5,16 @@ export default function GlobalFooter() {
     <section className='py-6 mt-10'>
       <nav className='border-b border-t border-zinc-200 py-3'>
         <MaxXLContainer>
-          <ul className='[&>*:not(:first-child)]:border-l-2 border-gray-300 flex text-center text-sm tracking-tight text-gray-400'>
+          <ul className='[&>*:not(:first-child)]:border-l-2 [&>*]:grow border-gray-300 flex justify-between text-center text-sm tracking-tight text-gray-400'>
             <li className=''>이머스 소개</li>
-            <li className='ml-7 pl-7'>이머스 상품권 소개</li>
-            <li className='ml-7 pl-7'>개인정보처리방침</li>
-            <li className='ml-7 pl-7'>영상정보처리기기 설치 운영 방침</li>
-            <li className='ml-7 pl-7'>약관안내</li>
-            <li className='ml-7 pl-7'>윤리경영</li>
-            <li className='ml-7 pl-7'>안전거래센터</li>
-            <li className='ml-7 pl-7'>전자세금 계산서</li>
-            <li className='ml-7 pl-7'>인터넷 쇼핑몰 입점 상담</li>
+            <li className=''>이머스 상품권 소개</li>
+            <li className=''>개인정보처리방침</li>
+            <li className=''>영상정보처리기기 설치 운영 방침</li>
+            <li className=''>약관안내</li>
+            <li className=''>윤리경영</li>
+            <li className=''>안전거래센터</li>
+            <li className=''>전자세금 계산서</li>
+            <li className=''>인터넷 쇼핑몰 입점 상담</li>
           </ul>
         </MaxXLContainer>
       </nav>
