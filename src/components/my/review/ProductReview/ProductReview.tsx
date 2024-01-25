@@ -31,7 +31,7 @@ export default function ProductReview({
   return (
     <section
       style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
-      className='fixed w-full h-screen top-0 flex justify-center items-center'
+      className='fixed w-full h-screen top-0 flex justify-center items-center z-10'
     >
       <form
         onSubmit={(e) => {
@@ -57,10 +57,14 @@ export default function ProductReview({
                 alt='주문한 상품 이미지'
                 width={100}
                 height={100}
+                className='w-[100px] h-[100px] object-contain shrink-0 grow-0'
+                sizes='100px'
               />
-              <div className='flex-grow'>
+              <div className='flex-grow '>
                 <p className='text-gray-500'>{orderHistoryItem.brand}</p>
-                <p className='font-blod'>{orderHistoryItem.name}</p>
+                <p className='font-blod line-clamp-2'>
+                  {orderHistoryItem.name}
+                </p>
                 <p>옵션</p>
               </div>
             </div>
