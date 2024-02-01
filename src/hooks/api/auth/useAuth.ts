@@ -1,18 +1,30 @@
 'use client';
 
-import { FormState } from '@/components/auth/AuthForm';
+import { FormState } from '@/container/auth/AuthFormContiner';
 import { useAuthFormContext } from '@/context/auth/AuthFormContext';
 import { useUserContext } from '@/context/auth/UserContext';
 import browserStorage from '@/db';
 import service from '@/service/client';
 import { LoginReq, RegisterReq } from '@/service/types/auth';
-import { COOKIE_OPTIONS } from '@/util/constants/auth';
+import { COOKIE_OPTIONS, TOKEN_NAME } from '@/util/constants/auth';
 import { useMutation } from '@tanstack/react-query';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Dispatch, SetStateAction } from 'react';
 
 export default function useAuth() {
-  const { setUserInfo, resetUserInfo } = useUserContext();
+  const { resetUserInfo } = useUserContext();
+
+  const { mutate: logoutMutate } = useMutation({
+    mutationFn: () => service.auth.logout(),
+    onMutate: () => resetUserInfo(),
+    onSettled: () => resetUserInfo(),
+  });
+
+  return { logoutMutate };
+}
+
+export function useAuthLogin(resetForm: () => void) {
+  const { setUserInfo } = useUserContext();
   const { handleClose } = useAuthFormContext();
 
   const { mutate: loginMutate } = useMutation({
@@ -21,43 +33,35 @@ export default function useAuth() {
       const token = res.headers.authorization.split(' ')[1];
       const refreshToken = res.headers.refreshtoken as string;
 
-      // 나중에 쿠키로 바꾸거나 클래스화 예정
-      localStorage.setItem('access-token', token);
-      localStorage.setItem('refresh-token', refreshToken);
-      browserStorage.cookie.setCookie('access-token', token, {
+      localStorage.setItem(TOKEN_NAME.access, token);
+      localStorage.setItem(TOKEN_NAME.refesh, refreshToken);
+      browserStorage.cookie.setCookie(TOKEN_NAME.access, token, {
         'max-age': COOKIE_OPTIONS['max-age'],
-        samesite: 'lax',
       });
-      browserStorage.cookie.setCookie('refresh-token', refreshToken, {
+      browserStorage.cookie.setCookie(TOKEN_NAME.refesh, refreshToken, {
         'max-age': COOKIE_OPTIONS['max-age'],
-        samesite: 'lax',
       });
       setUserInfo((user) => ({ ...user, token: token }));
+      resetForm();
       handleClose();
+    },
+    onError: () => {
+      alert('아이디나 비밀번호가 일치하지 않습니다. 다시 시도해주세요');
     },
   });
 
-  const { mutate: registerMutate } = useMutation({
-    mutationFn: (req: RegisterReq) => service.auth.register(req),
-    onSuccess: (res) => {},
-  });
-
-  const { mutate: logoutMutate } = useMutation({
-    mutationFn: () => service.auth.logout(),
-    onMutate: () => resetUserInfo(),
-    onSettled: () => resetUserInfo(),
-  });
-
-  return { loginMutate, registerMutate, logoutMutate };
+  return loginMutate;
 }
 
 export function useAuthRegister(
-  setFormState: Dispatch<SetStateAction<FormState>>
+  setFormState: Dispatch<SetStateAction<FormState>>,
+  resetForm: () => void
 ) {
   const registerMutate = useMutation({
     mutationFn: (req: RegisterReq) => service.auth.register(req),
     onSuccess: (res) => {
       alert('회원가입이 완료되었습니다.');
+      resetForm();
       setFormState(FormState.login);
     },
     onError: () => {
@@ -81,6 +85,26 @@ export function useAuthReissue() {
     },
   });
 
+  return mutate;
+}
+
+export function useNameCheckDuplicate(
+  setIsDuplicate: Dispatch<
+    SetStateAction<{
+      check: boolean;
+      isDuplicate: boolean;
+    }>
+  >
+) {
+  const { mutate } = useMutation({
+    mutationFn: (name: string) => service.auth.checkDuplicate(name),
+    onSuccess: () => {
+      setIsDuplicate({ check: true, isDuplicate: false });
+    },
+    onError: () => {
+      setIsDuplicate({ check: true, isDuplicate: true });
+    },
+  });
   return mutate;
 }
 

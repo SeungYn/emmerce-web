@@ -1,6 +1,5 @@
 import { CustomAxiosInstance } from '@/network/client';
 import { LoginReq, RegisterReq } from '../types/auth';
-import { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 export default class AuthService {
   constructor(private axios: CustomAxiosInstance) {}
@@ -25,12 +24,16 @@ export default class AuthService {
     return await this.axios.post('/auth/register', data);
   }
 
+  async checkDuplicate(name: string) {
+    const data = { name };
+    return await this.axios.post('/auth/duplicate-check', data);
+  }
+
   async login({ name, password }: LoginReq) {
     const data = {
       name,
       password,
     };
-
     return await this.axios.post('/auth/login', data);
   }
 
