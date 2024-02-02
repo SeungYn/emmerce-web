@@ -43,7 +43,6 @@ export async function POST(request: NextRequest) {
       }
     );
   }
-  console.log(data);
 
   const filteredData = filterOrderHistory(
     new Date(body.startDate),
