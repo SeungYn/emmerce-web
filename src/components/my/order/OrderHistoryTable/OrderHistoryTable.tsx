@@ -1,6 +1,5 @@
 import ProductReviewModalContainer from '@/container/my/review/ProductReviewModalContainer/ProductReviewModalContainer';
 import { DeliveryStatus, OrderHistory } from '@/service/types/order';
-import { translateYYYYMMDD } from '@/util/lib/my/order';
 import Image from 'next/image';
 import { PropsWithChildren, useState } from 'react';
 
@@ -38,7 +37,7 @@ function Body({ orderProductRespList, orderDate, orderId }: BodyProps) {
     <tbody>
       <tr className='bg-gray-100 block px-4 py-2 mt-2'>
         <td className='bold text-gray-500'>
-          주문일 : {translateYYYYMMDD(new Date(orderDate))}
+          주문일 : {new Date(orderDate).toLocaleDateString()}
         </td>
       </tr>
       {orderProductRespList.map((item) => {
@@ -53,6 +52,7 @@ function Body({ orderProductRespList, orderDate, orderId }: BodyProps) {
           reviewStatus,
           deliveryStatus,
         } = item;
+
         return (
           <tr
             className='grid border-b border-gray-300'

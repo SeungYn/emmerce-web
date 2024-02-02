@@ -19,6 +19,7 @@ export default function OrderDate() {
     ),
     endDate: translateYYYYMMDD(new Date()),
   });
+
   const [currentDifferenceDate, setCurrentDifferenceDate] = useState<
     number | null
   >(null);
