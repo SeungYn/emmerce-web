@@ -12,7 +12,7 @@ export default function AuthFormContiner({ isOpen, handleClose }: Props) {
   const [formState, setFormState] = useState<FormState>(FormState.login);
   return (
     <motion.div
-      className='w-[580px] bg-white rounded-lg flex-shrink-0 text-black pb-10'
+      className='w-[580px] bg-white rounded-lg flex-shrink-0 text-black pb-10 '
       initial={'hidden'}
       animate={isOpen ? 'visible' : 'hidden'}
       variants={{
@@ -30,7 +30,7 @@ export default function AuthFormContiner({ isOpen, handleClose }: Props) {
           <AiOutlineClose />
         </button>
       </header>
-      <section className='p-8'>
+      <section className='p-8 max-h-[600px] overflow-y-auto'>
         {formState === FormState.login ? (
           <p className='text-3xl px-10'>
             이랜드보다
