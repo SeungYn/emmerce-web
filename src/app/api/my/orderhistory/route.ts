@@ -29,6 +29,7 @@ export async function POST(request: NextRequest) {
   try {
     data = await serverService.my.getOrderHistory({
       headers: { Authorization: `Bearer ${accessToken}` },
+      cache: 'no-store',
     });
   } catch (e) {
     const error = e as GlobalErrorException;
@@ -42,6 +43,7 @@ export async function POST(request: NextRequest) {
       }
     );
   }
+  console.log(data);
 
   const filteredData = filterOrderHistory(
     new Date(body.startDate),
