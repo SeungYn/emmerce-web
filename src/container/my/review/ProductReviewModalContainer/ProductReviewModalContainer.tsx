@@ -44,11 +44,12 @@ export default function ProductReviewModalContainer({
       reviewForm,
       orderId,
       productId: orderHistoryItem.productId as number,
-      cb: () => {
+      successCB: () => {
         alert('리뷰 작성이 완료되었습니다.');
         setReviewForm({ ...initialForm });
         setOpenModal(false);
       },
+      errorCB: () => {},
     });
   };
 
@@ -95,6 +96,7 @@ export default function ProductReviewModalContainer({
         orderHistoryItem={orderHistoryItem}
         handleCloseModal={() => setOpenModal(false)}
         handleSubmit={handleSubmit}
+        isPending={postReview.isPending}
       />
     </ModalPortal>
   );

@@ -10,12 +10,14 @@ export default function useReviewMutation() {
       reviewForm,
       orderId,
       productId,
-      cb,
+      successCB,
+      errorCB,
     }: {
       reviewForm: ReviewForm;
       orderId: number;
       productId: number;
-      cb: () => void;
+      successCB: () => void;
+      errorCB: () => void;
     }) => {
       const data = {
         reviewReq: {
@@ -28,7 +30,11 @@ export default function useReviewMutation() {
 
       return service.review.postReview(data);
     },
-    onMutate: (data) => data.cb(),
+    onSuccess: (req, variables) => variables.successCB(),
+    onError: (err, variables) => {
+      alert(err.message);
+      variables.errorCB();
+    },
   });
   return { postReview };
 }
