@@ -33,7 +33,7 @@ export default function ProductReview({
   return (
     <section
       style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
-      className='fixed w-full h-screen top-0 flex justify-center items-center z-10'
+      className='fixed w-full h-screen top-0 flex justify-center items-center z-[66]'
     >
       <form
         onSubmit={(e) => {
