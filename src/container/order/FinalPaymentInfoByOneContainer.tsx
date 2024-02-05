@@ -4,21 +4,22 @@ import FinalPaymentInfo from '@/components/order/FinalPaymentInfo/FinalPaymentIn
 import { usePostOneOrder } from '@/hooks/api/order/useOrder';
 import { ProductDetail } from '@/service/types/product';
 
-type Props = {} & ProductDetail;
+type Props = { stockCount: number } & ProductDetail;
 
 export default function FinalPaymentInfoByOneContainer({
   productId,
   originalPrice,
   discountPrice,
+  stockCount,
 }: Props) {
-  const postOneOrder = usePostOneOrder(productId);
+  const postOneOrder = usePostOneOrder(productId, stockCount);
 
   return (
     <FinalPaymentInfo
-      originPrice={originalPrice}
-      discountPrice={originalPrice - discountPrice}
+      originPrice={originalPrice * stockCount}
+      discountPrice={(originalPrice - discountPrice) * stockCount}
       deliverPrice={0}
-      discountedPrice={discountPrice}
+      discountedPrice={discountPrice * stockCount}
       handlePostOrder={() => {
         postOneOrder.mutate();
       }}

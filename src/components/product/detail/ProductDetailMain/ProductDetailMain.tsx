@@ -181,10 +181,10 @@ export default function ProductDetailMain({ productDetail }: Props) {
           </TopBottomPaddingBox>
           <div className='flex pt-5'>
             <CartMoalContextProvider>
-              <CartBtnAndModal productId={productId} />
+              <CartBtnAndModal productId={productId} stockCount={stockCount} />
             </CartMoalContextProvider>
             <AuthGuardRunterBtn
-              targetRouterHref={`/o/order/${productId}`}
+              targetRouterHref={`/o/order/${productId}?stockCount=${stockCount}`}
               className='basis-[50%] h-[53px] border border-black font-medium text-xl text-white bg-black flex justify-center items-center'
             >
               바로구매

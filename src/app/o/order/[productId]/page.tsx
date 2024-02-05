@@ -9,8 +9,10 @@ import { pick } from '@/util/lib/util';
 
 export default async function page({
   params: { productId },
+  searchParams: { stockCount },
 }: {
   params: { productId: string | number };
+  searchParams: { stockCount: number };
 }) {
   const productDetail = await serverService.product.getProductDetail(productId);
   return (
@@ -50,7 +52,7 @@ export default async function page({
                   'originalPrice',
                   'titleImg',
                 ]),
-                quantity: 1,
+                quantity: stockCount,
               }}
             />
           </tbody>
@@ -64,7 +66,10 @@ export default async function page({
           <DeliveryForm />
           <PaymentForm />
         </div>
-        <FinalPaymentInfoByOneContainer {...productDetail} />
+        <FinalPaymentInfoByOneContainer
+          {...productDetail}
+          stockCount={stockCount}
+        />
       </div>
 
       {/* 팝업부분 */}
