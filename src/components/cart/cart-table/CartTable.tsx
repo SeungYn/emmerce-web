@@ -37,7 +37,7 @@ export default function CartTable({
           상품 선택해지
         </CartTableHeaderBtn>
         <CartTableHeaderBtn onClick={handleClearCart}>
-          선택상품 삭제
+          전체상품 삭제
         </CartTableHeaderBtn>
       </div>
 
