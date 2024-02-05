@@ -48,7 +48,7 @@ export default function InfoReview({
       {reviews.length > 0 && (
         <ul className='[&>*]:border-b border-gray-300 '>
           {reviews.map((r, i) => (
-            <ReviewItem key={r.reviewId + i} review={r} />
+            <ReviewItem key={r.reviewId} review={r} />
           ))}
         </ul>
       )}

@@ -24,6 +24,7 @@ export function usePostOrder() {
       }),
     onSuccess: ({ orderId }) => {
       readyMutate.mutate(orderId);
+      deliveryForm.dispatch({ type: 'reset', payload: '' });
     },
   });
 
@@ -45,6 +46,7 @@ export function usePostOneOrder(
       }),
     onSuccess: ({ orderId }) => {
       readyMutate.mutate(orderId);
+      deliveryForm.dispatch({ type: 'reset', payload: '' });
     },
   });
 

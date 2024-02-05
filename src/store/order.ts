@@ -1,5 +1,6 @@
 import { Delivery } from '@/service/types/order';
 import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 export interface DeliveryForm extends Delivery {
   telFirst: string;
@@ -48,13 +49,13 @@ function deliverStateReduceer(
       return {
         ...state,
         telSecond: payload,
-        tel: state.telSecond + payload + state.telThird,
+        tel: state.telFirst + payload + state.telThird,
       };
     case 'telThird':
       return {
         ...state,
         telThird: payload,
-        tel: state.telSecond + state.telSecond + payload,
+        tel: state.telFirst + state.telSecond + payload,
       };
     case 'email':
       return { ...state, email: payload };
@@ -69,8 +70,10 @@ function deliverStateReduceer(
   }
 }
 
-export const useDeliveryFormFluxStore = create<DeliveryState>()((set) => ({
-  ...initialDeliveryState,
-  dispatch: (action: DeliveryStateActionType) =>
-    set((state) => deliverStateReduceer(state, action)),
-}));
+export const useDeliveryFormFluxStore = create<DeliveryState>()(
+  devtools((set) => ({
+    ...initialDeliveryState,
+    dispatch: (action: DeliveryStateActionType) =>
+      set((state) => deliverStateReduceer(state, action)),
+  }))
+);

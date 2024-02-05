@@ -59,9 +59,9 @@ export default function MainItemLink({
             {name}
           </p>
           {!isDiscount && (
-            <p>
+            <p className='font-semibold text-xl'>
               {discountPrice.toLocaleString()}
-              <span className='text-sm'>원</span>
+              <span className='text-sm '>원</span>
             </p>
           )}
           {isDiscount && (
