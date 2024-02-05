@@ -103,6 +103,7 @@ export default function OrderDate() {
             value={state.startDate}
             max={state.endDate}
             onChange={(e) => {
+              console.log(e.target.value);
               setCurrentDifferenceDate(null);
               setState((s) => ({
                 ...s,
