@@ -2,7 +2,6 @@
 
 import CustomGlobalLoadingLink from '@/components/common/customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
 import useHydrateStore from '@/hooks/common/useHydrateStore';
-import useRefOutClickHelper from '@/hooks/common/useRefOutClickHelper';
 import {
   RecentSearchStore,
   useRecentSearchStore,
@@ -22,7 +21,7 @@ export default function GNBRecentSearch({ setOpenState }: Props) {
   );
 
   return (
-    <div className='absolute w-full top-full text-sm mt-2'>
+    <div className='absolute w-full top-full text-sm mt-2 '>
       <div className='bg-gray-100 border border-gray-300 py-2 px-4 flex items-center justify-between'>
         <strong className='font-semibold'>최근 검색어</strong>
         <button

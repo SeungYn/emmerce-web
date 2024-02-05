@@ -6,7 +6,7 @@ export default function BrandIconList() {
     <section className='max-w-screen-xl w-[1280px] mx-auto mt-6'>
       <ul className='w-full flex justify-between flex-shrink-0'>
         <li className='flex flex-col items-center justify-center'>
-          <BrandIconItem src='/assets/brand-icon/erun.gif' name='이런워크' />
+          <BrandIconItem src='/assets/brand-icon/erun.gif' name='이런위크' />
         </li>
         <li className='flex flex-col items-center justify-center'>
           <BrandIconItem
