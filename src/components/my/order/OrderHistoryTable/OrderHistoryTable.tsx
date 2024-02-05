@@ -1,3 +1,4 @@
+import CustomGlobalLoadingLink from '@/components/common/customlink/CustomGlobalLoadingLink/CustomGlobalLoadingLink';
 import ProductReviewModalContainer from '@/container/my/review/ProductReviewModalContainer/ProductReviewModalContainer';
 import { DeliveryStatus, OrderHistory } from '@/service/types/order';
 import Image from 'next/image';
@@ -64,20 +65,25 @@ function Body({ orderProductRespList, orderDate, orderId }: BodyProps) {
             }}
             key={productId + orderDate.toString()}
           >
-            <td className='flex shrink-0 justify-self-start gap-4 p-2'>
+            <td className='w-full'>
               {/* eslint-disable @next/next/no-img-element */}
-              <Image
-                src={titleImg}
-                alt='카트 상품 이미지'
-                width={85}
-                height={85}
-                className='w-[85px] aspect-square shrink-0 grow-0'
-              />
-              <div className='flex-grow'>
-                <p className='text-gray-500'>{brand}</p>
-                <p className='font-blod line-clamp-2 leading-4'>{name}</p>
-                <p>옵션</p>
-              </div>
+              <CustomGlobalLoadingLink
+                href={`/detail/${productId}`}
+                className='flex shrink-0 justify-self-start gap-4 p-2 grow'
+              >
+                <Image
+                  src={titleImg}
+                  alt='카트 상품 이미지'
+                  width={85}
+                  height={85}
+                  className='w-[85px] aspect-square shrink-0 grow-0 '
+                />
+                <div className='flex-grow'>
+                  <p className='text-gray-500'>{brand}</p>
+                  <p className='font-blod line-clamp-2 leading-4'>{name}</p>
+                  <p>옵션</p>
+                </div>
+              </CustomGlobalLoadingLink>
             </td>
 
             <td className='p-2'>
