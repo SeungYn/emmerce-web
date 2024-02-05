@@ -10,7 +10,7 @@ import {
 } from '@/util/lib/cart';
 
 export default function FinalPaymentInfoByCartContainer() {
-  const { data: cartItemList } = useCartItemList();
+  const { data: cartItemList } = useCartItemList(true);
   const { postOrderMutate } = usePostOrder();
 
   const discountPrice = discountCartListPrice(cartItemList);

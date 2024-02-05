@@ -30,14 +30,17 @@ export function usePostOrder() {
   return { postOrderMutate };
 }
 
-export function usePostOneOrder(productId: number | string) {
+export function usePostOneOrder(
+  productId: number | string,
+  stockCount: number
+) {
   const { readyMutate } = usePaymentMutation();
   const deliveryForm = useDeliveryFormFluxStore();
 
   const postOneOrderMutate = useMutation({
     mutationFn: () =>
       service.order.postOrder({
-        orderProductList: [{ productId, totalCount: 1 }],
+        orderProductList: [{ productId, totalCount: stockCount }],
         deliveryReq: deliveryForm,
       }),
     onSuccess: ({ orderId }) => {

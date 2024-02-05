@@ -14,16 +14,12 @@ const categories = [
     name: '캐주얼/유니섹스',
   },
   {
-    categoryId: 2,
-    name: '티셔츠',
+    categoryId: 11,
+    name: '여성의류',
   },
   {
-    categoryId: 3,
-    name: '긴팔',
-  },
-  {
-    categoryId: 4,
-    name: '루즈핏/롱',
+    categoryId: 25,
+    name: '슈즈',
   },
 ];
 
@@ -40,7 +36,6 @@ export default function RecommendProductsContainer() {
   // 프리패칭
   useRecommendProductsPrefetch(categories[1].categoryId);
   useRecommendProductsPrefetch(categories[2].categoryId);
-  useRecommendProductsPrefetch(categories[3].categoryId);
 
   return (
     <SSRSuspense fallback={<CommonMainSkeleton />}>

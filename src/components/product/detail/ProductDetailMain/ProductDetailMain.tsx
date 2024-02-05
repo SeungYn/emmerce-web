@@ -11,6 +11,8 @@ import AuthGuardRunterBtn from '@/components/common/button/auth-guard/AuthGuardR
 import DetailZoom from '../DetailZoom/DetailZoom';
 import StarScoreView from '@/components/common/star-score/StarScoreView/StarScoreView';
 import Link from 'next/link';
+import { CiSquarePlus, CiSquareMinus } from 'react-icons/ci';
+import { useCallback, useState } from 'react';
 
 type Props = {
   productDetail: ProductDetail;
@@ -30,6 +32,25 @@ export default function ProductDetailMain({ productDetail }: Props) {
     totalReviews,
     detail,
   } = productDetail;
+  const [stockCount, setStockCount] = useState(1);
+  const onPlusCount = useCallback(
+    (count: number) => {
+      if (count >= stockQuantity) {
+        alert('최대 수량을 초과하였습니다.');
+        return;
+      }
+      setStockCount((s) => s + 1);
+    },
+    [stockQuantity]
+  );
+
+  const onMinusCount = useCallback((count: number) => {
+    if (count <= 1) {
+      alert('1개 이상 가능합니다.');
+      return;
+    }
+    setStockCount((s) => s - 1);
+  }, []);
 
   return (
     <section>
@@ -64,9 +85,11 @@ export default function ProductDetailMain({ productDetail }: Props) {
             <div className='flex shrink-0 items-center '>
               <span className='basis-[140px]'>판매가</span>
               <div className='flex items-end gap-4'>
-                <h3 className='text-3xl font-semibold'>{discountPrice}원</h3>
+                <h3 className='text-3xl font-semibold'>
+                  {discountPrice.toLocaleString()}원
+                </h3>
                 <span className='text-lg text-gray-400 line-through'>
-                  {originalPrice}원
+                  {originalPrice.toLocaleString()}원
                 </span>
                 <h3 className='text-3xl text-red-500 font-semibold'>
                   {discountRate}%
@@ -91,7 +114,7 @@ export default function ProductDetailMain({ productDetail }: Props) {
             <p className='font-semibold pb-2'>배송안내</p>
             <div className='flex shrink-0 items-center pb-2'>
               <span className='basis-[140px]'>배송비</span>
-              <p className='text-gray-400'>2500원</p>
+              <p className='text-gray-400'>무료</p>
             </div>
             <div className='flex shrink-0 items-center'>
               <span className='basis-[140px]'>발송예정일</span>
@@ -111,7 +134,7 @@ export default function ProductDetailMain({ productDetail }: Props) {
             </div>
           </TopBottomPaddingBox>
 
-          <TopBottomPaddingBox className='border-b border-gray-300'>
+          {/* <TopBottomPaddingBox className='border-b border-gray-300'>
             <div className='flex '>
               <p className='basis-[140px]'>색상</p>
               <select
@@ -133,13 +156,35 @@ export default function ProductDetailMain({ productDetail }: Props) {
                 <option>2</option>
               </select>
             </div>
+          </TopBottomPaddingBox> */}
+          <TopBottomPaddingBox className='border-b border-gray-300'>
+            <div className='flex justify-between'>
+              <p className='font-semibold pb-2'>개수</p>
+              <div className='text-xl flex items-center'>
+                <button
+                  onClick={() => onMinusCount(stockCount)}
+                  className='text-4xl'
+                >
+                  <CiSquareMinus />
+                </button>
+                <span className='inline-block w-6 text-center'>
+                  {stockCount}
+                </span>
+                <button
+                  onClick={() => onPlusCount(stockCount)}
+                  className='text-4xl'
+                >
+                  <CiSquarePlus />
+                </button>
+              </div>
+            </div>
           </TopBottomPaddingBox>
           <div className='flex pt-5'>
             <CartMoalContextProvider>
-              <CartBtnAndModal productId={productId} />
+              <CartBtnAndModal productId={productId} stockCount={stockCount} />
             </CartMoalContextProvider>
             <AuthGuardRunterBtn
-              targetRouterHref={`/o/order/${productId}`}
+              targetRouterHref={`/o/order/${productId}?stockCount=${stockCount}`}
               className='basis-[50%] h-[53px] border border-black font-medium text-xl text-white bg-black flex justify-center items-center'
             >
               바로구매

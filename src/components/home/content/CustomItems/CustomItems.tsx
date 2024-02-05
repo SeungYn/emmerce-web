@@ -11,10 +11,7 @@ type Props = {
 export default function CustomItems({ productList }: Props) {
   return (
     <div>
-      <Header
-        title='고객님을 위해 준비했어요'
-        subTitle='당신을 위한 맞춤 상품'
-      />
+      <Header title='새로운 상품을 만나보세요' subTitle='새로운 상품' />
 
       <div className='overflow-auto mt-4'>
         <ul className='flex flex-wrap shrink-0 w-[1500px] gap-4'>

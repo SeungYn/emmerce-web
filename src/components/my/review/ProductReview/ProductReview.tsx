@@ -17,6 +17,7 @@ type Props = {
   orderHistoryItem: OrderHistoryItem;
   handleCloseModal: () => void;
   handleSubmit: () => void;
+  isPending: boolean;
 };
 
 export default function ProductReview({
@@ -27,11 +28,12 @@ export default function ProductReview({
   orderHistoryItem,
   handleCloseModal,
   handleSubmit,
+  isPending,
 }: Props) {
   return (
     <section
       style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
-      className='fixed w-full h-screen top-0 flex justify-center items-center z-10'
+      className='fixed w-full h-screen top-0 flex justify-center items-center z-[66]'
     >
       <form
         onSubmit={(e) => {
@@ -156,10 +158,15 @@ export default function ProductReview({
               </button>
             </div>
           </label>
-          <div className='text-center mt-2'>
-            <button className='bg-black text-white py-2 px-8 text-sm'>
-              등록
-            </button>
+          <div className='text-center mt-2 '>
+            <div className='relative inline-block'>
+              <button
+                className='bg-black text-white py-2 px-8 text-sm disabled:bg-slate-200'
+                disabled={isPending}
+              >
+                {isPending ? '후기 등록중' : '등록'}
+              </button>
+            </div>
           </div>
         </div>
       </form>

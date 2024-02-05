@@ -1,6 +1,7 @@
 import { serverService } from '@/service/server';
 import { OrderHistory } from '@/service/types/order';
 import { GlobalErrorException } from '@/util/lib/exception';
+import { oneDayMillseconds } from '@/util/lib/my/order';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -59,8 +60,10 @@ function filterOrderHistory(
   orderHistory: OrderHistory[]
 ) {
   const filtered = orderHistory.filter((item) => {
-    const itemDate = new Date(item.orderDate).getTime();
-    return itemDate >= startDate.getTime() && itemDate <= endDate.getTime()
+    const itemDate = new Date(item.orderDate.split('T')[0]).getTime();
+
+    return itemDate >= startDate.getTime() &&
+      itemDate < endDate.getTime() + oneDayMillseconds
       ? true
       : false;
   });

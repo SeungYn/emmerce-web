@@ -33,7 +33,7 @@ export default function GNBNavbarForm() {
   return (
     <form
       ref={ref}
-      className='flex items-center w-[600px] border-b border-black absolute left-[50%] translate-x-[-50%] z-10'
+      className='flex items-center w-[600px] border-b border-black absolute left-[50%] translate-x-[-50%] z-[30]'
       onSubmit={onSubmit}
     >
       <input

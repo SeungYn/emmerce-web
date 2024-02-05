@@ -18,9 +18,10 @@ const ModalPortal = dynamic(
 
 type Props = {
   productId: number;
+  stockCount: number;
 };
 
-export default function CartBtnAndModal({ productId }: Props) {
+export default function CartBtnAndModal({ productId, stockCount }: Props) {
   const router = useRouter();
   const { userInfo } = useUserContext();
   const { handleOpen: handleOpenAuthForm } = useAuthFormContext();
@@ -34,7 +35,7 @@ export default function CartBtnAndModal({ productId }: Props) {
 
   const onAddCartItem = () => {
     if (!userInfo?.token) handleOpenAuthForm();
-    else mutate({ productId, quantity: 1 });
+    else mutate({ productId, quantity: stockCount });
   };
 
   return (
