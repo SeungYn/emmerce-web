@@ -27,13 +27,14 @@ type Props = {
   setOpenModal: Dispatch<SetStateAction<boolean>>;
   orderHistoryItem: OrderHistoryItem;
   orderId: number;
+  orderProductId: number | string;
 };
 
 export default function ProductReviewModalContainer({
   openModal,
   setOpenModal,
   orderHistoryItem,
-  orderId,
+  orderProductId,
 }: Props) {
   const hiddenFileRef = useRef<HTMLInputElement>(null);
   const [reviewForm, setReviewForm] = useState<ReviewForm>(initialForm);
@@ -42,8 +43,7 @@ export default function ProductReviewModalContainer({
   const handleSubmit = () => {
     postReview.mutate({
       reviewForm,
-      orderId,
-      productId: orderHistoryItem.productId as number,
+      orderProductId,
       successCB: () => {
         alert('리뷰 작성이 완료되었습니다.');
         setReviewForm({ ...initialForm });

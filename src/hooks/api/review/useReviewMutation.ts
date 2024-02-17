@@ -8,22 +8,19 @@ export default function useReviewMutation() {
   const postReview = useMutation({
     mutationFn: ({
       reviewForm,
-      orderId,
-      productId,
+      orderProductId,
       successCB,
       errorCB,
     }: {
       reviewForm: ReviewForm;
-      orderId: number;
-      productId: number;
+      orderProductId: number | string;
       successCB: () => void;
       errorCB: () => void;
     }) => {
       const data = {
         reviewReq: {
           ...pick(reviewForm, ['title', 'ratings', 'description']),
-          orderId,
-          productId,
+          orderProductId,
         },
         reviewImages: reviewForm.reviewImageFile,
       };
