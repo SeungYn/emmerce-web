@@ -7,10 +7,12 @@ import { useOrderHistoryState } from '@/store/my/order/dateStore';
 import { OrderHistory } from '@/service/types/order';
 import { axiosInstance } from '@/network/http';
 import { whereIsHost } from '@/util/lib/util';
+import { useKakaoPayStore } from '@/store/payment/kakaoPayStore';
 
 export function usePostOrder() {
   const { data: cartList } = useCartItemList();
   const { readyMutate } = usePaymentMutation();
+  const { setOrderId } = useKakaoPayStore();
   const deliveryForm = useDeliveryFormFluxStore();
 
   const postOrderMutate = useMutation({
@@ -24,6 +26,7 @@ export function usePostOrder() {
       }),
     onSuccess: ({ orderId }) => {
       readyMutate.mutate(orderId);
+      setOrderId(orderId);
       deliveryForm.dispatch({ type: 'reset', payload: '' });
     },
   });
@@ -37,6 +40,7 @@ export function usePostOneOrder(
 ) {
   const { readyMutate } = usePaymentMutation();
   const deliveryForm = useDeliveryFormFluxStore();
+  const { setOrderId } = useKakaoPayStore();
 
   const postOneOrderMutate = useMutation({
     mutationFn: () =>
@@ -46,6 +50,7 @@ export function usePostOneOrder(
       }),
     onSuccess: ({ orderId }) => {
       readyMutate.mutate(orderId);
+      setOrderId(orderId);
       deliveryForm.dispatch({ type: 'reset', payload: '' });
     },
   });
