@@ -23,8 +23,7 @@ export type PostReviewReq = {
     title: string;
     description: string;
     ratings: number;
-    orderId: number;
-    productId: number;
+    orderProductId: string | number;
   };
   reviewImages: File[];
 };
