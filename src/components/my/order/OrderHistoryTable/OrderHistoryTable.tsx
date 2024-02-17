@@ -52,6 +52,7 @@ function Body({ orderProductRespList, orderDate, orderId }: BodyProps) {
           titleImg,
           reviewStatus,
           deliveryStatus,
+          orderProductId,
         } = item;
 
         return (
@@ -111,6 +112,7 @@ function Body({ orderProductRespList, orderDate, orderId }: BodyProps) {
                       후기작성
                     </button>
                     <ProductReviewModalContainer
+                      orderProductId={orderProductId}
                       openModal={openModal}
                       setOpenModal={setOpenModal}
                       orderHistoryItem={item}

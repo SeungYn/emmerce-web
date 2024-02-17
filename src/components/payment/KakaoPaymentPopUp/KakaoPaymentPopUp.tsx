@@ -6,10 +6,12 @@ import { useKakaoPayStore } from '@/store/payment/kakaoPayStore';
 import { useRouter } from 'next/navigation';
 import { useCartClear } from '@/hooks/api/cart/useCart';
 import { useOrderLoadingStore } from '@/store/order/orderLoading';
+import usePaymentMutation from '@/hooks/api/payment/usePaymentMutation';
 
 export default function KakaoPaymentPopUp() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const router = useRouter();
+  const { cancelMutate } = usePaymentMutation();
   const orderStore = useOrderLoadingStore();
   const { redirect_pc_url, reset } = useKakaoPayStore();
   const cartClearMutate = useCartClear();
@@ -37,7 +39,7 @@ export default function KakaoPaymentPopUp() {
         }
         if (e.data.approveResult === 'FAIL') {
           alert('결제를 실패하였습니다. 다시 시도해주세요.');
-          reset();
+          cancelMutate.mutate();
         }
       }
     };
@@ -47,7 +49,7 @@ export default function KakaoPaymentPopUp() {
     return () => {
       window.removeEventListener('message', receiveCallback);
     };
-  }, [approveSuccessCallback, cartClearMutate, reset]);
+  }, [approveSuccessCallback, cartClearMutate, reset, cancelMutate]);
 
   if (!redirect_pc_url) return <></>;
 

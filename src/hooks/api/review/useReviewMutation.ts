@@ -2,35 +2,36 @@ import { ReviewForm } from '@/container/my/review/ProductReviewModalContainer/Pr
 import service from '@/service/client';
 import { pick } from '@/util/lib/util';
 
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export default function useReviewMutation() {
+  const queryClient = useQueryClient();
   const postReview = useMutation({
     mutationFn: ({
       reviewForm,
-      orderId,
-      productId,
+      orderProductId,
       successCB,
       errorCB,
     }: {
       reviewForm: ReviewForm;
-      orderId: number;
-      productId: number;
+      orderProductId: number | string;
       successCB: () => void;
       errorCB: () => void;
     }) => {
       const data = {
         reviewReq: {
           ...pick(reviewForm, ['title', 'ratings', 'description']),
-          orderId,
-          productId,
+          orderProductId,
         },
         reviewImages: reviewForm.reviewImageFile,
       };
 
       return service.review.postReview(data);
     },
-    onSuccess: (req, variables) => variables.successCB(),
+    onSuccess: (req, variables) => {
+      variables.successCB();
+      queryClient.invalidateQueries({ queryKey: ['reviews'] });
+    },
     onError: (err, variables) => {
       alert(err.message);
       variables.errorCB();

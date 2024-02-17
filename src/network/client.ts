@@ -1,10 +1,12 @@
 import browserStorage from '@/db';
+import { ServerErrorRes } from '@/service/types/error';
 import { COOKIE_OPTIONS, TOKEN_NAME } from '@/util/constants/auth';
 import {
   AuthTokenErrorException,
   GlobalErrorException,
 } from '@/util/lib/exception';
 import axios, {
+  AxiosError,
   AxiosInstance,
   AxiosResponse,
   InternalAxiosRequestConfig,
@@ -73,8 +75,18 @@ export const createAxiosInstance = (baseURL: string) => {
       return res;
     },
     async (error) => {
+      console.log(error);
       if (axios.isAxiosError(error)) {
-        const { config, response } = error;
+        let { config, response } = error as AxiosError<ServerErrorRes>;
+        const errRes: ServerErrorRes | string = response?.data.message
+          ? response.data
+          : '알 수 없는 에러발생!';
+
+        if (typeof errRes === 'string') {
+          // 서버에서 정의된 에러를 보내주는 경우가 아닐 때
+          throw new GlobalErrorException(errRes);
+        }
+
         const flag =
           response?.status === 610
             ? true
@@ -83,11 +95,11 @@ export const createAxiosInstance = (baseURL: string) => {
             : false;
         // 610, 599가 아니면 에러 발생 599가 생긴이유가 NextRouteHandler로 api를 작성시 599 이상 번호를 status로 작성할 수 없기 때문
         if (!flag) {
-          throw new GlobalErrorException(error.message);
+          throw new GlobalErrorException(errRes);
         }
         if (response?.status === 599) {
           if (response?.data?.status !== 610)
-            throw new GlobalErrorException(error.message);
+            throw new GlobalErrorException(errRes);
         }
 
         if (!reissueObj.isWait) {

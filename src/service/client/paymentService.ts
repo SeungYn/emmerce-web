@@ -23,7 +23,7 @@ export default class PaymentService {
   }
 
   async cancel(orderId: number | string) {
-    const url = '/payment/refund';
+    const url = '/payment/cancel';
     const { data } = await this.axios.post(url, { orderId });
   }
 

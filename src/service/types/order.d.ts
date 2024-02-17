@@ -24,6 +24,7 @@ export interface OrderRes {
 export type DeliveryStatus = 'READY' | 'ING' | 'COMPLETE' | 'CANCEL';
 
 export interface OrderHistoryItem {
+  orderProductId: string | number;
   productId: string | number;
   name: string;
   titleImg: string;

@@ -1,6 +1,7 @@
 import { Review } from '@/service/types/review';
 import { translateStarScoreToPercent } from '@/util/lib/util';
 import ExpansionReviewImg from '../ExpansionReviewImg/ExpansionReviewImg';
+import { parseReviewDate } from '@/util/lib/review';
 
 type Props = {
   review: Review;
@@ -17,8 +18,6 @@ export default function ReviewItem({ review }: Props) {
     writeDate,
     memberId,
   } = review;
-
-  review;
 
   return (
     <li className='flex'>
@@ -48,12 +47,14 @@ export default function ReviewItem({ review }: Props) {
           ))}
         </ul>
       </div>
-      <div className='basis-[20%] p-6'>
+      <div className='basis-[20%] p-6 text-sm'>
         <p>
           <span className='text-gray-400'>작성자 : {writer} </span>
         </p>
         <p>
-          <span className='text-gray-400'>등록일 : {writeDate.toString()}</span>
+          <span className='text-gray-400'>
+            등록일 : {parseReviewDate(writeDate)}
+          </span>
         </p>
       </div>
     </li>

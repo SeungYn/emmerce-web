@@ -6,7 +6,7 @@ import { useMutation } from '@tanstack/react-query';
 import { Dispatch, SetStateAction } from 'react';
 
 export default function usePaymentMutation() {
-  const { setRedirect_pc_url } = useKakaoPayStore();
+  const { setRedirect_pc_url, reset, orderId } = useKakaoPayStore();
 
   const readyMutate = useMutation({
     mutationFn: (orderId: number | string) => {
@@ -24,8 +24,11 @@ export default function usePaymentMutation() {
   });
 
   const cancelMutate = useMutation({
-    mutationFn: (orderId: number | string) => {
-      return service.payment.cancel(orderId);
+    mutationFn: () => {
+      return service.payment.cancel(orderId!);
+    },
+    onSettled: () => {
+      reset();
     },
   });
 
