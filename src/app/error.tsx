@@ -3,6 +3,7 @@
 import { useUserContext } from '@/context/auth/UserContext';
 import { useAuthReissue } from '@/hooks/api/auth/useAuth';
 import useCustomRouter from '@/hooks/common/useCustomRouter';
+import { revalidateAuthPath } from '@/server-actions/auth/revalidatePaths';
 import {
   AuthTokenErrorException,
   ErrorCode,
@@ -32,7 +33,7 @@ export default function ErrorFallback({
       alert('세션이 만료되어 로그아웃되었습니다.');
       resetUserInfo();
     }
-
+    revalidateAuthPath();
     router.push('/');
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
