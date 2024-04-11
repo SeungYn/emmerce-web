@@ -11,10 +11,11 @@ export function middleware(request: NextRequest) {
 
   if (!accessTokenCookie) {
     const previousPath = request.headers.get('referer')!;
+
     const redirectURL = previousPath
       ? new URL(previousPath)
       : new URL('/', request.url);
-    return NextResponse.redirect(redirectURL);
+    return NextResponse.redirect(new URL('/auth/reset', request.url));
   }
 
   return NextResponse.next();
